@@ -1,5 +1,14 @@
 package SelectionSort;
 
+/**
+ * 
+ * @author kdgyun
+ * {@link https://st-lab.tistory.com}
+ * {@link https://github.com/kdgyun}
+ *
+ */
+
+
 import java.util.Comparator;
 
 public class SelectionSort {
