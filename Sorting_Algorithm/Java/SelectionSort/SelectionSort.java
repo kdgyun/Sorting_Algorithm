@@ -161,6 +161,66 @@ public class SelectionSort {
 	
 	
 	
+	/*==========================
+	 * sorting float type array 
+	 *==========================*/
+	public static void sort(float[] a) {
+		sort(a, a.length);
+	}
+	
+	private static void sort(float[] a, int size) {
+		
+		for(int i = 0; i < size - 1; i++) {
+			int min_index = i;	
+			
+			for(int j = i + 1; j < size; j++) {
+				if(a[j] < a[min_index]) {
+					min_index = j;
+				}
+			}
+			swap(a, min_index, i);
+		}
+	}
+	
+	private static void swap(float[] a, int i, int j) {
+		float temp = a[i];
+		a[i] = a[j];
+		a[j] = temp;
+	}
+
+	
+	
+	
+	/*==========================
+	 * sorting double type array 
+	 *==========================*/
+	public static void sort(double[] a) {
+		sort(a, a.length);
+	}
+	
+	private static void sort(double[] a, int size) {
+		
+		for(int i = 0; i < size - 1; i++) {
+			int min_index = i;	
+			
+			for(int j = i + 1; j < size; j++) {
+				if(a[j] < a[min_index]) {
+					min_index = j;
+				}
+			}
+			swap(a, min_index, i);
+		}
+	}
+	
+	private static void swap(double[] a, int i, int j) {
+		double temp = a[i];
+		a[i] = a[j];
+		a[j] = temp;
+	}
+	
+	
+	
+	
 	
 	//============= Object type ============//
 	

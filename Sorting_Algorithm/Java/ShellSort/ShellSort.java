@@ -202,6 +202,71 @@ public class ShellSort {
  	
  	
 	
+	/*==========================
+	 * sorting float type array 
+	 *==========================*/
+	
+	public static void sort(float[] a) {
+		sort(a, a.length);
+		
+	}
+
+	
+ 	private static void sort(float[] a, int size) {
+		int gapIndex = getGap(size);
+
+		while(gapIndex >= 0) {
+			int step = gap[gapIndex--];
+			
+
+			for(int i = step; i < size; i++) {
+	
+				float target = a[i];
+				int j = i;
+				
+				for (; j >= step && target < a[j - step]; j -= step) {
+					a[j] = a[j - step];
+				}
+				a[j] = target;
+			}
+		}
+	}
+
+ 	
+ 	
+	
+	/*==========================
+	 * sorting double type array 
+	 *==========================*/
+	
+	public static void sort(double[] a) {
+		sort(a, a.length);
+		
+	}
+
+	
+ 	private static void sort(double[] a, int size) {
+		int gapIndex = getGap(size);
+
+		while(gapIndex >= 0) {
+			int step = gap[gapIndex--];
+			
+
+			for(int i = step; i < size; i++) {
+	
+				double target = a[i];
+				int j = i;
+				
+				for (; j >= step && target < a[j - step]; j -= step) {
+					a[j] = a[j - step];
+				}
+				a[j] = target;
+			}
+		}
+	}
+ 	
+ 	
+	
 	
 	
 	//============= Object type ============//

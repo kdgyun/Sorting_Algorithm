@@ -182,6 +182,72 @@ public class BubbleSort {
 	
 	
 	
+	/*==========================
+	 * sorting float type array 
+	 *==========================*/
+	
+	public static void sort(float[] a) {
+		sort(a, a.length);
+	}
+	
+	private static void sort(float[] a, int size) {
+		
+		for(int i = 1; i < size; i++) {
+			boolean swapped = false;	
+			
+			for(int j = 0; j < size - i; j++) {
+				if(a[j] > a [j + 1]) {
+					swap(a, j, j + 1);
+					swapped = true;
+				}
+			}
+			if(swapped == false) {
+				break;
+			}
+		}
+	}
+	
+	private static void swap(float[] a, int i, int j) {
+		float temp = a[i];
+		a[i] = a[j];
+		a[j] = temp;
+	}
+	
+	
+	
+	/*==========================
+	 * sorting double type array 
+	 *==========================*/
+	
+	public static void sort(double[] a) {
+		sort(a, a.length);
+	}
+	
+	private static void sort(double[] a, int size) {
+		
+		for(int i = 1; i < size; i++) {
+			boolean swapped = false;	
+			
+			for(int j = 0; j < size - i; j++) {
+				if(a[j] > a [j + 1]) {
+					swap(a, j, j + 1);
+					swapped = true;
+				}
+			}
+			if(swapped == false) {
+				break;
+			}
+		}
+	}
+	
+	private static void swap(double[] a, int i, int j) {
+		double temp = a[i];
+		a[i] = a[j];
+		a[j] = temp;
+	}
+	
+	
+	
 	//============= Object type ============//
 	
 	

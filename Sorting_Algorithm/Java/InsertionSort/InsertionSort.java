@@ -160,6 +160,64 @@ public class InsertionSort {
 	
 	
 	
+	/*==========================
+	 * sorting float type array 
+	 *==========================*/
+	
+	public void sort(float[] a) {
+		sort(a, a.length);
+	}
+	
+	private void sort(float[] a, int size) {
+		
+		float target;
+		int j;
+		
+		for(int i = 1; i < size; i++) {
+			target = a[i];
+			
+			j = i - 1;
+			while(j >= 0 && target < a[j]) {
+				a[j + 1] = a[j];
+				j--;
+			}
+
+			a[j + 1] = target;	
+		}
+		
+	}
+	
+	
+	
+	/*==========================
+	 * sorting double type array 
+	 *==========================*/
+	
+	public void sort(double[] a) {
+		sort(a, a.length);
+	}
+	
+	private void sort(double[] a, int size) {
+		
+		double target;
+		int j;
+		
+		for(int i = 1; i < size; i++) {
+			target = a[i];
+			
+			j = i - 1;
+			while(j >= 0 && target < a[j]) {
+				a[j + 1] = a[j];
+				j--;
+			}
+
+			a[j + 1] = target;	
+		}
+		
+	}
+	
+	
+	
 	//============= Object type ============//
 	
 	
