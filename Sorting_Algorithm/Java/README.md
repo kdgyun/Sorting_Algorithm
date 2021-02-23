@@ -45,10 +45,16 @@ Your Project -> Build Path -> Configure Build Path -> Project -> select the clas
 
 - 3. import class
 
-```java
-import [sorting algorithm name].[sorting algorithm name];
+```
+import [sorting_algorithm name].[sorting algorithm name];
+```
 
+
+**All sorting methods are static methods.**
+
+```java
 //ex.
+
 import BubbleSort.BubbleSort;
 
 class YourClass {
@@ -60,7 +66,6 @@ class YourClass {
 ```
 
 
-**All sorting methods are static methods.**
 
 <br/><br/>
 
