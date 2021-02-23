@@ -43,7 +43,7 @@ Project
 
 <br /><br />
 
-- "3. import class"
+- **3. import class**
 
 ```
 import [sorting_algorithm name].[sorting algorithm name];
