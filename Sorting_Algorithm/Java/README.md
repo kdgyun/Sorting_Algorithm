@@ -34,21 +34,22 @@ Project
 #### How to Use (download ZIP)
 <br/>
 
-- 1. Project import 
-Window -> File -> New -> Java Project -> uncheck the **Use default location** and Browse the **Sorting_Algorithm** folder
+- **1. Project import** <br /> <br /> Window -> File -> New -> Java Project -> uncheck the **Use default location** and Browse the **Sorting_Algorithm** folder
 -> Finish
 
+<br /><br />
 
-- 2. Build path
-Your Project -> Build Path -> Configure Build Path -> Project -> select the class path -> add -> Select *Sorting_Algorithm* -> Apply and Close
+- **2. Build path** <br /> <br /> Your Project -> Build Path -> Configure Build Path -> Project -> select the class path -> add -> Select *Sorting_Algorithm* -> Apply and Close
 
+<br /><br />
 
-- 3. import class
+- "3. import class"
 
 ```
 import [sorting_algorithm name].[sorting algorithm name];
 ```
 
+</br></br></br>
 
 **All sorting methods are static methods.**
 
