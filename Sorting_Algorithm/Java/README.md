@@ -25,6 +25,42 @@ Project
 &nbsp;&nbsp;&nbsp; 블로그에서 포스팅과 동시에 지속적으로 업데이트 예정 
 
 
+<br/><br/>
+<br/><br/>
+
+-----------------
+
+
+#### How to Use (download ZIP)
+<br/>
+
+- 1. Project import 
+Window -> File -> New -> Java Project -> uncheck the **Use default location** and Browse the **Sorting_Algorithm** folder
+-> Finish
+
+
+- 2. Build path
+Your Project -> Build Path -> Configure Build Path -> Project -> select the class path -> add -> Select *Sorting_Algorithm* -> Apply and Close
+
+
+- 3. import class
+
+```java
+import [sorting algorithm name].[sorting algorithm name];
+
+//ex.
+import BubbleSort.BubbleSort;
+
+class YourClass {
+	public static main {
+		int[] a = {1, 5, 2, 4};
+		BubbleSort.sort(a);
+	}
+}
+```
+
+
+**All sorting methods are static methods.**
 
 <br/><br/>
 
