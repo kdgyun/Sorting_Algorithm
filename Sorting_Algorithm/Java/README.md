@@ -39,7 +39,7 @@ Project
 
 <br /><br />
 
-- **2. Build path** <br /> <br /> Your Project -> Build Path -> Configure Build Path -> Project -> select the class path -> add -> Select *Sorting_Algorithm* -> Apply and Close
+- **2. Build path** <br /> <br /> Your Project -> Build Path -> Configure Build Path -> Project -> select the class path -> add -> Select **Sorting_Algorithm** -> Apply and Close
 
 <br /><br />
 
