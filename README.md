@@ -22,10 +22,13 @@ Project
 > - Java를 기준으로 구현됩니다.
 > - Java11 API : [Java API](https://docs.oracle.com/en/java/javase/11/docs/api/index.html)
 
+<br/>
+
+#### How to Use
+> - [Implementation in Java](https://github.com/kdgyun/Sorting_Algorithm/tree/master/Sorting_Algorithm/Java)
 
 
-
-<br/><br/>
+<br/><br/><br/><br/>
 &nbsp;&nbsp;&nbsp; 블로그에서 포스팅과 동시에 지속적으로 업데이트 예정 
 
 
