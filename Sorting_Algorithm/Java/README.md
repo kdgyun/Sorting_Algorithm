@@ -59,7 +59,7 @@ import [sorting_algorithm name].[sorting algorithm name];
 import BubbleSort.BubbleSort;
 
 class YourClass {
-	public static main {
+	public static void main {
 		int[] a = {1, 5, 2, 4};
 		BubbleSort.sort(a);
 	}
