@@ -11,7 +11,7 @@ package HeapSort;
 
 public class HeapSort {
 
-	public static void heapsort(int[] a) {
+	public static void sort(int[] a) {
 		sort(a, a.length);
 	}
 	
