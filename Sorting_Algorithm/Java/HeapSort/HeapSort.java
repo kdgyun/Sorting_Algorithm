@@ -534,7 +534,7 @@ public class HeapSort {
 		int par = getParent(last);
 
 		while (par >= 0) {
-			heapify(a, par, last);
+			heapify(a, par, last, c);
 			par--;
 		}
 
