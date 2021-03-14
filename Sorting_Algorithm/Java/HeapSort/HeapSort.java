@@ -2,104 +2,578 @@ package HeapSort;
 
 /**
  * 
- * @author kdgyun
+ * @author kdgyun 
  * {@link https://st-lab.tistory.com}
  * {@link https://github.com/kdgyun}
  *
  */
 
+import java.util.Comparator;
 
 public class HeapSort {
 
-	public static void sort(int[] a) {
+	private static int getParent(int child) {
+		return (child - 1) / 2;
+	}
+
+	// ============= primitive type ============//
+
+	/*
+	 * ========================== 
+	 *  sorting byte type array
+	 * ==========================
+	 */
+
+	private static void swap(byte[] a, int i, int j) {
+		byte temp = a[i];
+		a[i] = a[j];
+		a[j] = temp;
+	}
+
+	public static void sort(byte[] a) {
 		sort(a, a.length);
 	}
-	
 
-	
-	// 부모 인덱스를 얻는 함수
-	private static int getParent(int child) {
-	    return (child - 1) / 2;
+	private static void sort(byte[] a, int size) {
+
+		int last = size - 1;
+		int par = getParent(last);
+
+		while (par >= 0) {
+			heapify(a, par, last);
+			par--;
+		}
+
+		// sort
+		int end = size - 1;
+		while (end > 0) {
+			swap(a, 0, end);
+			end--;
+			heapify(a, 0, end);
+		}
 	}
 
-	// 두 인덱스의 원소를 교환하는 함수
+	private static void heapify(byte[] a, int cur, int last) {
+
+		int left;
+		int right;
+		int large;
+
+		while ((cur << 1) + 1 <= last) {
+			left = (cur << 1) + 1;
+			right = (cur << 1) + 2;
+			large = cur;
+
+			if (a[left] > a[large]) {
+				large = left;
+			}
+
+			if (right <= last && a[right] > a[large]) {
+				large = right;
+			}
+
+			if (large != cur) {
+				swap(a, cur, large);
+				cur = large;
+			} else {
+				return;
+			}
+		}
+	}
+
+	/*
+	 * ==========================
+	 *  sorting char type array
+	 * ==========================
+	 */
+
+	private static void swap(char[] a, int i, int j) {
+		char temp = a[i];
+		a[i] = a[j];
+		a[j] = temp;
+	}
+
+	public static void sort(char[] a) {
+		sort(a, a.length);
+	}
+
+	private static void sort(char[] a, int size) {
+
+		int last = size - 1;
+		int par = getParent(last);
+
+		while (par >= 0) {
+			heapify(a, par, last);
+			par--;
+		}
+		int end = size - 1;
+		while (end > 0) {
+			swap(a, 0, end);
+			end--;
+			heapify(a, 0, end);
+		}
+	}
+
+	private static void heapify(char[] a, int cur, int last) {
+
+		int left;
+		int right;
+		int large;
+
+		while ((cur << 1) + 1 <= last) {
+			left = (cur << 1) + 1;
+			right = (cur << 1) + 2;
+			large = cur;
+
+			if (a[left] > a[large]) {
+				large = left;
+			}
+
+			if (right <= last && a[right] > a[large]) {
+				large = right;
+			}
+
+			if (large != cur) {
+				swap(a, cur, large);
+				cur = large;
+			} else {
+				return;
+			}
+		}
+	}
+
+	/*
+	 * ==========================
+	 *  sorting short type array
+	 * ==========================
+	 */
+
+	private static void swap(short[] a, int i, int j) {
+		short temp = a[i];
+		a[i] = a[j];
+		a[j] = temp;
+	}
+
+	public static void sort(short[] a) {
+		sort(a, a.length);
+	}
+
+	private static void sort(short[] a, int size) {
+
+		int last = size - 1;
+		int par = getParent(last);
+
+		while (par >= 0) {
+			heapify(a, par, last);
+			par--;
+		}
+
+		int end = size - 1;
+		while (end > 0) {
+			swap(a, 0, end);
+			end--;
+			heapify(a, 0, end);
+		}
+	}
+
+	private static void heapify(short[] a, int cur, int last) {
+
+		int left;
+		int right;
+		int large;
+
+		while ((cur << 1) + 1 <= last) {
+			left = (cur << 1) + 1;
+			right = (cur << 1) + 2;
+			large = cur;
+
+			if (a[left] > a[large]) {
+				large = left;
+			}
+
+			if (right <= last && a[right] > a[large]) {
+				large = right;
+			}
+
+			if (large != cur) {
+				swap(a, cur, large);
+				cur = large;
+			} else {
+				return;
+			}
+		}
+	}
+
+	/*
+	 * ========================== 
+	 *  sorting int type array 
+	 * ==========================
+	 */
+
 	private static void swap(int[] a, int i, int j) {
 		int temp = a[i];
 		a[i] = a[j];
 		a[j] = temp;
 	}
-	
-	
 
-	
+	public static void sort(int[] a) {
+		sort(a, a.length);
+	}
+
 	private static void sort(int[] a, int size) {
-		
-		// max heap
-		int lastIdx = size - 1;
-		int parentIdx = getParent(lastIdx);
-		
-		while(parentIdx >= 0) {
-			heapify(a, parentIdx, lastIdx);
-			parentIdx--;
+
+		int last = size - 1;
+		int par = getParent(last);
+
+		while (par >= 0) {
+			heapify(a, par, last);
+			par--;
 		}
 
-	    // sort
-	    int end = size - 1;
-	    while(end > 0) {
-	        swap(a, 0, end);
-	        end--;
-	        heapify(a, 0, end);
-	    }
+		int end = size - 1;
+		while (end > 0) {
+			swap(a, 0, end);
+			end--;
+			heapify(a, 0, end);
+		}
 	}
-	
-	
-	private static void heapify(int[] a, int parentIdx, int lastIdx) {
-		
-	    int leftChildIdx;
-	    int rightChildIdx;
-	    int largestIdx;
 
-	    /*
-	     * 현재 부모 인덱스의 자식 노드 인덱스가 
-	     * 마지막 인덱스를 넘지 않을 때 까지 반복한다.
-	     * 
-	     * 이 때 왼쪽 자식 노드를 기준으로 해야 한다.
-	     * 오른쪽 자식 노드를 기준으로 범위를 검사하게 되면
-	     * 마지막 부모 인덱스가 왼쪽 자식만 갖고 있을 경우
-	     * 왼쪽 자식노드와는 비교 및 교환을 할 수 없기 때문이다. 
-	     */
-	    while((parentIdx * 2) + 1 <= lastIdx) {
-	        leftChildIdx = (parentIdx * 2) + 1;
-	        rightChildIdx = (parentIdx * 2) + 2;
-	        largestIdx = parentIdx;
+	private static void heapify(int[] a, int cur, int last) {
 
-	        /*
-	         * left child node와 비교 
-	         * (범위는 while문에서 검사했으므로 별도 검사 필요 없음)
-	         */
-	        if (a[leftChildIdx] > a[largestIdx]) {
-	            largestIdx = leftChildIdx;
-	        }
+		int left;
+		int right;
+		int large;
 
-	        /*
-	         * right child node와 비교 
-	         * right child node는 범위를 검사해주어야한다. 
-	         */
-	        if (rightChildIdx <= lastIdx && a[rightChildIdx] > a[largestIdx]) {
-	            largestIdx = rightChildIdx;
-	        }
+		while ((cur << 1) + 1 <= last) {
+			left = (cur << 1) + 1;
+			right = (cur << 1) + 2;
+			large = cur;
 
-	        /*
-	         * 교환이 발생했을 경우 두 원소를 교체 한 후
-	         * 교환이 된 자식노드를 부모 노드가 되도록 교체한다. 
-	         */
-	        if (largestIdx != parentIdx) {
-	            swap(a, parentIdx, largestIdx);
-	            parentIdx = largestIdx;
-	        } 
-	        else {
-	            return;
-	        }
-	    }
+			if (a[left] > a[large]) {
+				large = left;
+			}
+
+			if (right <= last && a[right] > a[large]) {
+				large = right;
+			}
+
+			if (large != cur) {
+				swap(a, cur, large);
+				cur = large;
+			} else {
+				return;
+			}
+		}
 	}
+
+	/*
+	 * ========================== 
+	 * sorting long type array 
+	 * ==========================
+	 */
+
+	private static void swap(long[] a, int i, int j) {
+		long temp = a[i];
+		a[i] = a[j];
+		a[j] = temp;
+	}
+
+	public static void sort(long[] a) {
+		sort(a, a.length);
+	}
+
+	private static void sort(long[] a, int size) {
+
+		int last = size - 1;
+		int par = getParent(last);
+
+		while (par >= 0) {
+			heapify(a, par, last);
+			par--;
+		}
+
+		int end = size - 1;
+		while (end > 0) {
+			swap(a, 0, end);
+			end--;
+			heapify(a, 0, end);
+		}
+	}
+
+	private static void heapify(long[] a, int cur, int last) {
+
+		int left;
+		int right;
+		int large;
+
+		while ((cur << 1) + 1 <= last) {
+			left = (cur << 1) + 1;
+			right = (cur << 1) + 2;
+			large = cur;
+
+			if (a[left] > a[large]) {
+				large = left;
+			}
+
+			if (right <= last && a[right] > a[large]) {
+				large = right;
+			}
+
+			if (large != cur) {
+				swap(a, cur, large);
+				cur = large;
+			} else {
+				return;
+			}
+		}
+	}
+
+	/*
+	 * ========================== 
+	 * sorting float type array
+	 * ==========================
+	 */
+
+	private static void swap(float[] a, int i, int j) {
+		float temp = a[i];
+		a[i] = a[j];
+		a[j] = temp;
+	}
+
+	public static void sort(float[] a) {
+		sort(a, a.length);
+	}
+
+	private static void sort(float[] a, int size) {
+
+		int last = size - 1;
+		int par = getParent(last);
+
+		while (par >= 0) {
+			heapify(a, par, last);
+			par--;
+		}
+
+		int end = size - 1;
+		while (end > 0) {
+			swap(a, 0, end);
+			end--;
+			heapify(a, 0, end);
+		}
+	}
+
+	private static void heapify(float[] a, int cur, int last) {
+
+		int left;
+		int right;
+		int large;
+
+		while ((cur << 1) + 1 <= last) {
+			left = (cur << 1) + 1;
+			right = (cur << 1) + 2;
+			large = cur;
+
+			if (a[left] > a[large]) {
+				large = left;
+			}
+
+			if (right <= last && a[right] > a[large]) {
+				large = right;
+			}
+
+			if (large != cur) {
+				swap(a, cur, large);
+				cur = large;
+			} else {
+				return;
+			}
+		}
+	}
+
+	
+	/*
+	 * ========================== 
+	 * sorting double type array
+	 * ==========================
+	 */
+
+	private static void swap(double[] a, int i, int j) {
+		double temp = a[i];
+		a[i] = a[j];
+		a[j] = temp;
+	}
+
+	public static void sort(double[] a) {
+		sort(a, a.length);
+	}
+
+	private static void sort(double[] a, int size) {
+
+		int last = size - 1;
+		int par = getParent(last);
+
+		while (par >= 0) {
+			heapify(a, par, last);
+			par--;
+		}
+
+		// sort
+		int end = size - 1;
+		while (end > 0) {
+			swap(a, 0, end);
+			end--;
+			heapify(a, 0, end);
+		}
+	}
+
+	private static void heapify(double[] a, int cur, int last) {
+
+		int left;
+		int right;
+		int large;
+
+		while ((cur << 1) + 1 <= last) {
+			left = (cur << 1) + 1;
+			right = (cur << 1) + 2;
+			large = cur;
+
+			if (a[left] > a[large]) {
+				large = left;
+			}
+
+			if (right <= last && a[right] > a[large]) {
+				large = right;
+			}
+
+			if (large != cur) {
+				swap(a, cur, large);
+				cur = large;
+			} else {
+				return;
+			}
+		}
+	}
+
+	// ============= Object type ============//
+
+	/*
+	 * ========================== 
+	 * sorting Object type array
+	 * ==========================
+	 */
+
+	private static void swap(Object[] a, int i, int j) {
+		Object temp = a[i];
+		a[i] = a[j];
+		a[j] = temp;
+	}
+
+	public static void sort(Object[] a) {
+		sort(a, a.length);
+	}
+
+	private static void sort(Object[] a, int size) {
+
+		int last = size - 1;
+		int par = getParent(last);
+
+		while (par >= 0) {
+			heapify(a, par, last);
+			par--;
+		}
+
+		int end = size - 1;
+		while (end > 0) {
+			swap(a, 0, end);
+			end--;
+			heapify(a, 0, end);
+		}
+	}
+
+	@SuppressWarnings({ "rawtypes", "unchecked" })
+	private static void heapify(Object[] a, int cur, int last) {
+
+		int left;
+		int right;
+		int large;
+
+		while ((cur << 1) + 1 <= last) {
+			left = (cur << 1) + 1;
+			right = (cur << 1) + 2;
+			large = cur;
+
+			if (((Comparable) a[large]).compareTo(a[left]) < 0) {
+				large = left;
+			}
+
+			if (right <= last && ((Comparable) a[large]).compareTo(a[right]) < 0) {
+				large = right;
+			}
+
+			if (large != cur) {
+				swap(a, cur, large);
+				cur = large;
+			} else {
+				return;
+			}
+		}
+	}
+
+	public static <T> void sort(T[] a, Comparator<? super T> c) {
+		if (c == null) {
+			sort(a, a.length);
+		} else {
+			sort(a, a.length, c);
+		}
+	}
+
+	@SuppressWarnings("rawtypes")
+	private static void sort(Object[] a, int size, Comparator c) {
+
+		int last = size - 1;
+		int par = getParent(last);
+
+		while (par >= 0) {
+			heapify(a, par, last);
+			par--;
+		}
+
+		// sort
+		int end = size - 1;
+		while (end > 0) {
+			swap(a, 0, end);
+			end--;
+			heapify(a, 0, end, c);
+		}
+	}
+
+	@SuppressWarnings({ "rawtypes", "unchecked" })
+	private static void heapify(Object[] a, int cur, int last, Comparator c) {
+
+		int left;
+		int right;
+		int large;
+
+		while ((cur << 1) + 1 <= last) {
+			left = (cur << 1) + 1;
+			right = (cur << 1) + 2;
+			large = cur;
+
+			if (c.compare(a[large], a[left]) < 0) {
+				large = left;
+			}
+
+			if (right <= last && (c.compare(a[large], a[right]) < 0)) {
+				large = right;
+			}
+
+			if (large != cur) {
+				swap(a, cur, large);
+				cur = large;
+			} else {
+				return;
+			}
+		}
+	}
+
 }
