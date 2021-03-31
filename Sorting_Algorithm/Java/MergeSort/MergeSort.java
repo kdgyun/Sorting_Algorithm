@@ -52,29 +52,21 @@ public class MergeSort {
 		while (l <= mid && r <= right) {
 
 			if (a[l] <= a[r]) {
-				sorted[idx] = a[l];
-				idx++;
-				l++;
+				sorted[idx++] = a[l++];
 			}
 
 			else {
-				sorted[idx] = a[r];
-				idx++;
-				r++;
+				sorted[idx++] = a[r++];
 			}
 		}
 
 		if (l > mid) {
 			while (r <= right) {
-				sorted[idx] = a[r];
-				idx++;
-				r++;
+				sorted[idx++] = a[r++];
 			}
 		} else {
 			while (l <= mid) {
-				sorted[idx] = a[l];
-				idx++;
-				l++;
+				sorted[idx++] = a[l++];
 			}
 		}
 
@@ -115,29 +107,21 @@ public class MergeSort {
 		while (l <= mid && r <= right) {
 
 			if (a[l] <= a[r]) {
-				sorted[idx] = a[l];
-				idx++;
-				l++;
+				sorted[idx++] = a[l++];
 			}
 
 			else {
-				sorted[idx] = a[r];
-				idx++;
-				r++;
+				sorted[idx++] = a[r++];
 			}
 		}
 
 		if (l > mid) {
 			while (r <= right) {
-				sorted[idx] = a[r];
-				idx++;
-				r++;
+				sorted[idx++] = a[r++];
 			}
 		} else {
 			while (l <= mid) {
-				sorted[idx] = a[l];
-				idx++;
-				l++;
+				sorted[idx++] = a[l++];
 			}
 		}
 
@@ -179,29 +163,21 @@ public class MergeSort {
 		while (l <= mid && r <= right) {
 
 			if (a[l] <= a[r]) {
-				sorted[idx] = a[l];
-				idx++;
-				l++;
+				sorted[idx++] = a[l++];
 			}
 
 			else {
-				sorted[idx] = a[r];
-				idx++;
-				r++;
+				sorted[idx++] = a[r++];
 			}
 		}
 
 		if (l > mid) {
 			while (r <= right) {
-				sorted[idx] = a[r];
-				idx++;
-				r++;
+				sorted[idx++] = a[r++];
 			}
 		} else {
 			while (l <= mid) {
-				sorted[idx] = a[l];
-				idx++;
-				l++;
+				sorted[idx++] = a[l++];
 			}
 		}
 
@@ -242,29 +218,21 @@ public class MergeSort {
 		while (l <= mid && r <= right) {
 
 			if (a[l] <= a[r]) {
-				sorted[idx] = a[l];
-				idx++;
-				l++;
+				sorted[idx++] = a[l++];
 			}
 
 			else {
-				sorted[idx] = a[r];
-				idx++;
-				r++;
+				sorted[idx++] = a[r++];
 			}
 		}
 
 		if (l > mid) {
 			while (r <= right) {
-				sorted[idx] = a[r];
-				idx++;
-				r++;
+				sorted[idx++] = a[r++];
 			}
 		} else {
 			while (l <= mid) {
-				sorted[idx] = a[l];
-				idx++;
-				l++;
+				sorted[idx++] = a[l++];
 			}
 		}
 
@@ -305,29 +273,21 @@ public class MergeSort {
 		while (l <= mid && r <= right) {
 
 			if (a[l] <= a[r]) {
-				sorted[idx] = a[l];
-				idx++;
-				l++;
+				sorted[idx++] = a[l++];
 			}
 
 			else {
-				sorted[idx] = a[r];
-				idx++;
-				r++;
+				sorted[idx++] = a[r++];
 			}
 		}
 
 		if (l > mid) {
 			while (r <= right) {
-				sorted[idx] = a[r];
-				idx++;
-				r++;
+				sorted[idx++] = a[r++];
 			}
 		} else {
 			while (l <= mid) {
-				sorted[idx] = a[l];
-				idx++;
-				l++;
+				sorted[idx++] = a[l++];
 			}
 		}
 
@@ -369,29 +329,21 @@ public class MergeSort {
 		while (l <= mid && r <= right) {
 
 			if (a[l] <= a[r]) {
-				sorted[idx] = a[l];
-				idx++;
-				l++;
+				sorted[idx++] = a[l++];
 			}
 
 			else {
-				sorted[idx] = a[r];
-				idx++;
-				r++;
+				sorted[idx++] = a[r++];
 			}
 		}
 
 		if (l > mid) {
 			while (r <= right) {
-				sorted[idx] = a[r];
-				idx++;
-				r++;
+				sorted[idx++] = a[r++];
 			}
 		} else {
 			while (l <= mid) {
-				sorted[idx] = a[l];
-				idx++;
-				l++;
+				sorted[idx++] = a[l++];
 			}
 		}
 
@@ -432,29 +384,21 @@ public class MergeSort {
 		while (l <= mid && r <= right) {
 
 			if (a[l] <= a[r]) {
-				sorted[idx] = a[l];
-				idx++;
-				l++;
+				sorted[idx++] = a[l++];
 			}
 
 			else {
-				sorted[idx] = a[r];
-				idx++;
-				r++;
+				sorted[idx++] = a[r++];
 			}
 		}
 
 		if (l > mid) {
 			while (r <= right) {
-				sorted[idx] = a[r];
-				idx++;
-				r++;
+				sorted[idx++] = a[r++];
 			}
 		} else {
 			while (l <= mid) {
-				sorted[idx] = a[l];
-				idx++;
-				l++;
+				sorted[idx++] = a[l++];
 			}
 		}
 
@@ -501,29 +445,20 @@ public class MergeSort {
 		while (l <= mid && r <= right) {
 			
 			if (a[l].compareTo(a[r]) <= 0) {
-				sorted[idx] = a[l];
-				idx++;
-				l++;
+				sorted[idx++] = a[l++];
 			}
-
 			else {
-				sorted[idx] =  a[r];
-				idx++;
-				r++;
+				sorted[idx++] =  a[r++];
 			}
 		}
 
 		if (l > mid) {
 			while (r <= right) {
-				sorted[idx] = a[r];
-				idx++;
-				r++;
+				sorted[idx++] = a[r++];
 			}
 		} else {
 			while (l <= mid) {
-				sorted[idx] = a[l];
-				idx++;
-				l++;
+				sorted[idx++] = a[l++];
 			}
 		}
 
@@ -572,29 +507,21 @@ public class MergeSort {
 		while (l <= mid && r <= right) {
 			
 			if (c.compare(a[l], a[r]) <= 0) {
-				sorted[idx] = (Comparable) a[l];
-				idx++;
-				l++;
+				sorted[idx++] = (Comparable) a[l++];
 			}
 
 			else {
-				sorted[idx] =  (Comparable) a[r];
-				idx++;
-				r++;
+				sorted[idx++] =  (Comparable) a[r++];
 			}
 		}
 
 		if (l > mid) {
 			while (r <= right) {
-				sorted[idx] = (Comparable) a[r];
-				idx++;
-				r++;
+				sorted[idx++] = (Comparable) a[r++];
 			}
 		} else {
 			while (l <= mid) {
-				sorted[idx] = (Comparable) a[l];
-				idx++;
-				l++;
+				sorted[idx++] = (Comparable) a[l++];
 			}
 		}
 
