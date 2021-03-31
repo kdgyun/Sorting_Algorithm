@@ -19,6 +19,7 @@ Project
 > - BubbleSort : Bubble sort(거품 정렬)을 구현한 소스코드가 있습니다.
 > - ShellSort : Shell sort(셸 정렬)을 구현한 소스코드가 있습니다.
 > - HeapSort : Heap sort(힙 정렬)을 구현한 소스코드가 있습니다.
+> - MergeSort : Merge sort(합병/병합 정렬)을 구현한 소스코드가 있습니다.
 
 
 
