@@ -48,7 +48,7 @@ Project
 - **3. import class**
 
 ```
-import [sorting_algorithm name].[sorting algorithm name];
+import [sorting algorithm package name].[sorting algorithm name];
 ```
 
 </br></br></br>
