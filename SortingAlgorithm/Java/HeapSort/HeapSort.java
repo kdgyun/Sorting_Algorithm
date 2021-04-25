@@ -2,7 +2,11 @@ package HeapSort;
 
 /**
  * 
- * @author kdgyun 
+ * @author kdgyun
+ * 
+ * @version 1.0.0
+ * @since 1.0.0
+ *
  * {@link https://st-lab.tistory.com}
  * {@link https://github.com/kdgyun}
  *
