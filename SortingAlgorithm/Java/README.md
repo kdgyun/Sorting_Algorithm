@@ -70,7 +70,7 @@ class YourClass {
 
 </br></br></br>
 
-**If you want to sort an array of primitive types in reverse order, use it as in the following example. **
+**If you want to sort an array of primitive types in reverse order, use it as in the following example.**
 
 ```java
 //ex.
@@ -89,7 +89,7 @@ class YourClass {
 </br></br></br>
 
 
-**If you want to sort an array of Wrapper types in reverse order, use it as in the following example. **
+**If you want to sort an array of Wrapper types in reverse order, use it as in the following example.**
 
 
 ```java
