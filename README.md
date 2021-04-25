@@ -25,7 +25,7 @@ Project
 <br/>
 
 #### How to Use
-> - [Implementation in Java](https://github.com/kdgyun/Sorting_Algorithm/tree/master/Sorting_Algorithm/Java)
+> - [Implementation in Java](https://github.com/kdgyun/Sorting_Algorithm/blob/master/SortingAlgorithm/Java/README.md#project)
 
 
 <br/><br/><br/><br/>
