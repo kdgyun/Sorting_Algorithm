@@ -68,6 +68,50 @@ class YourClass {
 }
 ```
 
+</br></br></br>
+
+**If you want to sort an array of primitive types in reverse order, use it as in the following example. **
+
+```java
+//ex.
+
+import BubbleSort.BubbleSort;
+
+class YourClass {
+	public static void main {
+		int[] a = {1, 5, 2, 4};
+		// true : reverse order,  false : nature order
+		BubbleSort.sort(a, true);	
+	}
+}
+```
+
+</br></br></br>
+
+
+**If you want to sort an array of Wrapper types in reverse order, use it as in the following example. **
+
+```java
+//ex.
+
+import BubbleSort.BubbleSort;
+import Utils.Order;
+
+class YourClass {
+	public static void main {
+		Integer[] a = {1, 5, 2, 4};
+		BubbleSort.sort(a, Order.reverseOrder());
+		// or Collections.reverseOrder() (in java.util package)
+	}
+}
+```
+<br/>
+
+```
+Note : reverseOrder() method is in Utils.Order.
+```
+
+</br></br></br>
 
 
 <br/><br/>
