@@ -5,7 +5,7 @@ package ShellSort;
  * 
  * @author kdgyun
  * 
- * @version 1.0.0
+ * @version 1.1.0
  * @since 1.0.0
  *
  * {@link https://st-lab.tistory.com}
@@ -14,6 +14,9 @@ package ShellSort;
  */
 
 import java.util.Comparator;
+
+import Utils.Convert;
+import Utils.Order;
 
 public class ShellSort {
 
@@ -340,6 +343,102 @@ public class ShellSort {
 				}
 				a[j] = target;
 			}
+		}
+	}
+ 	
+ 	
+
+
+	// reverse ordering
+	
+	public static void sort(byte[] a, boolean isReverse) {
+		
+		// reverse order
+		if(isReverse) {
+			Byte[] b = Convert.toByteArray(a);
+			sort(b, Order.reverseOrder());
+			Convert.tobyteArray(b, a);
+		}
+		else {
+			sort(a, a.length);
+		}
+	}
+
+	public static void sort(char[] a, boolean isReverse) {
+		
+		// reverse order
+		if(isReverse) {
+			Character[] b = Convert.toCharacterArray(a);
+			sort(b, Order.reverseOrder());
+			Convert.tocharArray(b, a);
+		}
+		else {
+			sort(a, a.length);
+		}
+	}
+	
+	public static void sort(short[] a, boolean isReverse) {
+		
+		// reverse order
+		if(isReverse) {
+			Short[] b = Convert.toShortArray(a);
+			sort(b, Order.reverseOrder());
+			Convert.toshortArray(b, a);
+		}
+		else {
+			sort(a, a.length);
+		}
+	}
+	
+	public static void sort(int[] a, boolean isReverse) {
+		
+		// reverse order
+		if(isReverse) {
+			Integer[] b = Convert.toIntegerArray(a);
+			sort(b, Order.reverseOrder());
+			Convert.tointtArray(b, a);
+		}
+		else {
+			sort(a, a.length);
+		}
+	}
+	
+	public static void sort(long[] a, boolean isReverse) {
+		
+		// reverse order
+		if(isReverse) {
+			Long[] b = Convert.toLongArray(a);
+			sort(b, Order.reverseOrder());
+			Convert.tolongArray(b, a);
+		}
+		else {
+			sort(a, a.length);
+		}
+	}
+	
+	public static void sort(float[] a, boolean isReverse) {
+		
+		// reverse order
+		if(isReverse) {
+			Float[] b = Convert.toFloatArray(a);
+			sort(b, Order.reverseOrder());
+			Convert.toflostArray(b, a);
+		}
+		else {
+			sort(a, a.length);
+		}
+	}
+	
+	public static void sort(double[] a, boolean isReverse) {
+		
+		// reverse order
+		if(isReverse) {
+			Double[] b = Convert.toDoubleArray(a);
+			sort(b, Order.reverseOrder());
+			Convert.todoubleArray(b, a);
+		}
+		else {
+			sort(a, a.length);
 		}
 	}
 }

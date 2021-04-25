@@ -4,7 +4,7 @@ package InsertionSort;
  * 
  * @author kdgyun
  * 
- * @version 1.0.0
+ * @version 1.1.0
  * @since 1.0.0
  *
  * {@link https://st-lab.tistory.com}
@@ -13,6 +13,9 @@ package InsertionSort;
  */
 
 import java.util.Comparator;
+
+import Utils.Convert;
+import Utils.Order;
 
 public class InsertionSort {
 	
@@ -24,11 +27,11 @@ public class InsertionSort {
 	 * sorting byte type array 
 	 *==========================*/
 	
-	public void sort(byte[] a) {
+	public static void sort(byte[] a) {
 		sort(a, a.length);
 	}
 	
-	private void sort(byte[] a, int size ){
+	private static void sort(byte[] a, int size ){
 		byte target; 
 		int j;
 		
@@ -52,11 +55,11 @@ public class InsertionSort {
 	 * sorting char type array 
 	 *==========================*/
 	
-	public void sort(char[] a) {
+	public static void sort(char[] a) {
 		sort(a, a.length);
 	}
 	
-	private void sort(char[] a, int size) {
+	private static void sort(char[] a, int size) {
 		
 		char target;
 		int j;
@@ -81,11 +84,11 @@ public class InsertionSort {
 	 * sorting short type array 
 	 *==========================*/
 	
-	public void sort(short[] a) {
+	public static void sort(short[] a) {
 		sort(a, a.length);
 	}
 	
-	private void sort(short[] a, int size) {
+	private static void sort(short[] a, int size) {
 		
 		short target;
 		int j;
@@ -110,11 +113,11 @@ public class InsertionSort {
 	 * sorting int type array 
 	 *==========================*/
 	
-	public void sort(int[] a) {
+	public static void sort(int[] a) {
 		sort(a, a.length);
 	}
 	
-	private void sort(int[] a, int size) {
+	private static void sort(int[] a, int size) {
 		
 		int target, j;
 		
@@ -138,11 +141,11 @@ public class InsertionSort {
 	 * sorting long type array 
 	 *==========================*/
 	
-	public void sort(long[] a) {
+	public static void sort(long[] a) {
 		sort(a, a.length);
 	}
 	
-	private void sort(long[] a, int size) {
+	private static void sort(long[] a, int size) {
 		
 		long target;
 		int j;
@@ -167,11 +170,11 @@ public class InsertionSort {
 	 * sorting float type array 
 	 *==========================*/
 	
-	public void sort(float[] a) {
+	public static void sort(float[] a) {
 		sort(a, a.length);
 	}
 	
-	private void sort(float[] a, int size) {
+	private static void sort(float[] a, int size) {
 		
 		float target;
 		int j;
@@ -196,11 +199,11 @@ public class InsertionSort {
 	 * sorting double type array 
 	 *==========================*/
 	
-	public void sort(double[] a) {
+	public static void sort(double[] a) {
 		sort(a, a.length);
 	}
 	
-	private void sort(double[] a, int size) {
+	private static void sort(double[] a, int size) {
 		
 		double target;
 		int j;
@@ -279,6 +282,101 @@ public class InsertionSort {
 			}
 
 			a[j + 1] = target;	
+		}
+	}
+	
+	
+	
+	// reverse ordering
+	
+	public static void sort(byte[] a, boolean isReverse) {
+		
+		// reverse order
+		if(isReverse) {
+			Byte[] b = Convert.toByteArray(a);
+			sort(b, Order.reverseOrder());
+			Convert.tobyteArray(b, a);
+		}
+		else {
+			sort(a, a.length);
+		}
+	}
+
+	public static void sort(char[] a, boolean isReverse) {
+		
+		// reverse order
+		if(isReverse) {
+			Character[] b = Convert.toCharacterArray(a);
+			sort(b, Order.reverseOrder());
+			Convert.tocharArray(b, a);
+		}
+		else {
+			sort(a, a.length);
+		}
+	}
+	
+	public static void sort(short[] a, boolean isReverse) {
+		
+		// reverse order
+		if(isReverse) {
+			Short[] b = Convert.toShortArray(a);
+			sort(b, Order.reverseOrder());
+			Convert.toshortArray(b, a);
+		}
+		else {
+			sort(a, a.length);
+		}
+	}
+	
+	public static void sort(int[] a, boolean isReverse) {
+		
+		// reverse order
+		if(isReverse) {
+			Integer[] b = Convert.toIntegerArray(a);
+			sort(b, Order.reverseOrder());
+			Convert.tointtArray(b, a);
+		}
+		else {
+			sort(a, a.length);
+		}
+	}
+	
+	public static void sort(long[] a, boolean isReverse) {
+		
+		// reverse order
+		if(isReverse) {
+			Long[] b = Convert.toLongArray(a);
+			sort(b, Order.reverseOrder());
+			Convert.tolongArray(b, a);
+		}
+		else {
+			sort(a, a.length);
+		}
+	}
+	
+	public static void sort(float[] a, boolean isReverse) {
+		
+		// reverse order
+		if(isReverse) {
+			Float[] b = Convert.toFloatArray(a);
+			sort(b, Order.reverseOrder());
+			Convert.toflostArray(b, a);
+		}
+		else {
+			sort(a, a.length);
+		}
+	}
+	
+	public static void sort(double[] a, boolean isReverse) {
+		
+		// reverse order
+		if(isReverse) {
+			Double[] b = Convert.toDoubleArray(a);
+			sort(b, Order.reverseOrder());
+			Convert.todoubleArray(b, a);
+		}
+		else {
+			sort(a, a.length);
 		}
 	}
 }

@@ -4,7 +4,7 @@ package MergeSort;
  * 
  * @author kdgyun
  * 
- * @version 1.0.0
+ * @version 1.1.0
  * @since 1.0.0
  *
  * {@link https://st-lab.tistory.com}
@@ -14,10 +14,21 @@ package MergeSort;
 
 import java.util.Comparator;
 
+import Utils.Convert;
+import Utils.Order;
+
 public class MergeSort {
 
 	@SuppressWarnings("rawtypes")
 	private static Comparable[] sorted;
+	private static byte[] BYTESorted;
+	private static char[] CHARSorted;
+	private static short[] SHORTSorted;
+	private static int[] INTSorted;
+	private static long[] LONGSorted;
+	private static float[] FLOATSorted;
+	private static double[] DOUBLESorted;
+	
 
 	
 	
@@ -30,9 +41,9 @@ public class MergeSort {
 	
 	public static void sort(byte[] a) {
 
-		sorted = new Comparable[a.length];
+		BYTESorted = new byte[a.length];
 		sort(a, 0, a.length - 1);
-		sorted = null;
+		BYTESorted = null;
 	}
 
 	// Bottom-Up
@@ -56,25 +67,25 @@ public class MergeSort {
 		while (l <= mid && r <= right) {
 
 			if (a[l] <= a[r]) {
-				sorted[idx++] = a[l++];
+				BYTESorted[idx++] = a[l++];
 			}
 
 			else {
-				sorted[idx++] = a[r++];
+				BYTESorted[idx++] = a[r++];
 			}
 		}
 
 		if (l > mid) {
 			while (r <= right) {
-				sorted[idx++] = a[r++];
+				BYTESorted[idx++] = a[r++];
 			}
 		} else {
 			while (l <= mid) {
-				sorted[idx++] = a[l++];
+				BYTESorted[idx++] = a[l++];
 			}
 		}
 
-		System.arraycopy(sorted, left, a, left, right - left + 1);
+		System.arraycopy(BYTESorted, left, a, left, right - left + 1);
 	}
 	
 	
@@ -85,9 +96,9 @@ public class MergeSort {
 	
 	public static void sort(char[] a) {
 
-		sorted = new Comparable[a.length];
+		CHARSorted = new char[a.length];
 		sort(a, 0, a.length - 1);
-		sorted = null;
+		CHARSorted = null;
 	}
 
 	// Bottom-Up
@@ -111,25 +122,25 @@ public class MergeSort {
 		while (l <= mid && r <= right) {
 
 			if (a[l] <= a[r]) {
-				sorted[idx++] = a[l++];
+				CHARSorted[idx++] = a[l++];
 			}
 
 			else {
-				sorted[idx++] = a[r++];
+				CHARSorted[idx++] = a[r++];
 			}
 		}
 
 		if (l > mid) {
 			while (r <= right) {
-				sorted[idx++] = a[r++];
+				CHARSorted[idx++] = a[r++];
 			}
 		} else {
 			while (l <= mid) {
-				sorted[idx++] = a[l++];
+				CHARSorted[idx++] = a[l++];
 			}
 		}
 
-		System.arraycopy(sorted, left, a, left, right - left + 1);
+		System.arraycopy(CHARSorted, left, a, left, right - left + 1);
 	}
 
 	
@@ -141,9 +152,9 @@ public class MergeSort {
 	
 	public static void sort(short[] a) {
 
-		sorted = new Comparable[a.length];
+		SHORTSorted = new short[a.length];
 		sort(a, 0, a.length - 1);
-		sorted = null;
+		SHORTSorted = null;
 	}
 
 	// Bottom-Up
@@ -167,25 +178,25 @@ public class MergeSort {
 		while (l <= mid && r <= right) {
 
 			if (a[l] <= a[r]) {
-				sorted[idx++] = a[l++];
+				SHORTSorted[idx++] = a[l++];
 			}
 
 			else {
-				sorted[idx++] = a[r++];
+				SHORTSorted[idx++] = a[r++];
 			}
 		}
 
 		if (l > mid) {
 			while (r <= right) {
-				sorted[idx++] = a[r++];
+				SHORTSorted[idx++] = a[r++];
 			}
 		} else {
 			while (l <= mid) {
-				sorted[idx++] = a[l++];
+				SHORTSorted[idx++] = a[l++];
 			}
 		}
 
-		System.arraycopy(sorted, left, a, left, right - left + 1);
+		System.arraycopy(SHORTSorted, left, a, left, right - left + 1);
 	}
 
 	
@@ -196,9 +207,9 @@ public class MergeSort {
 	
 	public static void sort(int[] a) {
 
-		sorted = new Comparable[a.length];
+		INTSorted = new int[a.length];
 		sort(a, 0, a.length - 1);
-		sorted = null;
+		INTSorted = null;
 	}
 
 	// Bottom-Up
@@ -222,25 +233,25 @@ public class MergeSort {
 		while (l <= mid && r <= right) {
 
 			if (a[l] <= a[r]) {
-				sorted[idx++] = a[l++];
+				INTSorted[idx++] = a[l++];
 			}
 
 			else {
-				sorted[idx++] = a[r++];
+				INTSorted[idx++] = a[r++];
 			}
 		}
 
 		if (l > mid) {
 			while (r <= right) {
-				sorted[idx++] = a[r++];
+				INTSorted[idx++] = a[r++];
 			}
 		} else {
 			while (l <= mid) {
-				sorted[idx++] = a[l++];
+				INTSorted[idx++] = a[l++];
 			}
 		}
 
-		System.arraycopy(sorted, left, a, left, right - left + 1);
+		System.arraycopy(INTSorted, left, a, left, right - left + 1);
 	}
 	
 	
@@ -251,9 +262,9 @@ public class MergeSort {
 	
 	public static void sort(long[] a) {
 
-		sorted = new Comparable[a.length];
+		LONGSorted = new long[a.length];
 		sort(a, 0, a.length - 1);
-		sorted = null;
+		LONGSorted = null;
 	}
 
 	// Bottom-Up
@@ -277,25 +288,25 @@ public class MergeSort {
 		while (l <= mid && r <= right) {
 
 			if (a[l] <= a[r]) {
-				sorted[idx++] = a[l++];
+				LONGSorted[idx++] = a[l++];
 			}
 
 			else {
-				sorted[idx++] = a[r++];
+				LONGSorted[idx++] = a[r++];
 			}
 		}
 
 		if (l > mid) {
 			while (r <= right) {
-				sorted[idx++] = a[r++];
+				LONGSorted[idx++] = a[r++];
 			}
 		} else {
 			while (l <= mid) {
-				sorted[idx++] = a[l++];
+				LONGSorted[idx++] = a[l++];
 			}
 		}
 
-		System.arraycopy(sorted, left, a, left, right - left + 1);
+		System.arraycopy(LONGSorted, left, a, left, right - left + 1);
 	}
 
 	
@@ -307,9 +318,9 @@ public class MergeSort {
 	
 	public static void sort(float[] a) {
 
-		sorted = new Comparable[a.length];
+		FLOATSorted = new float[a.length];
 		sort(a, 0, a.length - 1);
-		sorted = null;
+		FLOATSorted = null;
 	}
 
 	// Bottom-Up
@@ -333,25 +344,25 @@ public class MergeSort {
 		while (l <= mid && r <= right) {
 
 			if (a[l] <= a[r]) {
-				sorted[idx++] = a[l++];
+				FLOATSorted[idx++] = a[l++];
 			}
 
 			else {
-				sorted[idx++] = a[r++];
+				FLOATSorted[idx++] = a[r++];
 			}
 		}
 
 		if (l > mid) {
 			while (r <= right) {
-				sorted[idx++] = a[r++];
+				FLOATSorted[idx++] = a[r++];
 			}
 		} else {
 			while (l <= mid) {
-				sorted[idx++] = a[l++];
+				FLOATSorted[idx++] = a[l++];
 			}
 		}
 
-		System.arraycopy(sorted, left, a, left, right - left + 1);
+		System.arraycopy(FLOATSorted, left, a, left, right - left + 1);
 	}
 	
 	
@@ -362,9 +373,9 @@ public class MergeSort {
 	
 	public static void sort(double[] a) {
 
-		sorted = new Comparable[a.length];
+		DOUBLESorted = new double[a.length];
 		sort(a, 0, a.length - 1);
-		sorted = null;
+		DOUBLESorted = null;
 	}
 
 	// Bottom-Up
@@ -388,31 +399,31 @@ public class MergeSort {
 		while (l <= mid && r <= right) {
 
 			if (a[l] <= a[r]) {
-				sorted[idx++] = a[l++];
+				DOUBLESorted[idx++] = a[l++];
 			}
 
 			else {
-				sorted[idx++] = a[r++];
+				DOUBLESorted[idx++] = a[r++];
 			}
 		}
 
 		if (l > mid) {
 			while (r <= right) {
-				sorted[idx++] = a[r++];
+				DOUBLESorted[idx++] = a[r++];
 			}
 		} else {
 			while (l <= mid) {
-				sorted[idx++] = a[l++];
+				DOUBLESorted[idx++] = a[l++];
 			}
 		}
 
-		System.arraycopy(sorted, left, a, left, right - left + 1);
+		System.arraycopy(DOUBLESorted, left, a, left, right - left + 1);
 	}
 	
 	
 	
 	
-	//============= primitive type ============//
+	//============= Oblect type ============//
 	
 	
 	
@@ -532,5 +543,101 @@ public class MergeSort {
 		System.arraycopy(sorted, left, a, left, right - left + 1);
 	}
 	
+	
 
+	// reverse ordering
+	
+	public static void sort(byte[] a, boolean isReverse) {
+		
+		// reverse order
+		if(isReverse) {
+			Byte[] b = Convert.toByteArray(a);
+			sort(b, Order.reverseOrder());
+			Convert.tobyteArray(b, a);
+		}
+		else {
+			sort(a);
+		}
+	}
+
+	public static void sort(char[] a, boolean isReverse) {
+		
+		// reverse order
+		if(isReverse) {
+			Character[] b = Convert.toCharacterArray(a);
+			sort(b, Order.reverseOrder());
+			Convert.tocharArray(b, a);
+		}
+		else {
+			sort(a);
+		}
+	}
+	
+	public static void sort(short[] a, boolean isReverse) {
+		
+		// reverse order
+		if(isReverse) {
+			Short[] b = Convert.toShortArray(a);
+			sort(b, Order.reverseOrder());
+			Convert.toshortArray(b, a);
+		}
+		else {
+			sort(a);
+		}
+	}
+	
+	public static void sort(int[] a, boolean isReverse) {
+		
+		// reverse order
+		if(isReverse) {
+			Integer[] b = Convert.toIntegerArray(a);
+			sort(b, Order.reverseOrder());
+			Convert.tointtArray(b, a);
+		}
+		else {
+			sort(a);
+		}
+	}
+	
+	public static void sort(long[] a, boolean isReverse) {
+		
+		// reverse order
+		if(isReverse) {
+			Long[] b = Convert.toLongArray(a);
+			sort(b, Order.reverseOrder());
+			Convert.tolongArray(b, a);
+		}
+		else {
+			sort(a);
+		}
+	}
+	
+	public static void sort(float[] a, boolean isReverse) {
+		
+		// reverse order
+		if(isReverse) {
+			Float[] b = Convert.toFloatArray(a);
+			sort(b, Order.reverseOrder());
+			Convert.toflostArray(b, a);
+		}
+		else {
+			sort(a);
+		}
+	}
+	
+	public static void sort(double[] a, boolean isReverse) {
+		
+		// reverse order
+		if(isReverse) {
+			Double[] b = Convert.toDoubleArray(a);
+			sort(b, Order.reverseOrder());
+			Convert.todoubleArray(b, a);
+		}
+		else {
+			sort(a);
+		}
+	}
 }
+
+
+
