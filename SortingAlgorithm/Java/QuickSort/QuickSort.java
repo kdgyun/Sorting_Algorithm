@@ -3,7 +3,7 @@ package QuickSort;
 /**
  * 
  * This Quick sort is implemented with middle element selected as the pivot
- * 
+ * @see #qsort(int[] a, int lo, int hi)
  * 
  * @author kdgyun
  * 
@@ -12,6 +12,7 @@ package QuickSort;
  *
  * {@link https://st-lab.tistory.com}
  * {@link https://github.com/kdgyun}
+ * 
  *
  */
 
@@ -222,7 +223,7 @@ public class QuickSort {
 		 *
 		 *  Recursion:
 		 *  
-		 * m_pivot_sort(a, lo, pivot)         m_pivot_sort(a, pivot + 1, hi)
+		 *    qsort(a, lo, pivot)                 qsort(a, pivot + 1, hi)
 		 *  
 		 *         left part                           right part
 		 * +-----------------------+             +-----------------------+
