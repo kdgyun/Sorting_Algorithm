@@ -114,6 +114,17 @@ Note : reverseOrder() method is in Utils.Order.
 ```
 
 </br></br></br>
+<br/>
+
+```
+Note
+
+class QuickSort -> standard QuickSort (with middle element selected as pivot)
+class LPQuickSort -> left-pivot QuickSort
+class RPQuickSort -> right-pivot QuickSort
+```
+
+</br></br></br>
 
 
 <br/><br/>
