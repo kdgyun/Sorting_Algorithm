@@ -32,7 +32,7 @@ public class Convert {
 
 	private static final Byte[] toByteArray(byte[] a, int size) {
 		if (a == null) {
-			return null;
+			throw new NullPointerException();
 		} else if (size == 0) {
 			return EMPTY_BYTE_OBJECT_ARRAY;
 		}
@@ -66,7 +66,7 @@ public class Convert {
 
 	private static final Character[] toCharacterArray(char[] a, int size) {
 		if (a == null) {
-			return null;
+			throw new NullPointerException();
 		} else if (size == 0) {
 			return EMPTY_CHAR_OBJECT_ARRAY;
 		}
@@ -100,7 +100,7 @@ public class Convert {
 
 	private static final Short[] toShortArray(short[] a, int size) {
 		if (a == null) {
-			return null;
+			throw new NullPointerException();
 		} else if (size == 0) {
 			return EMPTY_SHORT_OBJECT_ARRAY;
 		}
@@ -134,7 +134,7 @@ public class Convert {
 
 	private static final Integer[] toIntegerArray(int[] a, int size) {
 		if (a == null) {
-			return null;
+			throw new NullPointerException();
 		} else if (size == 0) {
 			return EMPTY_INT_OBJECT_ARRAY;
 		}
@@ -164,7 +164,7 @@ public class Convert {
 
 	private static final Long[] toLongArray(long[] a, int size) {
 		if (a == null) {
-			return null;
+			throw new NullPointerException();
 		} else if (size == 0) {
 			return EMPTY_LONG_OBJECT_ARRAY;
 		}
@@ -194,7 +194,7 @@ public class Convert {
 
 	private static final Float[] toFloatArray(float[] a, int size) {
 		if (a == null) {
-			return null;
+			throw new NullPointerException();
 		} else if (size == 0) {
 			return EMPTY_FLOAT_OBJECT_ARRAY;
 		}
@@ -228,7 +228,7 @@ public class Convert {
 
 	private static final Double[] toDoubleArray(double[] a, int size) {
 		if (a == null) {
-			return null;
+			throw new NullPointerException();
 		} else if (size == 0) {
 			return EMPTY_DOUBLE_OBJECT_ARRAY;
 		}
