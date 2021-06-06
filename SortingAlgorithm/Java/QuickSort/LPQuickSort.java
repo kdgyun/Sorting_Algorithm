@@ -56,14 +56,12 @@ public class LPQuickSort {
 	private static int partition(byte[] a, int left, int right) {
 		
 		int lo = left;
-		int hi = right;
-		byte pivot = a[left];	
+		int hi = right + 1;
+		int pivot = a[left];	
 		
 		while(lo < hi) {
 			
-			while(a[hi] > pivot && lo < hi) {
-				hi--;
-			}
+			while(a[--hi] > pivot);
 			
 
 			while(a[lo] <= pivot && lo < hi) {
@@ -114,14 +112,12 @@ public class LPQuickSort {
 	private static int partition(char[] a, int left, int right) {
 		
 		int lo = left;
-		int hi = right;
-		char pivot = a[left];	
+		int hi = right + 1;
+		int pivot = a[left];	
 		
 		while(lo < hi) {
 			
-			while(a[hi] > pivot && lo < hi) {
-				hi--;
-			}
+			while(a[--hi] > pivot);
 			
 
 			while(a[lo] <= pivot && lo < hi) {
@@ -173,16 +169,12 @@ public class LPQuickSort {
 	private static int partition(short[] a, int left, int right) {
 		
 		int lo = left;
-		int hi = right;
-		short pivot = a[left];	
+		int hi = right + 1;
+		int pivot = a[left];	
 		
 		while(lo < hi) {
 			
-			while(a[hi] > pivot && lo < hi) {
-				hi--;
-			}
-			
-
+			while(a[--hi] > pivot);
 			while(a[lo] <= pivot && lo < hi) {
 				lo++;
 			}
@@ -263,16 +255,12 @@ public class LPQuickSort {
 	private static int partition(int[] a, int left, int right) {
 		
 		int lo = left;
-		int hi = right;
+		int hi = right + 1;
 		int pivot = a[left];	
 		
 		while(lo < hi) {
 			
-			while(a[hi] > pivot && lo < hi) {
-				hi--;
-			}
-			
-
+			while(a[--hi] > pivot);
 			while(a[lo] <= pivot && lo < hi) {
 				lo++;
 			}
@@ -323,14 +311,12 @@ public class LPQuickSort {
 	private static int partition(long[] a, int left, int right) {
 		
 		int lo = left;
-		int hi = right;
+		int hi = right + 1;
 		long pivot = a[left];	
 		
 		while(lo < hi) {
 			
-			while(a[hi] > pivot && lo < hi) {
-				hi--;
-			}
+			while(a[--hi] > pivot);
 			
 
 			while(a[lo] <= pivot && lo < hi) {
@@ -382,14 +368,12 @@ public class LPQuickSort {
 	private static int partition(float[] a, int left, int right) {
 		
 		int lo = left;
-		int hi = right;
+		int hi = right + 1;
 		float pivot = a[left];	
 		
 		while(lo < hi) {
 			
-			while(a[hi] > pivot && lo < hi) {
-				hi--;
-			}
+			while(a[--hi] > pivot);
 			
 
 			while(a[lo] <= pivot && lo < hi) {
@@ -442,15 +426,14 @@ public class LPQuickSort {
 	private static int partition(double[] a, int left, int right) {
 		
 		int lo = left;
-		int hi = right;
+		int hi = right + 1;
 		double pivot = a[left];	
 		
 		while(lo < hi) {
 			
-			while(a[hi] > pivot && lo < hi) {
-				hi--;
-			}
+			while(a[--hi] > pivot);
 			
+
 			while(a[lo] <= pivot && lo < hi) {
 				lo++;
 			}
@@ -514,16 +497,12 @@ public class LPQuickSort {
 	private static int partition(Object[] a, int left, int right) {
 		
 		int lo = left;
-		int hi = right;
+		int hi = right + 1;
 		Comparable pivot = ((Comparable) a[left]);	
 		
 		while(lo < hi) {
 
-			while(pivot.compareTo(a[hi]) < 0 && lo < hi) {
-				hi--;
-			}
-
-
+			while(pivot.compareTo(a[--hi]) < 0);
 			while(pivot.compareTo(a[lo]) >= 0 && lo < hi) {
 				lo++;
 			}
@@ -535,8 +514,6 @@ public class LPQuickSort {
 		
 		return lo;
 	}
-	
-	
 	
 
 
@@ -558,15 +535,12 @@ public class LPQuickSort {
 	private static int partition(Object[] a, int left, int right, Comparator c) {
 		
 		int lo = left;
-		int hi = right;
+		int hi = right + 1;
 		Object pivot = a[left];
 		
 		while(lo < hi) {
 
-			while(c.compare(pivot, a[hi]) < 0 && lo < hi) {
-				hi--;
-			}
-
+			while(c.compare(pivot, a[--hi]) < 0);
 			while(c.compare(a[lo], pivot) <= 0 && lo < hi) {
 				lo++;
 			}
