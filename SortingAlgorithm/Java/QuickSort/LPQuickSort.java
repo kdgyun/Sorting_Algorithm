@@ -56,21 +56,16 @@ public class LPQuickSort {
 	private static int partition(byte[] a, int left, int right) {
 		
 		int lo = left;
-		int hi = right + 1;
-		int pivot = a[left];	
+		int hi = right;
+		byte pivot = a[left];	
 		
 		while(lo < hi) {
 			
-			while(a[--hi] > pivot);
-			
-
-			while(a[lo] <= pivot && lo < hi) {
-				lo++;
-			}
+			while(a[hi] > pivot) --hi;
+			while(a[lo] <= pivot && lo < hi) ++lo;
 			
 			swap(a, lo, hi);
 		}
-
 		swap(a, left, lo);
 		
 		return lo;
@@ -112,21 +107,16 @@ public class LPQuickSort {
 	private static int partition(char[] a, int left, int right) {
 		
 		int lo = left;
-		int hi = right + 1;
-		int pivot = a[left];	
+		int hi = right;
+		char pivot = a[left];	
 		
 		while(lo < hi) {
 			
-			while(a[--hi] > pivot);
-			
-
-			while(a[lo] <= pivot && lo < hi) {
-				lo++;
-			}
+			while(a[hi] > pivot) --hi;
+			while(a[lo] <= pivot && lo < hi) ++lo;
 			
 			swap(a, lo, hi);
 		}
-
 		swap(a, left, lo);
 		
 		return lo;
@@ -169,22 +159,20 @@ public class LPQuickSort {
 	private static int partition(short[] a, int left, int right) {
 		
 		int lo = left;
-		int hi = right + 1;
-		int pivot = a[left];	
+		int hi = right;
+		short pivot = a[left];	
 		
 		while(lo < hi) {
 			
-			while(a[--hi] > pivot);
-			while(a[lo] <= pivot && lo < hi) {
-				lo++;
-			}
+			while(a[hi] > pivot) --hi;
+			while(a[lo] <= pivot && lo < hi) ++lo;
 			
 			swap(a, lo, hi);
 		}
-
 		swap(a, left, lo);
 		
 		return lo;
+
 	}
 	
 	private static void swap(short[] a, int i, int j) {
@@ -255,19 +243,16 @@ public class LPQuickSort {
 	private static int partition(int[] a, int left, int right) {
 		
 		int lo = left;
-		int hi = right + 1;
+		int hi = right;
 		int pivot = a[left];	
 		
 		while(lo < hi) {
 			
-			while(a[--hi] > pivot);
-			while(a[lo] <= pivot && lo < hi) {
-				lo++;
-			}
+			while(a[hi] > pivot) --hi;
+			while(a[lo] <= pivot && lo < hi) ++lo;
 			
 			swap(a, lo, hi);
 		}
-
 		swap(a, left, lo);
 		
 		return lo;
@@ -311,21 +296,16 @@ public class LPQuickSort {
 	private static int partition(long[] a, int left, int right) {
 		
 		int lo = left;
-		int hi = right + 1;
+		int hi = right;
 		long pivot = a[left];	
 		
 		while(lo < hi) {
 			
-			while(a[--hi] > pivot);
-			
-
-			while(a[lo] <= pivot && lo < hi) {
-				lo++;
-			}
+			while(a[hi] > pivot) --hi;
+			while(a[lo] <= pivot && lo < hi) ++lo;
 			
 			swap(a, lo, hi);
 		}
-
 		swap(a, left, lo);
 		
 		return lo;
@@ -368,21 +348,16 @@ public class LPQuickSort {
 	private static int partition(float[] a, int left, int right) {
 		
 		int lo = left;
-		int hi = right + 1;
+		int hi = right;
 		float pivot = a[left];	
 		
 		while(lo < hi) {
 			
-			while(a[--hi] > pivot);
-			
-
-			while(a[lo] <= pivot && lo < hi) {
-				lo++;
-			}
+			while(a[hi] > pivot) --hi;
+			while(a[lo] <= pivot && lo < hi) ++lo;
 			
 			swap(a, lo, hi);
 		}
-
 		swap(a, left, lo);
 		
 		return lo;
@@ -426,21 +401,16 @@ public class LPQuickSort {
 	private static int partition(double[] a, int left, int right) {
 		
 		int lo = left;
-		int hi = right + 1;
+		int hi = right;
 		double pivot = a[left];	
 		
 		while(lo < hi) {
 			
-			while(a[--hi] > pivot);
-			
-
-			while(a[lo] <= pivot && lo < hi) {
-				lo++;
-			}
+			while(a[hi] > pivot) --hi;
+			while(a[lo] <= pivot && lo < hi) ++lo;
 			
 			swap(a, lo, hi);
 		}
-
 		swap(a, left, lo);
 		
 		return lo;
@@ -497,15 +467,13 @@ public class LPQuickSort {
 	private static int partition(Object[] a, int left, int right) {
 		
 		int lo = left;
-		int hi = right + 1;
+		int hi = right;
 		Comparable pivot = ((Comparable) a[left]);	
 		
 		while(lo < hi) {
 
-			while(pivot.compareTo(a[--hi]) < 0);
-			while(pivot.compareTo(a[lo]) >= 0 && lo < hi) {
-				lo++;
-			}
+			while(pivot.compareTo(a[hi]) < 0) --hi;
+			while(pivot.compareTo(a[lo]) >= 0 && lo < hi) ++lo;
 			
 			swap(a, lo, hi);
 		}
@@ -535,15 +503,13 @@ public class LPQuickSort {
 	private static int partition(Object[] a, int left, int right, Comparator c) {
 		
 		int lo = left;
-		int hi = right + 1;
+		int hi = right;
 		Object pivot = a[left];
 		
 		while(lo < hi) {
 
-			while(c.compare(pivot, a[--hi]) < 0);
-			while(c.compare(a[lo], pivot) <= 0 && lo < hi) {
-				lo++;
-			}
+			while(c.compare(pivot, a[hi]) < 0) --hi;
+			while(c.compare(a[lo], pivot) <= 0 && lo < hi) ++lo;
 
 			swap(a, lo, hi);
 		}
