@@ -107,7 +107,9 @@ public class HeapSort {
 	}
 
 	private static void sort(char[] a, int size) {
-
+		if(size < 2) {
+			return;
+		}
 		int last = size - 1;
 		int par = getParent(last);
 
@@ -168,7 +170,9 @@ public class HeapSort {
 	}
 
 	private static void sort(short[] a, int size) {
-
+		if(size < 2) {
+			return;
+		}
 		int last = size - 1;
 		int par = getParent(last);
 
@@ -230,7 +234,9 @@ public class HeapSort {
 	}
 
 	private static void sort(int[] a, int size) {
-
+		if(size < 2) {
+			return;
+		}
 		int last = size - 1;
 		int par = getParent(last);
 
@@ -292,7 +298,9 @@ public class HeapSort {
 	}
 
 	private static void sort(long[] a, int size) {
-
+		if(size < 2) {
+			return;
+		}
 		int last = size - 1;
 		int par = getParent(last);
 
@@ -354,7 +362,9 @@ public class HeapSort {
 	}
 
 	private static void sort(float[] a, int size) {
-
+		if(size < 2) {
+			return;
+		}
 		int last = size - 1;
 		int par = getParent(last);
 
@@ -417,7 +427,9 @@ public class HeapSort {
 	}
 
 	private static void sort(double[] a, int size) {
-
+		if(size < 2) {
+			return;
+		}
 		int last = size - 1;
 		int par = getParent(last);
 
@@ -482,7 +494,9 @@ public class HeapSort {
 	}
 
 	private static void sort(Object[] a, int size) {
-
+		if(size < 2) {
+			return;
+		}
 		int last = size - 1;
 		int par = getParent(last);
 
@@ -538,7 +552,9 @@ public class HeapSort {
 
 	@SuppressWarnings("rawtypes")
 	private static void sort(Object[] a, int size, Comparator c) {
-
+		if(size < 2) {
+			return;
+		}
 		int last = size - 1;
 		int par = getParent(last);
 
