@@ -20,7 +20,7 @@ import Utils.Order;
 public class HeapSort {
 
 	private static int getParent(int child) {
-		return (child - 1) / 2;
+		return (child - 1) >>> 1;
 	}
 
 	// ============= primitive type ============//
@@ -42,7 +42,9 @@ public class HeapSort {
 	}
 
 	private static void sort(byte[] a, int size) {
-
+		if(size < 2) {
+			return;
+		}
 		int last = size - 1;
 		int par = getParent(last);
 
