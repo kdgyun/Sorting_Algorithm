@@ -6,7 +6,7 @@ import java.util.concurrent.RecursiveTask;
 import Utils.Convert;
 import Utils.Order;
 
-public class LPQuickSort {
+public class ParallelLPQuickSort {
 
 	final static int THRESHOLD = 1 << 13;
 	
