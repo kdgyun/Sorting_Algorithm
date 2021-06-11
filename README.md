@@ -37,7 +37,9 @@ Sorting Algorithm Project
 
 ## Directory structure
 </br>
-This repository is organized as follows: </br> 
+This repository is organized as follows: 
+
+</br> 
 
 ```
 /Sorting_Algorithm
@@ -76,7 +78,7 @@ This repository is organized as follows: </br>
 <br/>
 <br/>
 
-### How to Use (download ZIP) on Eclipse
+#### How to Use (download ZIP) on Eclipse
 
 ------
 
