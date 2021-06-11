@@ -135,7 +135,7 @@ import BubbleSort.BubbleSort;
 class YourClass {
 	public static void main {
 		int[] a = {1, 5, 2, 4};
-		// true : reverse order,  false : nature order
+		// true : reverse order,  false : natural order
 		BubbleSort.sort(a, true);	
 	}
 }
@@ -144,7 +144,7 @@ class YourClass {
 </br></br></br>
 
 
-**If you want to sort an array of Wrapper types in reverse order, use it as in the following example.**
+**If you want to sort an array of Wrapper or class object types in reverse order, use it as in the following example.**
 
 
 ```java
@@ -163,9 +163,9 @@ class YourClass {
 ```
 <br/>
 
-```
-Note : reverseOrder() method is in Utils.Order.
-```
+
+
+`Note : reverseOrder() method of Comparator Interface in Utils.Order returns a comparator that imposes the reverse ordering of this comparator.`
 
 </br></br></br>
 
