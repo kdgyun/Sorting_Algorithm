@@ -18,20 +18,24 @@ Sorting Algorithm Project (Java)
 	Sorts the specified array into ascending order (natural order).</br></br>
 
 - 대부분의 정렬 알고리즘은 객체 정렬을 지원합니다. </br>
-	Most sorting algorithms supports sorting objects.</br></br>
+	Most sorting algorithms supports sorting objects. </br></br>
 
 - 내림차순 정렬을 지원합니다. </br>
-	Supports sorting Descending order (reverse order).</br>
+	Supports sorting Descending order (reverse order). </br>
 	*See : [Reverse ordering](#reverse-ordering)* </br></br>
+
+
+- 일부 정렬 알고리즘들은 스레드를 이용한 병렬 정렬을 지원합니다. ([지원하는 정렬 알고리즘](https://github.com/kdgyun/Sorting_Algorithm/blob/master/SortingAlgorithm/Java/README.md#parallelsort)) </br>
+	Some sorting algorithms support parallel sorting using threads. ([Supported Sorting Algoriths](https://github.com/kdgyun/Sorting_Algorithm/blob/master/SortingAlgorithm/Java/README.md#parallelsort)) </br></br>
+
 	
-- 사용자 객체(클래스)를 정렬하는 경우 Comparator 또는 Comparable에 의해 비교방식을 구현해주어야 하며, 형식은 표준 Java 작성법과 동일합니다.</br>
+- 사용자 객체(클래스)를 정렬하는 경우 Comparator 또는 Comparable에 의한 비교방식을 반드시 구현해주어야 합니다. </br>
 	if you want to sort specified array of objects, All elements in the array must implement the Comparable or Comparator interface.</br></br>
 
 
 - 만약 퀵 정렬을 사용하고자 하는 경우 참고해주시기 바랍니다. [Quick Sort info](https://github.com/kdgyun/Sorting_Algorithm/blob/master/SortingAlgorithm/Java/README.md#quicksort) </br>
-	if you use quick sort, Please note that [Quick Sort info](https://github.com/kdgyun/Sorting_Algorithm/blob/master/SortingAlgorithm/Java/README.md#quicksort)
+	if you use quick sort, Please note that [Quick Sort info](https://github.com/kdgyun/Sorting_Algorithm/blob/master/SortingAlgorithm/Java/README.md#quicksort) </br></br>
 
-</br>
 
 </br></br>
 
@@ -143,7 +147,52 @@ class YourClass {
 
 </br></br></br>
 
+## Object ordering
 
+</br></br>
+
+**If you want to sort an array of Wrapper or class object types in natural order, use it as in the following example.**
+
+
+```java
+//ex. Wrapper type
+
+import BubbleSort.BubbleSort;
+
+class Main {
+	public static void main {
+		Integer[] a = {1, 5, 2, 4};
+		BubbleSort.sort(a);
+	}
+}
+```
+<br/><br/>
+
+
+```java
+//ex. class Object type
+//class must implement the Comparable or Comparator interface.
+
+import BubbleSort.BubbleSort;
+
+class Custom {
+	...
+}
+
+class Main {
+	public static void main {
+
+		Custom[] a = new Custom[size];
+		BubbleSort.sort(a);		// using Comparable
+		BubbleSort.sort(a, comp);	// using Comparator
+	}
+	
+	static Comparator<Custom> comp = new Comparator<Custom>() { ... };
+}
+```
+<br/>
+
+</br></br>
 **If you want to sort an array of Wrapper or class object types in reverse order, use it as in the following example.**
 
 
@@ -153,7 +202,7 @@ class YourClass {
 import BubbleSort.BubbleSort;
 import Utils.Order;
 
-class YourClass {
+class Main {
 	public static void main {
 		Integer[] a = {1, 5, 2, 4};
 		BubbleSort.sort(a, Order.reverseOrder());
