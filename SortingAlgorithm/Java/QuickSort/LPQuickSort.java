@@ -61,18 +61,11 @@ public class LPQuickSort {
 		
 		while(lo < hi) {
 			
-			while(a[hi] > pivot && lo < hi) {
-				hi--;
-			}
-			
-
-			while(a[lo] <= pivot && lo < hi) {
-				lo++;
-			}
+			while(a[hi] > pivot) --hi;
+			while(a[lo] <= pivot && lo < hi) ++lo;
 			
 			swap(a, lo, hi);
 		}
-
 		swap(a, left, lo);
 		
 		return lo;
@@ -119,18 +112,11 @@ public class LPQuickSort {
 		
 		while(lo < hi) {
 			
-			while(a[hi] > pivot && lo < hi) {
-				hi--;
-			}
-			
-
-			while(a[lo] <= pivot && lo < hi) {
-				lo++;
-			}
+			while(a[hi] > pivot) --hi;
+			while(a[lo] <= pivot && lo < hi) ++lo;
 			
 			swap(a, lo, hi);
 		}
-
 		swap(a, left, lo);
 		
 		return lo;
@@ -178,21 +164,15 @@ public class LPQuickSort {
 		
 		while(lo < hi) {
 			
-			while(a[hi] > pivot && lo < hi) {
-				hi--;
-			}
-			
-
-			while(a[lo] <= pivot && lo < hi) {
-				lo++;
-			}
+			while(a[hi] > pivot) --hi;
+			while(a[lo] <= pivot && lo < hi) ++lo;
 			
 			swap(a, lo, hi);
 		}
-
 		swap(a, left, lo);
 		
 		return lo;
+
 	}
 	
 	private static void swap(short[] a, int i, int j) {
@@ -268,18 +248,11 @@ public class LPQuickSort {
 		
 		while(lo < hi) {
 			
-			while(a[hi] > pivot && lo < hi) {
-				hi--;
-			}
-			
-
-			while(a[lo] <= pivot && lo < hi) {
-				lo++;
-			}
+			while(a[hi] > pivot) --hi;
+			while(a[lo] <= pivot && lo < hi) ++lo;
 			
 			swap(a, lo, hi);
 		}
-
 		swap(a, left, lo);
 		
 		return lo;
@@ -328,18 +301,11 @@ public class LPQuickSort {
 		
 		while(lo < hi) {
 			
-			while(a[hi] > pivot && lo < hi) {
-				hi--;
-			}
-			
-
-			while(a[lo] <= pivot && lo < hi) {
-				lo++;
-			}
+			while(a[hi] > pivot) --hi;
+			while(a[lo] <= pivot && lo < hi) ++lo;
 			
 			swap(a, lo, hi);
 		}
-
 		swap(a, left, lo);
 		
 		return lo;
@@ -387,18 +353,11 @@ public class LPQuickSort {
 		
 		while(lo < hi) {
 			
-			while(a[hi] > pivot && lo < hi) {
-				hi--;
-			}
-			
-
-			while(a[lo] <= pivot && lo < hi) {
-				lo++;
-			}
+			while(a[hi] > pivot) --hi;
+			while(a[lo] <= pivot && lo < hi) ++lo;
 			
 			swap(a, lo, hi);
 		}
-
 		swap(a, left, lo);
 		
 		return lo;
@@ -447,17 +406,11 @@ public class LPQuickSort {
 		
 		while(lo < hi) {
 			
-			while(a[hi] > pivot && lo < hi) {
-				hi--;
-			}
-			
-			while(a[lo] <= pivot && lo < hi) {
-				lo++;
-			}
+			while(a[hi] > pivot) --hi;
+			while(a[lo] <= pivot && lo < hi) ++lo;
 			
 			swap(a, lo, hi);
 		}
-
 		swap(a, left, lo);
 		
 		return lo;
@@ -519,14 +472,8 @@ public class LPQuickSort {
 		
 		while(lo < hi) {
 
-			while(pivot.compareTo(a[hi]) < 0 && lo < hi) {
-				hi--;
-			}
-
-
-			while(pivot.compareTo(a[lo]) >= 0 && lo < hi) {
-				lo++;
-			}
+			while(pivot.compareTo(a[hi]) < 0) --hi;
+			while(pivot.compareTo(a[lo]) >= 0 && lo < hi) ++lo;
 			
 			swap(a, lo, hi);
 		}
@@ -535,8 +482,6 @@ public class LPQuickSort {
 		
 		return lo;
 	}
-	
-	
 	
 
 
@@ -563,13 +508,8 @@ public class LPQuickSort {
 		
 		while(lo < hi) {
 
-			while(c.compare(pivot, a[hi]) < 0 && lo < hi) {
-				hi--;
-			}
-
-			while(c.compare(a[lo], pivot) <= 0 && lo < hi) {
-				lo++;
-			}
+			while(c.compare(pivot, a[hi]) < 0) --hi;
+			while(c.compare(a[lo], pivot) <= 0 && lo < hi) ++lo;
 
 			swap(a, lo, hi);
 		}
