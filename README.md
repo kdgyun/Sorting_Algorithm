@@ -1,4 +1,4 @@
-Sorting Algorithm Project
+Sorting Algorithm Project (Java)
 ==========
 <br/>
 
