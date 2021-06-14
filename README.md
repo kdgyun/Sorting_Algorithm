@@ -1,4 +1,9 @@
-Sorting Algorithm Project (Java)
+<img src= "https://img.shields.io/badge/Java-v11.0.5-blue&?logo=Java" />
+
+
+<br/>
+
+Sorting Algorithm Project
 ==========
 <br/>
 
