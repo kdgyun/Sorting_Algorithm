@@ -1,7 +1,7 @@
 package ParallelSort;
 
 import java.util.Comparator;
-import java.util.concurrent.RecursiveTask;
+import java.util.concurrent.RecursiveAction;
 
 import Utils.Convert;
 import Utils.Order;
@@ -20,49 +20,46 @@ public class ParallelLPQuickSort {
 	 */
 
 	public static void sort(byte[] a) {
-		new ParLPQuickByte(a, 0, a.length - 1).invoke();
+		new ParLPQuickByte.QSort(a, 0, a.length - 1).invoke();
 	}
 	
 
-	private static final class ParLPQuickByte extends RecursiveTask<Void> {
-
-
-		private static final long serialVersionUID = 1L;
-		final byte[] a;
-		final int lo;
-		final int hi;
-		
-		ParLPQuickByte(byte[] a, int lo, int hi) {
-			this.a = a;
-			this.lo = lo;
-			this.hi = hi;
-		}
-		
-		public final Void compute() {
-
-			if(lo >= hi) {
-				return null;
-			}
-			int pivot = partition(a, lo, hi);	
-			if(hi - lo < THRESHOLD) {
-				
-				
-				qsort(a, lo, pivot - 1);
-				qsort(a, pivot + 1, hi);
-			}
-
-			else {
-				ParLPQuickByte left = new ParLPQuickByte(a, lo, pivot - 1);
-				ParLPQuickByte right = new ParLPQuickByte(a, pivot + 1, hi);
-				
-				left.fork();
-				right.fork();
-				left.join();
-				right.join();
+	private static final class ParLPQuickByte {	
+		private static final class QSort extends RecursiveAction {
+			private static final long serialVersionUID = 1L;
+			final byte[] a;
+			final int lo;
+			final int hi;
+			
+			QSort(byte[] a, int lo, int hi) {
+				this.a = a;
+				this.lo = lo;
+				this.hi = hi;
 			}
 			
-			
-			return null;
+			public final void compute() {
+				
+				if(lo >= hi) {
+					return;
+				}
+				
+				int pivot = partition(a, lo, hi);
+				if(hi - lo < THRESHOLD) {
+					
+					
+					qsort(a, lo, pivot - 1);
+					qsort(a, pivot + 1, hi);
+				}
+				else {
+					QSort left = new QSort(a, lo, pivot - 1);
+					QSort right = new QSort(a, pivot + 1, hi);
+					left.fork();
+					right.fork();
+					left.join();
+					right.join();
+				}
+				
+			}
 		}
 		
 		private static void qsort(byte[] a, int lo, int hi) {	
@@ -115,49 +112,47 @@ public class ParallelLPQuickSort {
 	 */
 
 	public static void sort(char[] a) {
-		new ParLPQuickChar(a, 0, a.length - 1).invoke();
+		new ParLPQuickChar.QSort(a, 0, a.length - 1).invoke();
 	}
 	
 
 
-	private static final class ParLPQuickChar extends RecursiveTask<Void> {
-
-		private static final long serialVersionUID = 1L;
-		final char[] a;
-		final int lo;
-		final int hi;
-		
-		ParLPQuickChar(char[] a, int lo, int hi) {
-			this.a = a;
-			this.lo = lo;
-			this.hi = hi;
-		}
-		
-		public final Void compute() {
-
-			if(lo >= hi) {
-				return null;
-			}
-			int pivot = partition(a, lo, hi);	
-			if(hi - lo < THRESHOLD) {
-				
-				
-				qsort(a, lo, pivot - 1);
-				qsort(a, pivot + 1, hi);
-			}
-
-			else {
-				ParLPQuickChar left = new ParLPQuickChar(a, lo, pivot - 1);
-				ParLPQuickChar right = new ParLPQuickChar(a, pivot + 1, hi);
-				
-				left.fork();
-				right.fork();
-				left.join();
-				right.join();
+	private static final class ParLPQuickChar {	
+		private static final class QSort extends RecursiveAction {
+			private static final long serialVersionUID = 1L;
+			final char[] a;
+			final int lo;
+			final int hi;
+			
+			QSort(char[] a, int lo, int hi) {
+				this.a = a;
+				this.lo = lo;
+				this.hi = hi;
 			}
 			
-			
-			return null;
+			public final void compute() {
+				
+				if(lo >= hi) {
+					return;
+				}
+				
+				int pivot = partition(a, lo, hi);
+				if(hi - lo < THRESHOLD) {
+					
+					
+					qsort(a, lo, pivot - 1);
+					qsort(a, pivot + 1, hi);
+				}
+				else {
+					QSort left = new QSort(a, lo, pivot - 1);
+					QSort right = new QSort(a, pivot + 1, hi);
+					left.fork();
+					right.fork();
+					left.join();
+					right.join();
+				}
+				
+			}
 		}
 		
 		private static void qsort(char[] a, int lo, int hi) {	
@@ -210,49 +205,46 @@ public class ParallelLPQuickSort {
 	 */
 
 	public static void sort(short[] a) {
-		new ParLPQuickShort(a, 0, a.length - 1).invoke();
+		new ParLPQuickShort.QSort(a, 0, a.length - 1).invoke();
 	}
 	
 
-	private static final class ParLPQuickShort extends RecursiveTask<Void> {
-
-
-		private static final long serialVersionUID = 1L;
-		final short[] a;
-		final int lo;
-		final int hi;
-		
-		ParLPQuickShort(short[] a, int lo, int hi) {
-			this.a = a;
-			this.lo = lo;
-			this.hi = hi;
-		}
-		
-		public final Void compute() {
-
-			if(lo >= hi) {
-				return null;
-			}
-			int pivot = partition(a, lo, hi);	
-			if(hi - lo < THRESHOLD) {
-				
-				
-				qsort(a, lo, pivot - 1);
-				qsort(a, pivot + 1, hi);
-			}
-
-			else {
-				ParLPQuickShort left = new ParLPQuickShort(a, lo, pivot - 1);
-				ParLPQuickShort right = new ParLPQuickShort(a, pivot + 1, hi);
-				
-				left.fork();
-				right.fork();
-				left.join();
-				right.join();
+	private static final class ParLPQuickShort {	
+		private static final class QSort extends RecursiveAction {
+			private static final long serialVersionUID = 1L;
+			final short[] a;
+			final int lo;
+			final int hi;
+			
+			QSort(short[] a, int lo, int hi) {
+				this.a = a;
+				this.lo = lo;
+				this.hi = hi;
 			}
 			
-			
-			return null;
+			public final void compute() {
+				
+				if(lo >= hi) {
+					return;
+				}
+				
+				int pivot = partition(a, lo, hi);
+				if(hi - lo < THRESHOLD) {
+					
+					
+					qsort(a, lo, pivot - 1);
+					qsort(a, pivot + 1, hi);
+				}
+				else {
+					QSort left = new QSort(a, lo, pivot - 1);
+					QSort right = new QSort(a, pivot + 1, hi);
+					left.fork();
+					right.fork();
+					left.join();
+					right.join();
+				}
+				
+			}
 		}
 		
 		private static void qsort(short[] a, int lo, int hi) {	
@@ -307,48 +299,46 @@ public class ParallelLPQuickSort {
 	 */
 	
 	public static void sort(int[] a) {
-		new ParLPQuickInt(a, 0, a.length - 1).invoke();
+		new ParLPQuickInt.QSort(a, 0, a.length - 1).invoke();
 		
 	}
 	
-	private static final class ParLPQuickInt extends RecursiveTask<Void> {
-
-		private static final long serialVersionUID = 1L;
-		final int[] a;
-		final int lo;
-		final int hi;
-		
-		ParLPQuickInt(int[] a, int lo, int hi) {
-			this.a = a;
-			this.lo = lo;
-			this.hi = hi;
-		}
-		
-		public final Void compute() {
-
-			if(lo >= hi) {
-				return null;
-			}
-			int pivot = partition(a, lo, hi);	
-			if(hi - lo < THRESHOLD) {
-				
-				
-				qsort(a, lo, pivot - 1);
-				qsort(a, pivot + 1, hi);
-			}
-
-			else {
-				ParLPQuickInt left = new ParLPQuickInt(a, lo, pivot - 1);
-				ParLPQuickInt right = new ParLPQuickInt(a, pivot + 1, hi);
-				
-				left.fork();
-				right.fork();
-				left.join();
-				right.join();
+	private static final class ParLPQuickInt {	
+		private static final class QSort extends RecursiveAction {
+			private static final long serialVersionUID = 1L;
+			final int[] a;
+			final int lo;
+			final int hi;
+			
+			QSort(int[] a, int lo, int hi) {
+				this.a = a;
+				this.lo = lo;
+				this.hi = hi;
 			}
 			
-			
-			return null;
+			public final void compute() {
+				
+				if(lo >= hi) {
+					return;
+				}
+				
+				int pivot = partition(a, lo, hi);
+				if(hi - lo < THRESHOLD) {
+					
+					
+					qsort(a, lo, pivot - 1);
+					qsort(a, pivot + 1, hi);
+				}
+				else {
+					QSort left = new QSort(a, lo, pivot - 1);
+					QSort right = new QSort(a, pivot + 1, hi);
+					left.fork();
+					right.fork();
+					left.join();
+					right.join();
+				}
+				
+			}
 		}
 		
 		private static void qsort(int[] a, int lo, int hi) {	
@@ -403,47 +393,45 @@ public class ParallelLPQuickSort {
 	 */
 
 	public static void sort(long[] a) {
-		new ParLPQuickLong(a, 0, a.length - 1).invoke();
+		new ParLPQuickLong.QSort(a, 0, a.length - 1).invoke();
 	}
 	
-	private static final class ParLPQuickLong extends RecursiveTask<Void> {
-
-		private static final long serialVersionUID = 1L;
-		final long[] a;
-		final int lo;
-		final int hi;
-		
-		ParLPQuickLong(long[] a, int lo, int hi) {
-			this.a = a;
-			this.lo = lo;
-			this.hi = hi;
-		}
-		
-		public final Void compute() {
-
-			if(lo >= hi) {
-				return null;
-			}
-			int pivot = partition(a, lo, hi);	
-			if(hi - lo < THRESHOLD) {
-				
-				
-				qsort(a, lo, pivot - 1);
-				qsort(a, pivot + 1, hi);
-			}
-
-			else {
-				ParLPQuickLong left = new ParLPQuickLong(a, lo, pivot - 1);
-				ParLPQuickLong right = new ParLPQuickLong(a, pivot + 1, hi);
-				
-				left.fork();
-				right.fork();
-				left.join();
-				right.join();
+	private static final class ParLPQuickLong {	
+		private static final class QSort extends RecursiveAction {
+			private static final long serialVersionUID = 1L;
+			final long[] a;
+			final int lo;
+			final int hi;
+			
+			QSort(long[] a, int lo, int hi) {
+				this.a = a;
+				this.lo = lo;
+				this.hi = hi;
 			}
 			
-			
-			return null;
+			public final void compute() {
+				
+				if(lo >= hi) {
+					return;
+				}
+				
+				int pivot = partition(a, lo, hi);
+				if(hi - lo < THRESHOLD) {
+					
+					
+					qsort(a, lo, pivot - 1);
+					qsort(a, pivot + 1, hi);
+				}
+				else {
+					QSort left = new QSort(a, lo, pivot - 1);
+					QSort right = new QSort(a, pivot + 1, hi);
+					left.fork();
+					right.fork();
+					left.join();
+					right.join();
+				}
+				
+			}
 		}
 		
 		private static void qsort(long[] a, int lo, int hi) {	
@@ -493,47 +481,45 @@ public class ParallelLPQuickSort {
 	 */
 
 	public static void sort(float[] a) {
-		new ParLPQuickFloat(a, 0, a.length - 1).invoke();
+		new ParLPQuickFloat.QSort(a, 0, a.length - 1).invoke();
 	}
 	
-	private static final class ParLPQuickFloat extends RecursiveTask<Void> {
-
-		private static final long serialVersionUID = 1L;
-		final float[] a;
-		final int lo;
-		final int hi;
-		
-		ParLPQuickFloat(float[] a, int lo, int hi) {
-			this.a = a;
-			this.lo = lo;
-			this.hi = hi;
-		}
-		
-		public final Void compute() {
-
-			if(lo >= hi) {
-				return null;
-			}
-			int pivot = partition(a, lo, hi);	
-			if(hi - lo < THRESHOLD) {
-				
-				
-				qsort(a, lo, pivot - 1);
-				qsort(a, pivot + 1, hi);
-			}
-
-			else {
-				ParLPQuickFloat left = new ParLPQuickFloat(a, lo, pivot - 1);
-				ParLPQuickFloat right = new ParLPQuickFloat(a, pivot + 1, hi);
-				
-				left.fork();
-				right.fork();
-				left.join();
-				right.join();
+	private static final class ParLPQuickFloat {	
+		private static final class QSort extends RecursiveAction {
+			private static final long serialVersionUID = 1L;
+			final float[] a;
+			final int lo;
+			final int hi;
+			
+			QSort(float[] a, int lo, int hi) {
+				this.a = a;
+				this.lo = lo;
+				this.hi = hi;
 			}
 			
-			
-			return null;
+			public final void compute() {
+				
+				if(lo >= hi) {
+					return;
+				}
+				
+				int pivot = partition(a, lo, hi);
+				if(hi - lo < THRESHOLD) {
+					
+					
+					qsort(a, lo, pivot - 1);
+					qsort(a, pivot + 1, hi);
+				}
+				else {
+					QSort left = new QSort(a, lo, pivot - 1);
+					QSort right = new QSort(a, pivot + 1, hi);
+					left.fork();
+					right.fork();
+					left.join();
+					right.join();
+				}
+				
+			}
 		}
 		
 		private static void qsort(float[] a, int lo, int hi) {	
@@ -587,48 +573,46 @@ public class ParallelLPQuickSort {
 	 */
 
 	public static void sort(double[] a) {
-		new ParLPQuickDouble(a, 0, a.length - 1).invoke();
+		new ParLPQuickDouble.QSort(a, 0, a.length - 1).invoke();
 	}
 	
 
-	private static final class ParLPQuickDouble extends RecursiveTask<Void> {
-
-		private static final long serialVersionUID = 1L;
-		final double[] a;
-		final int lo;
-		final int hi;
-		
-		ParLPQuickDouble(double[] a, int lo, int hi) {
-			this.a = a;
-			this.lo = lo;
-			this.hi = hi;
-		}
-		
-		public final Void compute() {
-
-			if(lo >= hi) {
-				return null;
-			}
-			int pivot = partition(a, lo, hi);	
-			if(hi - lo < THRESHOLD) {
-				
-				
-				qsort(a, lo, pivot - 1);
-				qsort(a, pivot + 1, hi);
-			}
-
-			else {
-				ParLPQuickDouble left = new ParLPQuickDouble(a, lo, pivot - 1);
-				ParLPQuickDouble right = new ParLPQuickDouble(a, pivot + 1, hi);
-				
-				left.fork();
-				right.fork();
-				left.join();
-				right.join();
+	private static final class ParLPQuickDouble {	
+		private static final class QSort extends RecursiveAction {
+			private static final long serialVersionUID = 1L;
+			final double[] a;
+			final int lo;
+			final int hi;
+			
+			QSort(double[] a, int lo, int hi) {
+				this.a = a;
+				this.lo = lo;
+				this.hi = hi;
 			}
 			
-			
-			return null;
+			public final void compute() {
+				
+				if(lo >= hi) {
+					return;
+				}
+				
+				int pivot = partition(a, lo, hi);
+				if(hi - lo < THRESHOLD) {
+					
+					
+					qsort(a, lo, pivot - 1);
+					qsort(a, pivot + 1, hi);
+				}
+				else {
+					QSort left = new QSort(a, lo, pivot - 1);
+					QSort right = new QSort(a, pivot + 1, hi);
+					left.fork();
+					right.fork();
+					left.join();
+					right.join();
+				}
+				
+			}
 		}
 		
 		private static void qsort(double[] a, int lo, int hi) {	
@@ -688,52 +672,50 @@ public class ParallelLPQuickSort {
 			sort(a);
 		}
 		else {
-			new ParLPQuickDComparator(a, 0, a.length - 1, c).invoke();
+			new ParLPQuickDComparator.QSort(a, 0, a.length - 1, c).invoke();
 		}
 	}
 	
 	public static void sort(Object[] a) {
-		new ParLPQuickDComparable(a, 0, a.length - 1).invoke();
+		new ParLPQuickDComparable.QSort(a, 0, a.length - 1).invoke();
 	}
 	
-	private static final class ParLPQuickDComparable extends RecursiveTask<Void> {
-
-		private static final long serialVersionUID = 1L;
-		final Object[] a;
-		final int lo;
-		final int hi;
-		
-		ParLPQuickDComparable(Object[] a, int lo, int hi) {
-			this.a = a;
-			this.lo = lo;
-			this.hi = hi;
-		}
-		
-		public final Void compute() {
-
-			if(lo >= hi) {
-				return null;
-			}
-			int pivot = partition(a, lo, hi);	
-			if(hi - lo < THRESHOLD) {
-				
-				
-				qsort(a, lo, pivot - 1);
-				qsort(a, pivot + 1, hi);
-			}
-
-			else {
-				ParLPQuickDComparable left = new ParLPQuickDComparable(a, lo, pivot - 1);
-				ParLPQuickDComparable right = new ParLPQuickDComparable(a, pivot + 1, hi);
-				
-				left.fork();
-				right.fork();
-				left.join();
-				right.join();
+	private static final class ParLPQuickDComparable {	
+		private static final class QSort extends RecursiveAction {
+			private static final long serialVersionUID = 1L;
+			final Object[] a;
+			final int lo;
+			final int hi;
+			
+			QSort(Object[] a, int lo, int hi) {
+				this.a = a;
+				this.lo = lo;
+				this.hi = hi;
 			}
 			
-			
-			return null;
+			public final void compute() {
+				
+				if(lo >= hi) {
+					return;
+				}
+				
+				int pivot = partition(a, lo, hi);
+				if(hi - lo < THRESHOLD) {
+					
+					
+					qsort(a, lo, pivot - 1);
+					qsort(a, pivot + 1, hi);
+				}
+				else {
+					QSort left = new QSort(a, lo, pivot - 1);
+					QSort right = new QSort(a, pivot + 1, hi);
+					left.fork();
+					right.fork();
+					left.join();
+					right.join();
+				}
+				
+			}
 		}
 		
 
@@ -780,47 +762,47 @@ public class ParallelLPQuickSort {
 	
 
 	
-	private static final class ParLPQuickDComparator extends RecursiveTask<Void> {
-
-		private static final long serialVersionUID = 1L;
-		final Object[] a;
-		final int lo;
-		final int hi;
-		final Comparator<?> c;
-		
-		ParLPQuickDComparator(Object[] a, int lo, int hi, Comparator<?> c) {
-			this.a = a;
-			this.lo = lo;
-			this.hi = hi;
-			this.c = c;
-		}
-		
-		public final Void compute() {
-
-			if(lo >= hi) {
-				return null;
-			}
-			int pivot = partition(a, lo, hi, c);	
-			if(hi - lo < THRESHOLD) {
-				
-				
-				qsort(a, lo, pivot - 1, c);
-				qsort(a, pivot + 1, hi, c);
-			}
-
-			else {
-				ParLPQuickDComparator left = new ParLPQuickDComparator(a, lo, pivot - 1, c);
-				ParLPQuickDComparator right = new ParLPQuickDComparator(a, pivot + 1, hi, c);
-				
-				left.fork();
-				right.fork();
-				left.join();
-				right.join();
+	private static final class ParLPQuickDComparator {
+		private static final class QSort extends RecursiveAction {
+			private static final long serialVersionUID = 1L;
+			final Object[] a;
+			final int lo;
+			final int hi;
+			final Comparator<?> c;
+			
+			QSort(Object[] a, int lo, int hi, Comparator<?> c) {
+				this.a = a;
+				this.lo = lo;
+				this.hi = hi;
+				this.c = c;
 			}
 			
-			
-			return null;
+			public final void compute() {
+
+				if(lo >= hi) {
+					return;
+				}
+				int pivot = partition(a, lo, hi, c);	
+				if(hi - lo < THRESHOLD) {
+					
+					
+					qsort(a, lo, pivot - 1, c);
+					qsort(a, pivot + 1, hi, c);
+				}
+
+				else {
+					QSort left = new QSort(a, lo, pivot - 1, c);
+					QSort right = new QSort(a, pivot + 1, hi, c);
+					
+					left.fork();
+					right.fork();
+					left.join();
+					right.join();
+				}
+
+			}
 		}
+		
 		
 
 
