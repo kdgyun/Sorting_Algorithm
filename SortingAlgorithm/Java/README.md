@@ -25,6 +25,7 @@ Sorting algorithm in this package uses **threading**.
 
 
 > - ParallelLPQuickSort (left pivot quick sort with threading)
+> - ParallelRPQuickSort (right pivot quick sort with threading)
 
 </br>
 
