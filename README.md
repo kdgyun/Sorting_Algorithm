@@ -14,6 +14,7 @@ Sorting Algorithm Project
 - [Feature](#feature)
 - [Directory structure](#directory-structure)
 - [Build and Usage](#build-and-usage)
+- [Natural ordering](#natural-ordering)
 - [Reverse ordering](#reverse-ordering)
 <br/><br/><br/>
 
@@ -65,6 +66,7 @@ This repository is organized as follows:
 #### [Preview subFolder]
 > - SelectionSort : Selection sort(선택 정렬)를 구현한 소스코드가 있습니다.
 > - InsertionSort : Insertion sort(삽입 정렬)를 구현한 소스코드가 있습니다.
+> - BinaryInsertionSort : Binary Insertion sort(이진 삽입 정렬)를 구현한 소스코드가 있습니다.
 > - BubbleSort : Bubble sort(거품 정렬)을 구현한 소스코드가 있습니다.
 > - ShellSort : Shell sort(셸 정렬)을 구현한 소스코드가 있습니다.
 > - HeapSort : Heap sort(힙 정렬)을 구현한 소스코드가 있습니다.
@@ -130,31 +132,25 @@ class YourClass {
 
 </br></br></br>
 
-
-
-
-## Reverse ordering
+## Natural ordering
 
 </br></br>
-**If you want to sort an array of primitive types in reverse order, use it as in the following example.**
+
+**If you want to sort an array of primitive types in natural order, use it as in the following example.**
+
 
 ```java
-//ex.
+//ex. primitive type
 
 import BubbleSort.BubbleSort;
 
-class YourClass {
+class Main {
 	public static void main {
-		int[] a = {1, 5, 2, 4};
-		// true : reverse order,  false : natural order
-		BubbleSort.sort(a, true);	
+		double[] a = {1.3, 5.2, 2.4231, 4.425};
+		BubbleSort.sort(a);
 	}
 }
 ```
-
-</br></br></br>
-
-## Object ordering
 
 </br></br>
 
@@ -198,7 +194,31 @@ class Main {
 }
 ```
 <br/>
+</br></br></br>
 
+
+
+
+## Reverse ordering
+
+</br></br>
+**If you want to sort an array of primitive types in reverse order, use it as in the following example.**
+
+```java
+//ex.
+
+import BubbleSort.BubbleSort;
+
+class YourClass {
+	public static void main {
+		int[] a = {1, 5, 2, 4};
+		// true : reverse order,  false : natural order
+		BubbleSort.sort(a, true);	
+	}
+}
+```
+
+</br></br></br>
 </br></br>
 **If you want to sort an array of Wrapper or class object types in reverse order, use it as in the following example.**
 
