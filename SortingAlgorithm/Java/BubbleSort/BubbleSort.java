@@ -395,8 +395,7 @@ public class BubbleSort {
 		}
 	}
 	
-	@SuppressWarnings({ "unchecked", "rawtypes" })
-	private static void sort(Object[] a, int size, Comparator c) {
+	private static <T> void sort(T[] a, int size, Comparator<? super T> c) {
 		
 		for(int i = 1; i < size; i++) {
 			boolean swapped = false;	
