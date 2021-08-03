@@ -433,14 +433,13 @@ public class MergeSort {
 	
 	public static void sort(Object[] a) {
 
-		sorted = new Comparable[a.length];
 		sort(a, 0, a.length - 1);
-		sorted = null;
+		
 	}
 
 	// Bottom-Up
 	private static void sort(Object[] a, int left, int right) {
-
+		sorted = new Comparable[a.length];
 		for (int size = 1; size <= right; size += size) {
 
 			for (int l = 0; l <= right - size; l += (2 * size)) {
@@ -448,7 +447,7 @@ public class MergeSort {
 				merge((Comparable[])a, l, l + size - 1, high);
 			}
 		}
-
+		sorted = null;
 	}
 
 	@SuppressWarnings({ "unchecked", "rawtypes" })
@@ -489,20 +488,17 @@ public class MergeSort {
 	
 	public static <T> void sort(T[] a, Comparator<? super T> c) {
 
-		sorted = new Comparable[a.length];
 		if(c == null) {
 			sort(a, 0, a.length - 1);
 		}
 		else {
 			sort(a, 0, a.length - 1, c);
 		}
-		sorted = null;
 	}
 
 	// Bottom-Up
-	@SuppressWarnings("rawtypes")
-	private static void sort(Object[] a, int left, int right, Comparator c) {
-
+	private static <T> void sort(T[] a, int left, int right, Comparator<? super T> c) {
+		sorted = new Comparable[a.length];
 		for (int size = 1; size <= right; size += size) {
 
 			for (int l = 0; l <= right - size; l += (2 * size)) {
@@ -510,11 +506,11 @@ public class MergeSort {
 				merge(a, l, l + size - 1, high, c);
 			}
 		}
-
+		sorted = null;
 	}
 
-	@SuppressWarnings({ "unchecked", "rawtypes" })
-	private static void merge(Object[] a, int left, int mid, int right , Comparator c) {
+	@SuppressWarnings({ "rawtypes" })
+	private static <T> void merge(T[] a, int left, int mid, int right , Comparator<? super T> c) {
 		int l = left;
 		int r = mid + 1;
 		int idx = left;
@@ -522,7 +518,7 @@ public class MergeSort {
 		while (l <= mid && r <= right) {
 			
 			if (c.compare(a[l], a[r]) <= 0) {
-				sorted[idx++] = (Comparable) a[l++];
+				sorted[idx++] =  (Comparable) a[l++];
 			}
 
 			else {

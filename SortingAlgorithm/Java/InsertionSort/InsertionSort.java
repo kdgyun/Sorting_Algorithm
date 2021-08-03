@@ -267,9 +267,9 @@ public class InsertionSort {
 		}
 	}
 	
-	@SuppressWarnings({ "rawtypes", "unchecked" })
-	private static void sort(Object[] a, int size, Comparator c) {
-		Object target;
+	
+	private static <T> void sort(T[] a, int size, Comparator<? super T> c) {
+		T target;
 		int j;
 		
 		for(int i = 1; i < size; i++) {

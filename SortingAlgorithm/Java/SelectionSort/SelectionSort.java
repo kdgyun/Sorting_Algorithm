@@ -255,8 +255,8 @@ public class SelectionSort {
 		}
 	}
 	
-	private static void swap(Object[] a, int i, int j) {
-		Object temp = a[i];
+	private static <T> void swap(T[] a, int i, int j) {
+		T temp = a[i];
 		a[i] = a[j];
 		a[j] = temp;
 	}
@@ -275,8 +275,7 @@ public class SelectionSort {
 		}
 	}
 	
-	@SuppressWarnings({ "rawtypes", "unchecked" })
-	private static void sort(Object[] a, int size, Comparator c) {
+	private static <T> void sort(T[] a, int size, Comparator<? super T> c) {
 		
 		for(int i = 0; i < size - 1; i++) {
 			int min_index = i;	

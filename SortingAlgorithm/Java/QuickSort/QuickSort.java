@@ -476,8 +476,7 @@ public class QuickSort {
 	}
 	
 
-	@SuppressWarnings("rawtypes")
-	private static void qsort(Object[] a, int lo, int hi ,Comparator c) {
+	private static <T> void qsort(T[] a, int lo, int hi ,Comparator<? super T> c) {
 		
 		if(lo >= hi) {
 			return;
@@ -489,12 +488,11 @@ public class QuickSort {
 	}
 	
 
-	@SuppressWarnings({ "unchecked", "rawtypes" })
-	private static int partition(Object[] a, int left, int right, Comparator c) {
+	private static <T> int partition(T[] a, int left, int right, Comparator<? super T> c) {
 		
 		int lo = left - 1;
 		int hi = right + 1;
-		Object pivot = a[(left + right) / 2];
+		T pivot = a[(left + right) >>> 1];
 
 		while(true) {
 
@@ -511,8 +509,8 @@ public class QuickSort {
 	
 	
 	
-	private static void swap(Object[] a, int i, int j) {
-		Object temp = a[i];
+	private static <T> void swap(T[] a, int i, int j) {
+		T temp = a[i];
 		a[i] = a[j];
 		a[j] = temp;
 	}

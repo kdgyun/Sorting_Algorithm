@@ -485,8 +485,7 @@ public class LPQuickSort {
 	
 
 
-	@SuppressWarnings("rawtypes")
-	private static void qsort(Object[] a, int lo, int hi, Comparator c) {
+	private static <T> void qsort(T[] a, int lo, int hi, Comparator<? super T> c) {
 
 		if(lo >= hi) {
 			return;
@@ -499,12 +498,11 @@ public class LPQuickSort {
 	}
 	
 
-	@SuppressWarnings({ "rawtypes", "unchecked" })
-	private static int partition(Object[] a, int left, int right, Comparator c) {
+	private static <T> int partition(T[] a, int left, int right, Comparator<? super T> c) {
 		
 		int lo = left;
 		int hi = right;
-		Object pivot = a[left];
+		T pivot = a[left];
 		
 		while(lo < hi) {
 
@@ -523,8 +521,8 @@ public class LPQuickSort {
 	
 	
 	
-	private static void swap(Object[] a, int i, int j) {
-		Object temp = a[i];
+	private static <T> void swap(T[] a, int i, int j) {
+		T temp = a[i];
 		a[i] = a[j];
 		a[j] = temp;
 	}

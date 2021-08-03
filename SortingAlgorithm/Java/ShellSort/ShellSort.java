@@ -325,8 +325,7 @@ public class ShellSort {
 	}
 	
 	
- 	@SuppressWarnings({ "rawtypes", "unchecked" })
-	private static void sort(Object[] a, int size, Comparator c) {
+	private static <T> void sort(T[] a, int size, Comparator<? super T> c) {
 		int gapIndex = getGap(size);
 
 		while(gapIndex >= 0) {
@@ -335,7 +334,7 @@ public class ShellSort {
 
 			for(int i = step; i < size; i++) {
 	
-				Object target = a[i];
+				T target = a[i];
 				int j = i;
 				
 				for (; j >= step && c.compare(target, a[j - step]) < 0; j -= step) {

@@ -483,8 +483,8 @@ public class HeapSort {
 	 * ==========================
 	 */
 
-	private static void swap(Object[] a, int i, int j) {
-		Object temp = a[i];
+	private static <T> void swap(T[] a, int i, int j) {
+		T temp = a[i];
 		a[i] = a[j];
 		a[j] = temp;
 	}
@@ -550,8 +550,8 @@ public class HeapSort {
 		}
 	}
 
-	@SuppressWarnings("rawtypes")
-	private static void sort(Object[] a, int size, Comparator c) {
+	
+	private static <T> void sort(T[] a, int size, Comparator<? super T> c) {
 		if(size < 2) {
 			return;
 		}
@@ -572,8 +572,7 @@ public class HeapSort {
 		}
 	}
 
-	@SuppressWarnings({ "rawtypes", "unchecked" })
-	private static void heapify(Object[] a, int cur, int last, Comparator c) {
+	private static <T> void heapify(T[] a, int cur, int last, Comparator<? super T> c) {
 
 		int left;
 		int right;
