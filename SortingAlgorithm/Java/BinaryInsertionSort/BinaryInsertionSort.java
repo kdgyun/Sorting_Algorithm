@@ -64,7 +64,7 @@ public class BinaryInsertionSort {
 
 		int mid;
 		while (lo < hi) {
-			mid = (lo + hi) >>> 1;
+			mid = lo + ((hi - lo) >>> 1);
 			if (key < a[mid]) {
 				hi = mid;
 			} 
@@ -151,7 +151,7 @@ public class BinaryInsertionSort {
 
 		int mid;
 		while (lo < hi) {
-			mid = (lo + hi) >>> 1;
+			mid = lo + ((hi - lo) >>> 1);
 			if (key < a[mid]) {
 				hi = mid;
 			} 
@@ -239,7 +239,7 @@ public class BinaryInsertionSort {
 
 		int mid;
 		while (lo < hi) {
-			mid = (lo + hi) >>> 1;
+			mid = lo + ((hi - lo) >>> 1);
 			if (key < a[mid]) {
 				hi = mid;
 			} 
@@ -326,7 +326,7 @@ public class BinaryInsertionSort {
 
 		int mid;
 		while (lo < hi) {
-			mid = (lo + hi) >>> 1;
+			mid = lo + ((hi - lo) >>> 1);
 			if (key < a[mid]) {
 				hi = mid;
 			} 
@@ -414,7 +414,7 @@ public class BinaryInsertionSort {
 
 		int mid;
 		while (lo < hi) {
-			mid = (lo + hi) >>> 1;
+			mid = lo + ((hi - lo) >>> 1);
 			if (key < a[mid]) {
 				hi = mid;
 			} 
@@ -501,7 +501,7 @@ public class BinaryInsertionSort {
 
 		int mid;
 		while (lo < hi) {
-			mid = (lo + hi) >>> 1;
+			mid = lo + ((hi - lo) >>> 1);
 			if (key < a[mid]) {
 				hi = mid;
 			} 
@@ -589,7 +589,7 @@ public class BinaryInsertionSort {
 
 		int mid;
 		while (lo < hi) {
-			mid = (lo + hi) >>> 1;
+			mid = lo + ((hi - lo) >>> 1);
 			if (key < a[mid]) {
 				hi = mid;
 			} 
@@ -689,7 +689,7 @@ public class BinaryInsertionSort {
 
 		int mid;
 		while (lo < hi) {
-			mid = (lo + hi) >>> 1;
+			mid = lo + ((hi - lo) >>> 1);
 			if (key.compareTo(a[mid]) < 0) {
 				hi = mid;
 			} 
@@ -752,7 +752,7 @@ public class BinaryInsertionSort {
 
 		int mid;
 		while (lo < hi) {
-			mid = (lo + hi) >>> 1;
+			mid = lo + ((hi - lo) >>> 1);
 			if (c.compare(key, a[mid]) < 0) {
 				hi = mid;
 			} 
