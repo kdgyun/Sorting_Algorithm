@@ -20,7 +20,7 @@ public class TimSort {
 	private static class IntMerge {
 		
 		private int[] array;
-		private final int[] runBase;
+		private final int[] startPointOfRun;
 	    private final int[] runLen;
 	    private int stackSize = 0;	// run 스택의 원소 개수를 가리킬 변수
 	    
@@ -51,16 +51,186 @@ public class TimSort {
 	    	int stackLen = (len <    120  ?  5 :
 	        				len <   1542  ? 10 :
 	        				len < 119151  ? 19 : 35);
-	    	runBase = new int[stackLen];
+	    	startPointOfRun = new int[stackLen];
 	    	runLen = new int[stackLen];
 	    }
 	    
-	    public void pushRun(int runBase, int runLen) {
-	    	this.runBase[stackSize] = runBase;
+	    public void pushRun(int startPoint, int runLen) {
+	    	this.startPointOfRun[stackSize] = startPoint;
 	    	this.runLen[stackSize] = runLen;
 	    	stackSize++;
 	    }
+	    
+	    public void merge() {
+	    	while(stackSize > 1) {
+	    		
+	    		/*
+	    		 * stack의 상위 3개 원소를 비교하며
+	    		 * 병합하기 위한 상위 3개 원소의 중간 피벗
+	    		 *  
+	    		 */
+	    		int pivot = stackSize - 2;
+	    		
+	    		/*
+	    		 *	1. runLen[i - 3] > runLen[i - 2] + runLen[i - 1]
+	    		 *	2. runLen[i - 2] > runLen[i - 1]
+	    		 *
+	    		 *	runLen[n-1] = A, runLen[n] = B, runLen[n+1] = C를 상위 세 요소로 합니다.
+				 *	운영상 루프는 다음과 같은 경우에 기초한다.
+				 *	1. A <= B + C 및 A < C일 경우 A 과 B 병합. 즉, n-1 과 n 병합
+				 *	2. A <= B + C 및 A >= C일 경우, B와 C 병합. 즉, n 과 n+1 병합 
+				 *	3. A > B + C 및 B <= C일 경우,  B와 C 병합. 즉, n 과 n+1 병합 
+				 *	4. A > B + C 및 B > C일 경우 루프 종료
+	    		 */
+	    		
+	    		// stack 요소가 3개 이상일 경우에만 3개를 비교할 수 있음
+	    		if(stackSize > 2) {
+	    			// A <= B + C
+	    			if(runLen[pivot - 1] <= runLen[pivot] + runLen[pivot + 1]) {
+	    				// A < C
+	    				if(runLen[pivot - 1] < runLen[pivot + 1]) {
+	    					// A 와 B 병합 (pivot-1 and pivot merged)
+	    					//merge(n - 1)
+	    				}
+	    				else {	// A >= C
+	    					//merge(n)
+	    				}
+	    			}
+	    			// A > B + C && B <= C
+	    			else if(runLen[pivot] <= runLen[pivot + 1]) {
+	    				//merge(n)
+	    			}
+	    			else {
+	    				break;
+	    			}
+	    		}
+	    		// 유일하게 두 개만 남은 경우
+	    		else if(stackSize > 1) {
+	    			// merge(n)
+	    		}
+	    	}
+	    }
+	    
+	    /**
+	     * run[idx] 와 run[idx + 1]이 병합 됨
+	     * @param idx 병합되는 두 서브리스트(run) 중 낮은 인덱스
+	     */
+	    private void merge(int idx) {
+	    	
+	    	int start1 = startPointOfRun[idx];
+	    	int length1 = runLen[idx];
+	    	int start2 = startPointOfRun[idx + 1];
+	    	int length2 = runLen[idx + 1];
+	    }
+	    
+	    
+	    /**
+	     * gallop_right() 함수를 수행하여 RUN B 의 첫번째 원소보다 
+	     * 큰 원소들이 첫번째 출현하는 위치를 RUN A 에서 찾는다.
+	     * 
+	     * 
+	     * @param key run B의 startPoint key
+	     * @param array	배열
+	     * @param startPoint run A의 startPoint
+	     * @param len run A 의 길이
+	     * @param hint 
+	     * @return
+	     */
+	    private int gallopRight(int key, int[] array, int startPoint, int len, int hint) {
+	    	
+	    	/*
+	    	 * lastOffset과 다음 오프셋인 offset 사이를 구하고 이 구간에 대해
+	    	 * 이분탐색을 통해 최종 오프셋을 반환한다. 
+	    	 */
+	    	int lo = 0;
+	    	int hi = 1;
+	    	
+	    	/*
+	    	 * RUN A의 시작지점 값이 RUN B의 시작지점보다 클 경우
+	    	 */
+	    	if(key < array[startPoint + hint]) {
+	    		
+	    		int maxOffset = hint + 1;	// 최대 오프셋은 RUN A의 길이다.
+	    		
+	    		// Gallop left until a[b + hint - hi] <= key < array[b + hint - lo]
+	    		while(hi < maxOffset && key < array[startPoint + hint - hi]) {
+	    			lo = hi;
+	    			hi = (hi << 1) + 1;	// 2배씩 건너뜀 탐색
+	    			
+	    			// overflow가 발생시 maxOffset으로 만들어 while문의 break를 건다.
+	    			if(hi <= 0) {
+	    				hi = maxOffset;
+	    				break;
+	    			}
+	    		}
+	    		
+	    		// 최대로 가질 수 있는 오프셋을 벗어났을 경우 최대 값으로 초기화
+	    		if(hi > maxOffset) {
+	    			hi = maxOffset;
+	    		}
+	    		
+	    		int temp = lo;
+	    		lo = hint - hi;
+	    		hi = hint - temp;
+	    	}
+	    	
+	    	else {
+	    		// Gallop right until a[b + hint + lo] <= key < a[b + hint + hi]
+	    		int maxOffset = len - hint;	// 최대로 가질 수 있는 offset
+	    		
+	    		while(hi < maxOffset && array[startPoint + hint + hi] <= key) {
+	    			lo = hi;
+	    			hi = (hi << 1) + 1;
+	    			
+	    			if(hi <= 0) {	// overflow
+	    				hi = maxOffset;
+	    				break;
+	    			}
+	    		}
+	    		
+	    		if(hi > maxOffset) {
+	    			hi = maxOffset;
+	    		}
+	    		
+	    		lo += hint;
+	    		hi += hint;
+	    	}
+	    	
+	    	lo++;
+	    	
+	    	// binary search
+	    	while(lo < hi) {
+	    		
+	    		/*
+	    		 * 중간 값을 구할 때 (lo + hi) / 2 를 하면
+	    		 * (lo + hi) 여기서 int overflow가 발생할 수 있다.
+	    		 * 
+	    		 * 그러므로 hi - lo의 차이값에 2를 나눈 뒤,
+	    		 * lo을 더하는 방식으로 해준다.
+	    		 * 
+	    		 * ex) lo = 3, hi = 7
+	    		 * 3 + ((7 - 3) / 2)
+	    		 * = 3 + (4 / 2)
+	    		 * = 3 + 2
+	    		 * = 5 
+	    		 * ( == ((3 + 7) / 2 = 5) )
+	    		 */
+	    		int mid = lo + ((hi - lo) >>> 1);
+	    		
+	    		if(key < array[startPoint + mid]) {
+	    			hi = mid;
+	    		}
+	    		else {
+	    			lo = mid + 1;
+	    		}
+	    	}
+	    	return hi;
+	    }
 	}
+	
+	
+	
+	
 	
 	public static void sort(int[] a) {
 		sort(a, 0, a.length);
@@ -100,11 +270,28 @@ public class TimSort {
 			 * minRun = 18 이라고 가정
 			 * [0, 2, 3, 8, 16, 4, 7, 26, 13, ..., 21]
 			 * incLength = 5
-			 * 
+			 * -> (lo + incLength) 이 이진삽입정렬 수행 시작점이 됨
 			 */
 			if(incLength < minRun) {
 				
+				// 최소 run 크기가 남은 원소 개수보다 작을 수 있으므로 이를 처리해준다.
+				int endPoint = remain < minRun ? remain : minRun;
+				
+				/*
+				 * BinarySort(array, lo, hi, start);
+				 * index[lo] <= index < index[endPoint] 구간을 삽입 정렬을 하되,
+				 * index[lo + incLength] 부터 삽입정렬을 시작함.
+				 * (이전 인덱스는 이미 오름차순 상태임) 
+				 */
+				BinarySort(a, lo, lo + endPoint, lo + incLength);
+				
+				// 이진 삽입 정렬이 수행되었기에 증가하는 길이는 endPoint가 된다.
+				incLength = endPoint;
 			}
+			
+			// stack에 run의 시작점과 해당 run의 길이를 스택에 push한다. 
+			im.pushRun(lo, incLength);
+			
 		} while(remain > 0);
 		
 	}
@@ -180,7 +367,7 @@ public class TimSort {
 	
 	/*
 	 *  arrayLength / runSize 이 2의 제곱근에 가까울수록 좋음(병합정렬 특성)
-	 *  즉, 나오는 수는 THRESHOLD <= runSize <+ THRESHOLD 사잇값이 됨.
+	 *  즉, 나오는 수는 THRESHOLD <= runSize <= THRESHOLD 사잇값이 됨.
 	 * 
 	 *  이를 구하기 위해 runSize을 THRESHOLD(32) 보다 작을 떄 까지 2씩 매 번 나눠가며
 	 *  runSize 로 나눴을 때 근접하도록 한다.
