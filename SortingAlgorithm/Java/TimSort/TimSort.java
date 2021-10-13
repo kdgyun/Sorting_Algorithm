@@ -61,6 +61,17 @@ public class TimSort {
 	    	stackSize++;
 	    }
 	    
+	    public void mergeForce() {
+	    	while(stackSize > 1) {
+	    		int pivot = stackSize - 2;
+	    		if(pivot > 0 && runLen[pivot - 1] < runLen[pivot + 1]) {
+	    			pivot--;
+	    		}
+	    		merge(pivot);
+	    	}
+	    }
+	    
+	    
 	    public void merge() {
 	    	while(stackSize > 1) {
 	    		
@@ -121,6 +132,79 @@ public class TimSort {
 	    	int length1 = runLen[idx];
 	    	int start2 = startPointOfRun[idx + 1];
 	    	int length2 = runLen[idx + 1];
+	    	
+	    	
+	    	// idx 와 idx + 1 번째 run을 병합
+	    	runLen[idx] = length1 + length2;
+	    	
+	    	/*
+	    	 *  상위 3개 (A, B, C)에서 A를 기준으로 병합 할 경우
+	    	 *  앞서 A, B가 병합되므로, C를 당겨온다.
+	    	 *  
+	    	 *  ex)
+	    	 *  stack [[A], [B], [C]]
+	    	 *  
+	    	 *  runLen[idx] = length1 + length2
+	    	 *  stack[[A + B], [B], [C]]
+	    	 *  
+	    	 *  C를 B위치로 당겨온다.
+	    	 *  stack[[A + B], [C], [C]]
+	    	 *  
+	    	 *  이 때 마지막 [C]는 더이상 참조될 일 없음 
+	    	 */
+	    	
+	    	if(idx == (stackSize - 3)) {
+	    		startPointOfRun[idx + 1] = startPointOfRun[idx + 2];
+	    		runLen[idx + 1] = runLen[idx + 2];
+	    	}
+	    	stackSize--;
+	    	
+	    	
+	    	/*
+	
+			  gallopRight ->								<- gallopLeft
+			  				RUN A					   RUN B
+			  ______________________________ ______________________________				
+	  		  [   |   |   ||   |   |   |MAX] [MIN|   |   |   |   ||   |   ]
+			  ￣￣￣￣￣￣￣￣￣￣￣￣￣￣￣ ￣￣￣￣￣￣￣￣￣￣￣￣￣￣￣
+	  		  |___________| |______________| |___________________| |______|
+	  		  less than MIN       RUN A'             RUN B'        greater than MAX
+	  		  
+	  		                |____________________________________|
+ 									merge RUN A' and RUN B'
+	    	 */
+	    	
+	    	
+	    	// start2(RUN B의 시작점보다 작으면서 RUN A 에서 merge를 시작할 위치)
+	    	int lo = gallopRight(start2, array, start1, length1, 0);
+	    	
+	    	/*
+	    	 *  만약 RUN A의 길이와 merge를 시작할 지점이 같을 경우 
+	    	 *  이미 정렬되어있는 상태로 정렳 할 필요 없음
+	    	 */
+	    	if(length1 == lo) {
+	    		return;
+	    	}
+	    	
+	    	int hi = gallopLeft(array[start1 + length1 - 1], array, start2, length2, length2 - 1);
+	    	
+	    	/*
+	    	 *  만약 merge를 시작할 지점이 0이라는 것은 
+	    	 *  이미 정렬되어있는 상태로 정렳 할 필요 없음
+	    	 */
+	    	if(hi == 0) {
+	    		return;
+	    	}
+	    	
+	    	start1 += lo;
+	    	length1 -= lo;
+	    	length2 = hi;
+	    	if(length1 <= length2) {
+	    		mergeLo(start1, length1, start2, length2);
+	    	}
+	    	else {
+	    		mergeHi(start1, length1, start2, length2);
+	    	}
 	    }
 	    
 	    
@@ -226,6 +310,183 @@ public class TimSort {
 	    	}
 	    	return hi;
 	    }
+	    
+	    /**
+	     * gallop_right() 함수를 수행하여 RUN B 의 첫번째 원소보다 
+	     * 큰 원소들이 첫번째 출현하는 위치를 RUN A 에서 찾는다.
+	     * 
+	     * 
+	     * @param key run B의 startPoint key
+	     * @param array	배열
+	     * @param startPoint run A의 startPoint
+	     * @param len run A 의 길이
+	     * @param hint 
+	     * @return
+	     */
+	    private int gallopLeft(int key, int[] array, int startPoint, int len, int hint) {
+	    	
+	    	/*
+	    	 * lastOffset과 다음 오프셋인 offset 사이를 구하고 이 구간에 대해
+	    	 * 이분탐색을 통해 최종 오프셋을 반환한다. 
+	    	 */
+	    	int lo = 0;
+	    	int hi = 1;
+	    	
+	    	/*
+	    	 * RUN A의 시작지점 값이 RUN B의 시작지점보다 클 경우
+	    	 */
+	    	if(key <= array[startPoint + hint]) {
+	    		
+	    		int maxOffset = hint + 1;	// 최대 오프셋은 RUN A의 길이다.
+	    		
+	    		// Gallop left until a[b + hint - hi] <= key < array[b + hint - lo]
+	    		while(hi < maxOffset && key <= array[startPoint + hint - hi]) {
+	    			lo = hi;
+	    			hi = (hi << 1) + 1;	// 2배씩 건너뜀 탐색
+	    			
+	    			// overflow가 발생시 maxOffset으로 만들어 while문의 break를 건다.
+	    			if(hi <= 0) {
+	    				hi = maxOffset;
+	    				break;
+	    			}
+	    		}
+	    		
+	    		// 최대로 가질 수 있는 오프셋을 벗어났을 경우 최대 값으로 초기화
+	    		if(hi > maxOffset) {
+	    			hi = maxOffset;
+	    		}
+	    		
+	    		int temp = lo;
+	    		lo = hint - hi;
+	    		hi = hint - temp;
+	    	}
+	    	
+	    	else {
+	    		// Gallop right until a[b + hint + lo] <= key < a[b + hint + hi]
+	    		int maxOffset = len - hint;	// 최대로 가질 수 있는 offset
+	    		
+	    		while(hi < maxOffset && array[startPoint + hint + hi] < key) {
+	    			lo = hi;
+	    			hi = (hi << 1) + 1;
+	    			
+	    			if(hi <= 0) {	// overflow
+	    				hi = maxOffset;
+	    				break;
+	    			}
+	    		}
+	    		
+	    		if(hi > maxOffset) {
+	    			hi = maxOffset;
+	    		}
+	    		
+	    		lo += hint;
+	    		hi += hint;
+	    	}
+	    	
+	    	lo++;
+	    	
+	    	// binary search
+	    	while(lo < hi) {
+	    		
+	    		/*
+	    		 * 중간 값을 구할 때 (lo + hi) / 2 를 하면
+	    		 * (lo + hi) 여기서 int overflow가 발생할 수 있다.
+	    		 * 
+	    		 * 그러므로 hi - lo의 차이값에 2를 나눈 뒤,
+	    		 * lo을 더하는 방식으로 해준다.
+	    		 * 
+	    		 * ex) lo = 3, hi = 7
+	    		 * 3 + ((7 - 3) / 2)
+	    		 * = 3 + (4 / 2)
+	    		 * = 3 + 2
+	    		 * = 5 
+	    		 * ( == ((3 + 7) / 2 = 5) )
+	    		 */
+	    		int mid = lo + ((hi - lo) >>> 1);
+	    		
+	    		if(key < array[startPoint + mid]) {
+	    			hi = mid;
+	    		}
+	    		else {
+	    			lo = mid + 1;
+	    		}
+	    	}
+	    	return hi;
+	    }
+	    
+	    
+	    // start1, length1, start2, length2
+	    private void mergeLo(int start1, int length1, int start2, int length2) {
+	    	
+	    	// RUN A' 를 담을 임시 복사 배열
+	    	int[] temp = new int[length1];
+	    	System.arraycopy(array, start1, temp, 0, length1);
+	    	
+	    	int left = start1;
+	    	int right = start2;
+	    	
+	    	int tempIdx = 0;
+	    	int leftRemain = length1;
+	    	int rightRemain = length2;
+	    	
+	    	while(leftRemain != 0 && rightRemain != 0) {
+	    		
+	    		// RUN B' < RUN A' 라면 RUN B' 원소 삽입
+	    		if(array[right] < temp[tempIdx]) {
+	    			array[left++] = array[right++];
+	    			rightRemain--;
+	    		}
+	    		else {
+	    			array[left++] = temp[tempIdx++];
+	    			leftRemain--;
+	    		}
+	    	}
+	    	
+	    	// 왼쪽 부분 리스트가 남아있을 경우
+	    	if(leftRemain != 0) {
+	    		System.arraycopy(temp, tempIdx, array, left, leftRemain);
+	    	}
+	    	else {
+	    		System.arraycopy(array, right, array, left, rightRemain);
+	    	}
+	    }
+	    
+	    // start1, length1, start2, length2
+	    private void mergeHi(int start1, int length1, int start2, int length2) {
+	    	
+	    	// RUN B' 를 담을 임시 복사 배열
+	    	int[] temp = new int[length2];
+	    	System.arraycopy(array, start2, temp, 0, length2);
+	    	
+	    	int left = start1 + length1 - 1;
+	    	int right = start2 + length2 - 1;
+	    	
+	    	int tempIdx = length2 - 1;
+	    	
+	    	int leftRemain = length1;
+	    	int rightRemain = length2;
+	    	
+	    	while(leftRemain != 0 && rightRemain != 0) {
+	    		
+	    		// RUN A' > RUN B' 라면 RUN A' 원소 삽입 (내림차순이기 때문)
+	    		if(array[left] > temp[tempIdx]) {
+	    			array[right--] = array[left--];
+	    			leftRemain--;
+	    		}
+	    		else {
+	    			array[right--] = temp[tempIdx--];
+	    			rightRemain--;
+	    		}
+	    	}
+	    	
+	    	// 오른쪽 부분 리스트가 남아있을 경우
+	    	if(rightRemain != 0) {
+	    		System.arraycopy(temp, 0, array, start1, rightRemain);
+	    	}
+	    	else {
+	    		System.arraycopy(array, start1, array, start1, leftRemain);
+	    	}
+	    }
 	}
 	
 	
@@ -291,8 +552,13 @@ public class TimSort {
 			
 			// stack에 run의 시작점과 해당 run의 길이를 스택에 push한다. 
 			im.pushRun(lo, incLength);
+			im.merge();
 			
+			lo += incLength;
+			remain -= incLength;
 		} while(remain > 0);
+		
+		im.mergeForce();
 		
 	}
 	
