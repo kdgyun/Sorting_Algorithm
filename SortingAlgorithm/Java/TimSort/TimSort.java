@@ -20,8 +20,8 @@ public class TimSort {
 	private static class IntMerge {
 		
 		private int[] array;
-		private final int[] startPointOfRun;
-	    private final int[] runLen;
+		private int[] startPointOfRun;
+	    private int[] runLen;
 	    private int stackSize = 0;	// run 스택의 원소 개수를 가리킬 변수
 	    
 	    public IntMerge(int[] a) {
@@ -51,14 +51,18 @@ public class TimSort {
 	    	int stackLen = (len <    120  ?  5 :
 	        				len <   1542  ? 10 :
 	        				len < 119151  ? 19 : 35);
+    	
+//	    	 int stackLen = (len <    120  ?  5 :
+//                 len <   1542  ? 10 :
+//                 len < 119151  ? 24 : 49);
 	    	startPointOfRun = new int[stackLen];
 	    	runLen = new int[stackLen];
 	    }
 	    
-	    public void pushRun(int startPoint, int runLen) {
-	    	this.startPointOfRun[stackSize] = startPoint;
-	    	this.runLen[stackSize] = runLen;
-	    	stackSize++;
+	    public void pushRun(int runBase, int runLen) {
+	        this.startPointOfRun[stackSize] = runBase;
+	        this.runLen[stackSize] = runLen;
+	        stackSize++;
 	    }
 	    
 	    public void mergeForce() {
@@ -67,73 +71,111 @@ public class TimSort {
 	    		if(pivot > 0 && runLen[pivot - 1] < runLen[pivot + 1]) {
 	    			pivot--;
 	    		}
+	    		//System.out.println("pivot : " + pivot);
 	    		merge(pivot);
 	    	}
 	    }
 	    
 	    
 	    public void merge() {
-	    	while(stackSize > 1) {
-	    		
-	    		/*
-	    		 * stack의 상위 3개 원소를 비교하며
-	    		 * 병합하기 위한 상위 3개 원소의 중간 피벗
-	    		 *  
-	    		 */
-	    		int pivot = stackSize - 2;
-	    		
-	    		/*
-	    		 *	1. runLen[i - 3] > runLen[i - 2] + runLen[i - 1]
-	    		 *	2. runLen[i - 2] > runLen[i - 1]
-	    		 *
-	    		 *	runLen[n-1] = A, runLen[n] = B, runLen[n+1] = C를 상위 세 요소로 합니다.
-				 *	운영상 루프는 다음과 같은 경우에 기초한다.
-				 *	1. A <= B + C 및 A < C일 경우 A 과 B 병합. 즉, n-1 과 n 병합
-				 *	2. A <= B + C 및 A >= C일 경우, B와 C 병합. 즉, n 과 n+1 병합 
-				 *	3. A > B + C 및 B <= C일 경우,  B와 C 병합. 즉, n 과 n+1 병합 
-				 *	4. A > B + C 및 B > C일 경우 루프 종료
-	    		 */
-	    		
-	    		// stack 요소가 3개 이상일 경우에만 3개를 비교할 수 있음
-	    		if(stackSize > 2) {
-	    			// A <= B + C
-	    			if(runLen[pivot - 1] <= runLen[pivot] + runLen[pivot + 1]) {
-	    				// A < C
-	    				if(runLen[pivot - 1] < runLen[pivot + 1]) {
-	    					// A 와 B 병합 (pivot-1 and pivot merged)
-	    					//merge(n - 1)
-	    				}
-	    				else {	// A >= C
-	    					//merge(n)
-	    				}
-	    			}
-	    			// A > B + C && B <= C
-	    			else if(runLen[pivot] <= runLen[pivot + 1]) {
-	    				//merge(n)
-	    			}
-	    			else {
-	    				break;
-	    			}
-	    		}
-	    		// 유일하게 두 개만 남은 경우
-	    		else if(stackSize > 1) {
-	    			// merge(n)
-	    		}
+	    	
+//	    	System.out.println("merge run");
+	    	
+//	    	while(stackSize > 1) {
+//	    		
+//	    		/*
+//	    		 * stack의 상위 3개 원소를 비교하며
+//	    		 * 병합하기 위한 상위 3개 원소의 중간 피벗
+//	    		 *  
+//	    		 */
+//	    		int pivot = stackSize - 2;
+//	    		
+//	    		/*
+//	    		 *	1. runLen[i - 3] > runLen[i - 2] + runLen[i - 1]
+//	    		 *	2. runLen[i - 2] > runLen[i - 1]
+//	    		 *
+//	    		 *	runLen[n-1] = A, runLen[n] = B, runLen[n+1] = C를 상위 세 요소로 합니다.
+//				 *	운영상 루프는 다음과 같은 경우에 기초한다.
+//				 *	1. A <= B + C 및 A < C일 경우 A 과 B 병합. 즉, n-1 과 n 병합
+//				 *	2. A <= B + C 및 A >= C일 경우, B와 C 병합. 즉, n 과 n+1 병합 
+//				 *	3. A > B + C 및 B <= C일 경우,  B와 C 병합. 즉, n 과 n+1 병합 
+//				 *	4. A > B + C 및 B > C일 경우 루프 종료
+//	    		 */
+//	    		
+//	    		// stack 요소가 3개 이상일 경우에만 3개를 비교할 수 있음
+//	    		
+//	    		
+//	    		if(stackSize > 3) {
+//	    			if(runLen[pivot - 1] <= runLen[pivot] + runLen[pivot + 1]) {
+//	    				if(runLen[pivot - 1] < runLen[pivot + 1]) {
+//	    					// A 와 B 병합 (pivot-1 and pivot merged)
+//	    					merge(pivot - 1);
+//	    				}
+//	    				else {	// A >= C
+//	    					merge(pivot);
+//	    				}
+//	    			}
+//	    			else {
+//	    				merge(pivot);
+//	    			}
+//	    		}
+//	    		else if(stackSize > 2) {
+//	    			// A <= B + C
+//	    			if(runLen[pivot - 1] <= runLen[pivot] + runLen[pivot + 1]) {
+//	    				// A < C
+//	    				if(runLen[pivot - 1] < runLen[pivot + 1]) {
+//	    					// A 와 B 병합 (pivot-1 and pivot merged)
+//	    					merge(pivot - 1);
+//	    				}
+//	    				else {	// A >= C
+//	    					merge(pivot);
+//	    				}
+//	    			}
+//	    			// A > B + C && B <= C
+//	    			else if(runLen[pivot] <= runLen[pivot + 1]) {
+//	    				merge(pivot);
+//	    			}
+//	    			merge(pivot);
+//	    		}
+//	    		// 유일하게 두 개만 남은 경우
+//	    		else if(stackSize > 1) {
+//	    			merge(pivot);
+//	    		}
+//	    		else if(pivot < 0 || runLen[pivot] > runLen[pivot + 1]){
+//	    			break;
+//	    		}
+//	    		else {
+//	    			merge(pivot);
+//	    		}
+//	    	}
+	    	
+	    	// ref. OpenJDK’s java.utils.Collection.sort() is broken: The good, the bad and the worst case⋆
+	    	while (stackSize > 1) {
+	        	int pivot = stackSize - 2;
+
+	        	if (pivot > 0 && runLen[pivot - 1] <= runLen[pivot] + runLen[pivot + 1] ||
+	        			pivot > 1 && runLen[pivot - 2] <= runLen[pivot] + runLen[pivot - 1]) {
+	        		if (runLen[pivot - 1] < runLen[pivot + 1])
+	        			pivot--;
+	        	} else if (pivot < 0 || runLen[pivot] > runLen[pivot + 1]) {
+	        		break; // Invariant is established
+	        	}
+
+	        	merge(pivot);
 	    	}
+
 	    }
-	    
 	    /**
 	     * run[idx] 와 run[idx + 1]이 병합 됨
 	     * @param idx 병합되는 두 서브리스트(run) 중 낮은 인덱스
 	     */
 	    private void merge(int idx) {
-	    	
+
 	    	int start1 = startPointOfRun[idx];
 	    	int length1 = runLen[idx];
 	    	int start2 = startPointOfRun[idx + 1];
 	    	int length2 = runLen[idx + 1];
-	    	
-	    	
+
 	    	// idx 와 idx + 1 번째 run을 병합
 	    	runLen[idx] = length1 + length2;
 	    	
@@ -173,10 +215,9 @@ public class TimSort {
 	  		                |____________________________________|
  									merge RUN A' and RUN B'
 	    	 */
-	    	
-	    	
+	    
 	    	// start2(RUN B의 시작점보다 작으면서 RUN A 에서 merge를 시작할 위치)
-	    	int lo = gallopRight(start2, array, start1, length1, 0);
+	    	int lo = gallopRight(array[start2], array, start1, length1, 0);
 	    	
 	    	/*
 	    	 *  만약 RUN A의 길이와 merge를 시작할 지점이 같을 경우 
@@ -185,19 +226,16 @@ public class TimSort {
 	    	if(length1 == lo) {
 	    		return;
 	    	}
+	    	start1 += lo;
+	    	length1 -= lo;
 	    	
 	    	int hi = gallopLeft(array[start1 + length1 - 1], array, start2, length2, length2 - 1);
-	    	
-	    	/*
-	    	 *  만약 merge를 시작할 지점이 0이라는 것은 
-	    	 *  이미 정렬되어있는 상태로 정렳 할 필요 없음
-	    	 */
+
 	    	if(hi == 0) {
 	    		return;
 	    	}
 	    	
-	    	start1 += lo;
-	    	length1 -= lo;
+
 	    	length2 = hi;
 	    	if(length1 <= length2) {
 	    		mergeLo(start1, length1, start2, length2);
@@ -215,13 +253,13 @@ public class TimSort {
 	     * 
 	     * @param key run B의 startPoint key
 	     * @param array	배열
-	     * @param startPoint run A의 startPoint
+	     * @param base run A의 startPoint
 	     * @param len run A 의 길이
 	     * @param hint 
 	     * @return
 	     */
-	    private int gallopRight(int key, int[] array, int startPoint, int len, int hint) {
-	    	
+	    private int gallopRight(int key, int[] array, int base, int len, int hint) {
+
 	    	/*
 	    	 * lastOffset과 다음 오프셋인 offset 사이를 구하고 이 구간에 대해
 	    	 * 이분탐색을 통해 최종 오프셋을 반환한다. 
@@ -232,22 +270,20 @@ public class TimSort {
 	    	/*
 	    	 * RUN A의 시작지점 값이 RUN B의 시작지점보다 클 경우
 	    	 */
-	    	if(key < array[startPoint + hint]) {
-	    		
+	    	if(key < array[base + hint]) {
 	    		int maxOffset = hint + 1;	// 최대 오프셋은 RUN A의 길이다.
 	    		
 	    		// Gallop left until a[b + hint - hi] <= key < array[b + hint - lo]
-	    		while(hi < maxOffset && key < array[startPoint + hint - hi]) {
+	    		while(hi < maxOffset && key < array[base + hint - hi]) {
 	    			lo = hi;
 	    			hi = (hi << 1) + 1;	// 2배씩 건너뜀 탐색
 	    			
 	    			// overflow가 발생시 maxOffset으로 만들어 while문의 break를 건다.
 	    			if(hi <= 0) {
 	    				hi = maxOffset;
-	    				break;
+	    			
 	    			}
 	    		}
-	    		
 	    		// 최대로 가질 수 있는 오프셋을 벗어났을 경우 최대 값으로 초기화
 	    		if(hi > maxOffset) {
 	    			hi = maxOffset;
@@ -262,13 +298,13 @@ public class TimSort {
 	    		// Gallop right until a[b + hint + lo] <= key < a[b + hint + hi]
 	    		int maxOffset = len - hint;	// 최대로 가질 수 있는 offset
 	    		
-	    		while(hi < maxOffset && array[startPoint + hint + hi] <= key) {
+	    		while(hi < maxOffset && array[base + hint + hi] <= key) {
 	    			lo = hi;
 	    			hi = (hi << 1) + 1;
 	    			
 	    			if(hi <= 0) {	// overflow
 	    				hi = maxOffset;
-	    				break;
+	    				
 	    			}
 	    		}
 	    		
@@ -279,9 +315,9 @@ public class TimSort {
 	    		lo += hint;
 	    		hi += hint;
 	    	}
-	    	
+
 	    	lo++;
-	    	
+
 	    	// binary search
 	    	while(lo < hi) {
 	    		
@@ -301,7 +337,7 @@ public class TimSort {
 	    		 */
 	    		int mid = lo + ((hi - lo) >>> 1);
 	    		
-	    		if(key < array[startPoint + mid]) {
+	    		if(key < array[base + mid]) {
 	    			hi = mid;
 	    		}
 	    		else {
@@ -329,8 +365,8 @@ public class TimSort {
 	    	 * lastOffset과 다음 오프셋인 offset 사이를 구하고 이 구간에 대해
 	    	 * 이분탐색을 통해 최종 오프셋을 반환한다. 
 	    	 */
-	    	int lo = 0;
-	    	int hi = 1;
+	    	int lastOfs = 0;
+	    	int ofs = 1;
 	    	
 	    	/*
 	    	 * RUN A의 시작지점 값이 RUN B의 시작지점보다 클 경우
@@ -340,53 +376,52 @@ public class TimSort {
 	    		int maxOffset = hint + 1;	// 최대 오프셋은 RUN A의 길이다.
 	    		
 	    		// Gallop left until a[b + hint - hi] <= key < array[b + hint - lo]
-	    		while(hi < maxOffset && key <= array[startPoint + hint - hi]) {
-	    			lo = hi;
-	    			hi = (hi << 1) + 1;	// 2배씩 건너뜀 탐색
+	    		while(ofs < maxOffset && key <= array[startPoint + hint - ofs]) {
+	    			lastOfs = ofs;
+	    			ofs = (ofs << 1) + 1;	// 2배씩 건너뜀 탐색
 	    			
 	    			// overflow가 발생시 maxOffset으로 만들어 while문의 break를 건다.
-	    			if(hi <= 0) {
-	    				hi = maxOffset;
+	    			if(ofs <= 0) {
+	    				ofs = maxOffset;
 	    				break;
 	    			}
 	    		}
 	    		
 	    		// 최대로 가질 수 있는 오프셋을 벗어났을 경우 최대 값으로 초기화
-	    		if(hi > maxOffset) {
-	    			hi = maxOffset;
+	    		if(ofs > maxOffset) {
+	    			ofs = maxOffset;
 	    		}
 	    		
-	    		int temp = lo;
-	    		lo = hint - hi;
-	    		hi = hint - temp;
+	    		int temp = lastOfs;
+	    		lastOfs = hint - ofs;
+	    		ofs = hint - temp;
 	    	}
 	    	
 	    	else {
 	    		// Gallop right until a[b + hint + lo] <= key < a[b + hint + hi]
 	    		int maxOffset = len - hint;	// 최대로 가질 수 있는 offset
 	    		
-	    		while(hi < maxOffset && array[startPoint + hint + hi] < key) {
-	    			lo = hi;
-	    			hi = (hi << 1) + 1;
+	    		while(ofs < maxOffset && array[startPoint + hint + ofs] < key) {
+	    			lastOfs = ofs;
+	    			ofs = (ofs << 1) + 1;
 	    			
-	    			if(hi <= 0) {	// overflow
-	    				hi = maxOffset;
+	    			if(ofs <= 0) {	// overflow
+	    				ofs = maxOffset;
 	    				break;
 	    			}
 	    		}
 	    		
-	    		if(hi > maxOffset) {
-	    			hi = maxOffset;
+	    		if(ofs > maxOffset) {
+	    			ofs = maxOffset;
 	    		}
 	    		
-	    		lo += hint;
-	    		hi += hint;
+	    		lastOfs += hint;
+	    		ofs += hint;
 	    	}
-	    	
-	    	lo++;
+	    	lastOfs++;
 	    	
 	    	// binary search
-	    	while(lo < hi) {
+	    	while(lastOfs < ofs) {
 	    		
 	    		/*
 	    		 * 중간 값을 구할 때 (lo + hi) / 2 를 하면
@@ -402,30 +437,31 @@ public class TimSort {
 	    		 * = 5 
 	    		 * ( == ((3 + 7) / 2 = 5) )
 	    		 */
-	    		int mid = lo + ((hi - lo) >>> 1);
+	    		int mid = lastOfs + ((ofs - lastOfs) >>> 1);
 	    		
-	    		if(key < array[startPoint + mid]) {
-	    			hi = mid;
+	    		if(key <= array[startPoint + mid]) {
+	    			ofs = mid;
 	    		}
 	    		else {
-	    			lo = mid + 1;
+	    			lastOfs = mid + 1;
 	    		}
 	    	}
-	    	return hi;
+	    	return ofs;
 	    }
 	    
+//	    private static int MIN_GALLOP = 7;
+//	    private int minGallop = MIN_GALLOP;
 	    
 	    // start1, length1, start2, length2
 	    private void mergeLo(int start1, int length1, int start2, int length2) {
-	    	
 	    	// RUN A' 를 담을 임시 복사 배열
 	    	int[] temp = new int[length1];
 	    	System.arraycopy(array, start1, temp, 0, length1);
 	    	
 	    	int left = start1;
 	    	int right = start2;
-	    	
 	    	int tempIdx = 0;
+	    	
 	    	int leftRemain = length1;
 	    	int rightRemain = length2;
 	    	
@@ -449,11 +485,114 @@ public class TimSort {
 	    	else {
 	    		System.arraycopy(array, right, array, left, rightRemain);
 	    	}
+	    	
+	    	
+	    	
+//	    	 // Copy first run into temp array
+//	        int[] a = this.array; // For performance
+//	        int[] tmp = new int[len1];
+//
+//	        int cursor1 = 0; // Indexes into tmp array
+//	        int cursor2 = base2;   // Indexes int a
+//	        int dest = base1;      // Indexes int a
+//	        System.arraycopy(a, base1, tmp, cursor1, len1);
+//
+//	        // Move first element of second run and deal with degenerate cases
+//	        a[dest++] = a[cursor2++];
+//	        if (--len2 == 0) {
+//	            System.arraycopy(tmp, cursor1, a, dest, len1);
+//	            return;
+//	        }
+//	        if (len1 == 1) {
+//	            System.arraycopy(a, cursor2, a, dest, len2);
+//	            a[dest + len2] = tmp[cursor1]; // Last elt of run 1 to end of merge
+//	            return;
+//	        }
+//
+//	        int minGallop = this.minGallop;  // Use local variable for performance
+//	    outer:
+//	        while (true) {
+//	            int count1 = 0; // Number of times in a row that first run won
+//	            int count2 = 0; // Number of times in a row that second run won
+//
+//	            /*
+//	             * Do the straightforward thing until (if ever) one run starts
+//	             * winning consistently.
+//	             */
+//	            do {
+//	                assert len1 > 1 && len2 > 0;
+//	                if ((a[cursor2]) < (tmp[cursor1])) {
+//	                    a[dest++] = a[cursor2++];
+//	                    count2++;
+//	                    count1 = 0;
+//	                    if (--len2 == 0)
+//	                        break outer;
+//	                } else {
+//	                    a[dest++] = tmp[cursor1++];
+//	                    count1++;
+//	                    count2 = 0;
+//	                    if (--len1 == 1)
+//	                        break outer;
+//	                }
+//	            } while ((count1 | count2) < minGallop);
+//
+//	            /*
+//	             * One run is winning so consistently that galloping may be a
+//	             * huge win. So try that, and continue galloping until (if ever)
+//	             * neither run appears to be winning consistently anymore.
+//	             */
+//	            do {
+//	                assert len1 > 1 && len2 > 0;
+//	                count1 = gallopRight(a[cursor2], tmp, cursor1, len1, 0);
+//	                if (count1 != 0) {
+//	                    System.arraycopy(tmp, cursor1, a, dest, count1);
+//	                    dest += count1;
+//	                    cursor1 += count1;
+//	                    len1 -= count1;
+//	                    if (len1 <= 1)  // len1 == 1 || len1 == 0
+//	                        break outer;
+//	                }
+//	                a[dest++] = a[cursor2++];
+//	                if (--len2 == 0)
+//	                    break outer;
+//
+//	                count2 = gallopLeft(tmp[cursor1], a, cursor2, len2, 0);
+//	                if (count2 != 0) {
+//	                    System.arraycopy(a, cursor2, a, dest, count2);
+//	                    dest += count2;
+//	                    cursor2 += count2;
+//	                    len2 -= count2;
+//	                    if (len2 == 0)
+//	                        break outer;
+//	                }
+//	                a[dest++] = tmp[cursor1++];
+//	                if (--len1 == 1)
+//	                    break outer;
+//	                minGallop--;
+//	            } while (count1 >= 7 | count2 >= 7);
+//	            if (minGallop < 0)
+//	                minGallop = 0;
+//	            minGallop += 2;  // Penalize for leaving gallop mode
+//	        }  // End of "outer" loop
+//	        this.minGallop = minGallop < 1 ? 1 : minGallop;  // Write back to field
+//
+//	        if (len1 == 1) {
+//	            assert len2 > 0;
+//	            System.arraycopy(a, cursor2, a, dest, len2);
+//	            a[dest + len2] = tmp[cursor1]; //  Last elt of run 1 to end of merge
+//	        } else if (len1 == 0) {
+//	            throw new IllegalArgumentException(
+//	                "Comparison method violates its general contract!");
+//	        } else {
+//	            assert len2 == 0;
+//	            assert len1 > 1;
+//	            System.arraycopy(tmp, cursor1, a, dest, len1);
+//	        }
+	    	
 	    }
 	    
 	    // start1, length1, start2, length2
 	    private void mergeHi(int start1, int length1, int start2, int length2) {
-	    	
 	    	// RUN B' 를 담을 임시 복사 배열
 	    	int[] temp = new int[length2];
 	    	System.arraycopy(array, start2, temp, 0, length2);
@@ -486,7 +625,119 @@ public class TimSort {
 	    	else {
 	    		System.arraycopy(array, start1, array, start1, leftRemain);
 	    	}
+	    	
+	    	
+	    	
+//	        // Copy second run into temp array
+//	        int[] a = this.array; // For performance
+//	        int[] tmp = new int[len2];
+//	        int tmpBase = 0;
+//	        System.arraycopy(a, base2, tmp, tmpBase, len2);
+//
+//	        int cursor1 = base1 + len1 - 1;  // Indexes into a
+//	        int cursor2 = tmpBase + len2 - 1; // Indexes into tmp array
+//	        int dest = base2 + len2 - 1;     // Indexes into a
+//
+//	        // Move last element of first run and deal with degenerate cases
+//	        a[dest--] = a[cursor1--];
+//	        if (--len1 == 0) {
+//	            System.arraycopy(tmp, tmpBase, a, dest - (len2 - 1), len2);
+//	            return;
+//	        }
+//	        if (len2 == 1) {
+//	            dest -= len1;
+//	            cursor1 -= len1;
+//	            System.arraycopy(a, cursor1 + 1, a, dest + 1, len1);
+//	            a[dest] = tmp[cursor2];
+//	            return;
+//	        }
+//
+//	        int minGallop = this.minGallop;  // Use local variable for performance
+//	    outer:
+//	        while (true) {
+//	            int count1 = 0; // Number of times in a row that first run won
+//	            int count2 = 0; // Number of times in a row that second run won
+//
+//	            /*
+//	             * Do the straightforward thing until (if ever) one run
+//	             * appears to win consistently.
+//	             */
+//	            do {
+//	                assert len1 > 0 && len2 > 1;
+//	                if (tmp[cursor2] <a[cursor1]) {
+//	                    a[dest--] = a[cursor1--];
+//	                    count1++;
+//	                    count2 = 0;
+//	                    if (--len1 == 0)
+//	                        break outer;
+//	                } else {
+//	                    a[dest--] = tmp[cursor2--];
+//	                    count2++;
+//	                    count1 = 0;
+//	                    if (--len2 == 1)
+//	                        break outer;
+//	                }
+//	            } while ((count1 | count2) < minGallop);
+//
+//	            /*
+//	             * One run is winning so consistently that galloping may be a
+//	             * huge win. So try that, and continue galloping until (if ever)
+//	             * neither run appears to be winning consistently anymore.
+//	             */
+//	            do {
+//	                assert len1 > 0 && len2 > 1;
+//	                count1 = len1 - gallopRight(tmp[cursor2], a, base1, len1, len1 - 1);
+//	                if (count1 != 0) {
+//	                    dest -= count1;
+//	                    cursor1 -= count1;
+//	                    len1 -= count1;
+//	                    System.arraycopy(a, cursor1 + 1, a, dest + 1, count1);
+//	                    if (len1 == 0)
+//	                        break outer;
+//	                }
+//	                a[dest--] = tmp[cursor2--];
+//	                if (--len2 == 1)
+//	                    break outer;
+//
+//	                count2 = len2 - gallopLeft(a[cursor1], tmp, tmpBase, len2, len2 - 1);
+//	                if (count2 != 0) {
+//	                    dest -= count2;
+//	                    cursor2 -= count2;
+//	                    len2 -= count2;
+//	                    System.arraycopy(tmp, cursor2 + 1, a, dest + 1, count2);
+//	                    if (len2 <= 1)
+//	                        break outer; // len2 == 1 || len2 == 0
+//	                }
+//	                a[dest--] = a[cursor1--];
+//	                if (--len1 == 0)
+//	                    break outer;
+//	                minGallop--;
+//	            } while (count1 >= MIN_GALLOP | count2 >= MIN_GALLOP);
+//	            if (minGallop < 0)
+//	                minGallop = 0;
+//	            minGallop += 2;  // Penalize for leaving gallop mode
+//	        }  // End of "outer" loop
+//	        this.minGallop = minGallop < 1 ? 1 : minGallop;  // Write back to field
+//
+//	        if (len2 == 1) {
+//	            assert len1 > 0;
+//	            dest -= len1;
+//	            cursor1 -= len1;
+//	            System.arraycopy(a, cursor1 + 1, a, dest + 1, len1);
+//	            a[dest] = tmp[cursor2];  // Move first elt of run2 to front of merge
+//	        } else if (len2 == 0) {
+//	            throw new IllegalArgumentException(
+//	                "Comparison method violates its general contract!");
+//	        } else {
+//	            assert len1 == 0;
+//	            assert len2 > 0;
+//	            System.arraycopy(tmp, tmpBase, a, dest - (len2 - 1), len2);
+//	        }
+
+	    	
 	    }
+	    	
+	    	
 	}
 	
 	
@@ -499,11 +750,10 @@ public class TimSort {
 	
 	public static void sort(int[] a, int lo, int hi) {
 		
-		int remain = lo - hi;
+		int remain = hi - lo;
 		if(remain < 2) {
 			return;
 		}
-		
 		/**
 		 * 일정 크기 이하의 배열이라면 
 		 * binaryInsertionSort로 정렬
@@ -516,11 +766,12 @@ public class TimSort {
 			return;
 		}
 		
+		
 		IntMerge im = new IntMerge(a);
 		int minRun = minRunLength(remain);	// run의 최소 길이
 		do {
 			
-			int incLength = getAscending(a, lo, hi);
+			int runLen = getAscending(a, lo, hi);
 			
 			/*
 			 * 만약 정렬 된 부분의 길이가 minRun 보다 작다면
@@ -533,10 +784,9 @@ public class TimSort {
 			 * incLength = 5
 			 * -> (lo + incLength) 이 이진삽입정렬 수행 시작점이 됨
 			 */
-			if(incLength < minRun) {
-				
+			if(runLen < minRun) {
 				// 최소 run 크기가 남은 원소 개수보다 작을 수 있으므로 이를 처리해준다.
-				int endPoint = remain < minRun ? remain : minRun;
+				int force = remain < minRun ? remain : minRun;
 				
 				/*
 				 * BinarySort(array, lo, hi, start);
@@ -544,23 +794,23 @@ public class TimSort {
 				 * index[lo + incLength] 부터 삽입정렬을 시작함.
 				 * (이전 인덱스는 이미 오름차순 상태임) 
 				 */
-				BinarySort(a, lo, lo + endPoint, lo + incLength);
+				BinarySort(a, lo, lo + force, lo + runLen);
 				
 				// 이진 삽입 정렬이 수행되었기에 증가하는 길이는 endPoint가 된다.
-				incLength = endPoint;
+				runLen = force;
 			}
-			
 			// stack에 run의 시작점과 해당 run의 길이를 스택에 push한다. 
-			im.pushRun(lo, incLength);
+			im.pushRun(lo, runLen);
 			im.merge();
 			
-			lo += incLength;
-			remain -= incLength;
-		} while(remain > 0);
-		
+			lo += runLen;
+			remain -= runLen;
+		} while(remain != 0);
 		im.mergeForce();
-		
+
 	}
+	
+	
 	
 	private static void BinarySort(int[] a, int lo, int hi ,int start) {
 
@@ -571,7 +821,7 @@ public class TimSort {
 		for (; start < hi; start++) {
 			int target = a[start];
 
-			int loc = binarySearch(a, target, 0, start);
+			int loc = binarySearch(a, target, lo, start);
 
 			int j = start - 1;
 
@@ -582,6 +832,46 @@ public class TimSort {
 
 			a[loc] = target;
 		}
+		
+//	       if (start == lo)
+//	           start++;
+//	       for ( ; start < hi; start++) {
+//	           int pivot = a[start];
+//
+//	           int left = lo;
+//	           int right = start;
+//	           assert left <= right;
+//	           /*
+//	            * Invariants:
+//	            *   pivot >= all in [lo, left).
+//	            *   pivot <  all in [right, start).
+//	            */
+//	           while (left < right) {
+//	               int mid = (left + right) >>> 1;
+//	               if (pivot < a[mid])
+//	                   right = mid;
+//	               else
+//	                   left = mid + 1;
+//	           }
+//	           assert left == right;
+//
+//	           /*
+//	            * The invariants still hold: pivot >= all in [lo, left) and
+//	            * pivot < all in [left, start), so pivot belongs at left.  Note
+//	            * that if there are elements equal to pivot, left points to the
+//	            * first slot after them -- that's why this sort is stable.
+//	            * Slide elements over to make room for pivot.
+//	            */
+//	           int n = start - left;  // The number of elements to move
+//	           // Switch is just an optimization for arraycopy in default case
+//	           switch (n) {
+//	               case 2:  a[left + 2] = a[left + 1];
+//	               case 1:  a[left + 1] = a[left];
+//	                        break;
+//	               default: System.arraycopy(a, left, a, left + 1, n);
+//	           }
+//	           a[left] = pivot;
+//	       }
 	}
 	
 	private static int binarySearch(int[] a, int key, int lo, int hi) {
