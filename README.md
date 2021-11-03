@@ -72,7 +72,8 @@ This repository is organized as follows:
 > - HeapSort : Heap sort(힙 정렬)을 구현한 소스코드가 있습니다.
 > - MergeSort : Merge sort(합병/병합 정렬)을 구현한 소스코드가 있습니다.
 > - QuickSort : Quick sort(퀵 정렬)을 구현한 소스코드가 있습니다.
-> - ParallelSort : 스레드를 이용한 병렬 정렬을 구현하는 소스코드가 있습니다.
+> - ParallelSort : 스레드를 이용한 병렬 정렬을 구현한 소스코드가 있습니다.
+> - TimSort : Tim sort(팀 정렬)를 구현한 소스코드가 있습니다.
 > - Utils : reverse ordering에 필요한 유틸 클래스입니다.
 
 
