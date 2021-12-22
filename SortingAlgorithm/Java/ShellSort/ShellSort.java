@@ -37,9 +37,7 @@ public class ShellSort {
 	private static int getGap(int length) {
 		int index = 0;
 		int len = (int)(length / 2.25);	
-		while (gap[index] <= len) {
-			index++;
-		}
+		while (gap[index++] < len);
 		return index;
 	}
 	
