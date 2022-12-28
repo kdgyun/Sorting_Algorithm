@@ -63,17 +63,21 @@ This repository is organized as follows:
 ```
 
 </br></br>
-#### [Preview subFolder]
-> - SelectionSort : Selection sort(선택 정렬)를 구현한 소스코드가 있습니다.
-> - InsertionSort : Insertion sort(삽입 정렬)를 구현한 소스코드가 있습니다.
+#### [Preview subFolder] - 알파벳순
 > - BinaryInsertionSort : Binary Insertion sort(이진 삽입 정렬)를 구현한 소스코드가 있습니다.
+> - BitonicSort : Bitonic sort(바이토닉 정렬)를 구현한 소스코드가 있습니다.
 > - BubbleSort : Bubble sort(거품 정렬)을 구현한 소스코드가 있습니다.
-> - ShellSort : Shell sort(셸 정렬)을 구현한 소스코드가 있습니다.
-> - HeapSort : Heap sort(힙 정렬)을 구현한 소스코드가 있습니다.
-> - MergeSort : Merge sort(합병/병합 정렬)을 구현한 소스코드가 있습니다.
-> - QuickSort : Quick sort(퀵 정렬)을 구현한 소스코드가 있습니다.
+> - CocktailSort : Cocktail sort(칵테일 정렬)를 구현한 소스코드가 있습니다.
+> - CombSort : Comb sort(빗 정렬)를 구현한 소스코드가 있습니다.
+> - CycleSort : Cycle sort(순환 정렬)를 구현한 소스코드가 있습니다.
 > - DualPivotQuickSort : Dual Pivot Quick sort(이중 피벗 퀵 정렬)을 구현한 소스코드가 있습니다.
+> - HeapSort : Heap sort(힙 정렬)을 구현한 소스코드가 있습니다.
+> - InsertionSort : Insertion sort(삽입 정렬)를 구현한 소스코드가 있습니다.
+> - MergeSort : Merge sort(합병/병합 정렬)을 구현한 소스코드가 있습니다.
 > - ParallelSort : 스레드를 이용한 병렬 정렬을 구현한 소스코드가 있습니다.
+> - QuickSort : Quick sort(퀵 정렬)을 구현한 소스코드가 있습니다.
+> - SelectionSort : Selection sort(선택 정렬)를 구현한 소스코드가 있습니다.
+> - ShellSort : Shell sort(셸 정렬)을 구현한 소스코드가 있습니다.
 > - TimSort : Tim sort(팀 정렬)를 구현한 소스코드가 있습니다.
 > - Utils : reverse ordering에 필요한 유틸 클래스입니다.
 
