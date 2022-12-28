@@ -1,4 +1,4 @@
-package QuickSort;
+package DualPivotQuickSort;
 
 /**
  * Dual-Pivot Quick Sort is based on Divide-and-conquer algorithm of quick sort,
