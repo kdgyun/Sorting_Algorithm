@@ -252,7 +252,7 @@ class Main {
 
 
 
-#### 구현 대한 내용은 블로그에 기재하고 있습니다.  
+#### 일부 구현 대한 내용은 블로그에 기재하고 있습니다.  
 <br/>
 
 - [Stranger's LAB](https://st-lab.tistory.com/category/알고리즘/Java)
