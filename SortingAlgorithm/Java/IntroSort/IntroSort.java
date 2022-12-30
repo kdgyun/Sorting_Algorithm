@@ -70,7 +70,7 @@ public class IntroSort {
 			return;
 		}
 		int last = hi - 1;
-		int parent = ((last - 1) >> 1);
+		int parent = ((last - 1) >>> 1);
 		
 		while(parent >= lo) {
 			__heapify(a, parent, last);
@@ -188,7 +188,7 @@ public class IntroSort {
 			return;
 		}
 		int last = hi - 1;
-		int parent = ((last - 1) >> 1);
+		int parent = ((last - 1) >>> 1);
 		
 		while(parent >= lo) {
 			__heapify(a, parent, last);
@@ -308,7 +308,7 @@ public class IntroSort {
 			return;
 		}
 		int last = hi - 1;
-		int parent = ((last - 1) >> 1);
+		int parent = ((last - 1) >>> 1);
 		
 		while(parent >= lo) {
 			__heapify(a, parent, last);
@@ -428,7 +428,7 @@ public class IntroSort {
 			return;
 		}
 		int last = hi - 1;
-		int parent = ((last - 1) >> 1);
+		int parent = ((last - 1) >>> 1);
 		
 		while(parent >= lo) {
 			__heapify(a, parent, last);
@@ -547,7 +547,7 @@ public class IntroSort {
 			return;
 		}
 		int last = hi - 1;
-		int parent = ((last - 1) >> 1);
+		int parent = ((last - 1) >>> 1);
 		
 		while(parent >= lo) {
 			__heapify(a, parent, last);
@@ -665,7 +665,7 @@ public class IntroSort {
 			return;
 		}
 		int last = hi - 1;
-		int parent = ((last - 1) >> 1);
+		int parent = ((last - 1) >>> 1);
 		
 		while(parent >= lo) {
 			__heapify(a, parent, last);
@@ -783,7 +783,7 @@ public class IntroSort {
 			return;
 		}
 		int last = hi - 1;
-		int parent = ((last - 1) >> 1);
+		int parent = ((last - 1) >>> 1);
 		
 		while(parent >= lo) {
 			__heapify(a, parent, last);
@@ -904,7 +904,7 @@ public class IntroSort {
 			return;
 		}
 		int last = hi - 1;
-		int parent = ((last - 1) >> 1);
+		int parent = ((last - 1) >>> 1);
 		
 		while(parent >= lo) {
 			__heapify(a, parent, last);
@@ -1031,7 +1031,7 @@ public class IntroSort {
 			return;
 		}
 		int last = hi - 1;
-		int parent = ((last - 1) >> 1);
+		int parent = ((last - 1) >>> 1);
 		
 		while(parent >= lo) {
 			__heapify(a, parent, last, c);

@@ -24,7 +24,7 @@ public class BitonicSort {
 		while(k > 0 && k < n) {
 			k <<= 1;
 		}
-		return k >> 1;
+		return k >>> 1;
 	}
 	
 	//============= primitive type ============//
@@ -40,7 +40,7 @@ public class BitonicSort {
 	
 	private static void sort(byte[] a, int lo, int len, boolean dir) {
 		if(len > 1) {
-			int mid = (len >> 1);
+			int mid = (len >>> 1);
 			sort(a, lo, mid, !dir);
 			sort(a, lo + mid, len - mid, dir);
 			merge(a, lo, len, dir);
@@ -82,7 +82,7 @@ public class BitonicSort {
 	
 	private static void sort(char[] a, int lo, int len, boolean dir) {
 		if(len > 1) {
-			int mid = (len >> 1);
+			int mid = (len >>> 1);
 			sort(a, lo, mid, !dir);
 			sort(a, lo + mid, len - mid, dir);
 			merge(a, lo, len, dir);
@@ -123,7 +123,7 @@ public class BitonicSort {
 	
 	private static void sort(short[] a, int lo, int len, boolean dir) {
 		if(len > 1) {
-			int mid = (len >> 1);
+			int mid = (len >>> 1);
 			sort(a, lo, mid, !dir);
 			sort(a, lo + mid, len - mid, dir);
 			merge(a, lo, len, dir);
@@ -164,7 +164,7 @@ public class BitonicSort {
 	
 	private static void sort(int[] a, int lo, int len, boolean dir) {
 		if(len > 1) {
-			int mid = (len >> 1);
+			int mid = (len >>> 1);
 			sort(a, lo, mid, !dir);
 			sort(a, lo + mid, len - mid, dir);
 			merge(a, lo, len, dir);
@@ -204,7 +204,7 @@ public class BitonicSort {
 	
 	private static void sort(long[] a, int lo, int len, boolean dir) {
 		if(len > 1) {
-			int mid = (len >> 1);
+			int mid = (len >>> 1);
 			sort(a, lo, mid, !dir);
 			sort(a, lo + mid, len - mid, dir);
 			merge(a, lo, len, dir);
@@ -244,7 +244,7 @@ public class BitonicSort {
 	
 	private static void sort(float[] a, int lo, int len, boolean dir) {
 		if(len > 1) {
-			int mid = (len >> 1);
+			int mid = (len >>> 1);
 			sort(a, lo, mid, !dir);
 			sort(a, lo + mid, len - mid, dir);
 			merge(a, lo, len, dir);
@@ -283,7 +283,7 @@ public class BitonicSort {
 	
 	private static void sort(double[] a, int lo, int len, boolean dir) {
 		if(len > 1) {
-			int mid = (len >> 1);
+			int mid = (len >>> 1);
 			sort(a, lo, mid, !dir);
 			sort(a, lo + mid, len - mid, dir);
 			merge(a, lo, len, dir);
@@ -324,7 +324,7 @@ public class BitonicSort {
 	
 	private static void sort(Object[] a, int lo, int len, boolean dir) {
 		if(len > 1) {
-			int mid = (len >> 1);
+			int mid = (len >>> 1);
 			sort(a, lo, mid, !dir);
 			sort(a, lo + mid, len - mid, dir);
 			merge(a, lo, len, dir);
@@ -370,7 +370,7 @@ public class BitonicSort {
 	
 	private static <T> void sort(T[] a, int lo, int len, boolean dir, Comparator<? super T> c) {
 		if(len > 1) {
-			int mid = (len >> 1);
+			int mid = (len >>> 1);
 			sort(a, lo, mid, !dir, c);
 			sort(a, lo + mid, len - mid, dir, c);
 			merge(a, lo, len, dir, c);
