@@ -74,7 +74,8 @@ This repository is organized as follows:
 > - HeapSort : Heap sort(힙 정렬)을 구현한 소스코드가 있습니다.
 > - InsertionSort : Insertion sort(삽입 정렬)를 구현한 소스코드가 있습니다.
 > - IntroSort : Intro sort(인트로 정렬)를 구현한 소스코드가 있습니다.
-> - OddEvenMergeSort : Odd Even Merge Sort(홀짝 병합 정렬)를 구현한 소스코드가 있습니다. 
+> - OddEvenMergeSort : Odd Even Merge Sort(홀짝 병합 정렬)를 구현한 소스코드가 있습니다.
+> - OddEvenSort : Odd Even Sort(홀짝 정렬)를 구현한 소스코드가 있습니다. 
 > - MergeSort : Merge sort(합병/병합 정렬)을 구현한 소스코드가 있습니다.
 > - ParallelSort : 스레드를 이용한 병렬 정렬을 구현한 소스코드가 있습니다.
 > - QuickSort : Quick sort(퀵 정렬)을 구현한 소스코드가 있습니다.
