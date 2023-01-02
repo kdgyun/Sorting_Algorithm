@@ -6,10 +6,12 @@ import java.util.concurrent.RecursiveAction;
 import Utils.Convert;
 import Utils.Order;
 
-public class ParallelLPQuickSort {
+
+
+
+public class ParallelRightPivotQuickSort {
 
 	final static int THRESHOLD = 1 << 13;
-	
 	
 	// ============= primitive type ============//
 
@@ -18,13 +20,13 @@ public class ParallelLPQuickSort {
 	 *  sorting byte type array
 	 * ==========================
 	 */
-
+	
 	public static void sort(byte[] a) {
-		new ParLPQuickByte.QSort(a, 0, a.length - 1).invoke();
+		new ParallelRightPivotQuickSortForByte.QSort(a, 0, a.length - 1).invoke();
 	}
 	
-
-	private static final class ParLPQuickByte {	
+	
+	private static final class ParallelRightPivotQuickSortForByte {	
 		private static final class QSort extends RecursiveAction {
 			private static final long serialVersionUID = 1L;
 			final byte[] a;
@@ -52,45 +54,49 @@ public class ParallelLPQuickSort {
 				}
 				else {
 					QSort left = new QSort(a, lo, pivot - 1);
-					QSort right = new QSort(a, pivot + 1, hi);
+					QSort right =  new QSort(a, pivot + 1, hi);
 					left.fork();
 					right.compute();
 					left.join();
 				}
+				
 			}
 		}
-		
-		private static void qsort(byte[] a, int lo, int hi) {	
 
+		
+		private static void qsort(byte[] a, int lo, int hi) {
+			
 			if(lo >= hi) {
 				return;
 			}
-			
-
 			int pivot = partition(a, lo, hi);	
 			
 			qsort(a, lo, pivot - 1);
 			qsort(a, pivot + 1, hi);
+			
 		}
-		
-
 		private static int partition(byte[] a, int left, int right) {
 			
 			int lo = left;
 			int hi = right;
-			byte pivot = a[left];	
-			
+			byte pivot = a[right];		
 			while(lo < hi) {
 				
-				while(a[hi] > pivot) --hi;
-				while(a[lo] <= pivot && lo < hi) ++lo;
+
+				while(a[lo] < pivot && lo < hi) {
+					lo++;
+				}
+				while(a[hi] >= pivot && lo < hi) {
+					hi--;
+				}
 				
 				swap(a, lo, hi);
 			}
-
-			swap(a, left, lo);
 			
-			return lo;
+
+			swap(a, right, hi);
+			
+			return hi;
 		}
 		
 		private static void swap(byte[] a, int i, int j) {
@@ -99,23 +105,21 @@ public class ParallelLPQuickSort {
 			a[j] = temp;
 		}
 	}
-
 	
 	
-
+	
 	/*
 	 * ========================== 
 	 *  sorting char type array
 	 * ==========================
 	 */
-
+	
 	public static void sort(char[] a) {
-		new ParLPQuickChar.QSort(a, 0, a.length - 1).invoke();
+		new ParallelRightPivotQuickSortForChar.QSort(a, 0, a.length - 1).invoke();
 	}
 	
-
-
-	private static final class ParLPQuickChar {	
+	
+	private static final class ParallelRightPivotQuickSortForChar {	
 		private static final class QSort extends RecursiveAction {
 			private static final long serialVersionUID = 1L;
 			final char[] a;
@@ -143,7 +147,7 @@ public class ParallelLPQuickSort {
 				}
 				else {
 					QSort left = new QSort(a, lo, pivot - 1);
-					QSort right = new QSort(a, pivot + 1, hi);
+					QSort right =  new QSort(a, pivot + 1, hi);
 					left.fork();
 					right.compute();
 					left.join();
@@ -151,38 +155,41 @@ public class ParallelLPQuickSort {
 				
 			}
 		}
-		
-		private static void qsort(char[] a, int lo, int hi) {	
 
+		
+		private static void qsort(char[] a, int lo, int hi) {
+			
 			if(lo >= hi) {
 				return;
 			}
-			
-
 			int pivot = partition(a, lo, hi);	
 			
 			qsort(a, lo, pivot - 1);
 			qsort(a, pivot + 1, hi);
+			
 		}
-		
-
 		private static int partition(char[] a, int left, int right) {
 			
 			int lo = left;
 			int hi = right;
-			char pivot = a[left];	
-			
+			char pivot = a[right];		
 			while(lo < hi) {
 				
-				while(a[hi] > pivot) --hi;
-				while(a[lo] <= pivot && lo < hi) ++lo;
+
+				while(a[lo] < pivot && lo < hi) {
+					lo++;
+				}
+				while(a[hi] >= pivot && lo < hi) {
+					hi--;
+				}
 				
 				swap(a, lo, hi);
 			}
-
-			swap(a, left, lo);
 			
-			return lo;
+
+			swap(a, right, hi);
+			
+			return hi;
 		}
 		
 		private static void swap(char[] a, int i, int j) {
@@ -194,19 +201,22 @@ public class ParallelLPQuickSort {
 	
 	
 	
-
+	
+	
+	
+	
 	/*
 	 * ========================== 
 	 *  sorting short type array
 	 * ==========================
 	 */
-
+	
 	public static void sort(short[] a) {
-		new ParLPQuickShort.QSort(a, 0, a.length - 1).invoke();
+		new ParallelRightPivotQuickSortForShort.QSort(a, 0, a.length - 1).invoke();
 	}
 	
-
-	private static final class ParLPQuickShort {	
+	
+	private static final class ParallelRightPivotQuickSortForShort {	
 		private static final class QSort extends RecursiveAction {
 			private static final long serialVersionUID = 1L;
 			final short[] a;
@@ -234,7 +244,7 @@ public class ParallelLPQuickSort {
 				}
 				else {
 					QSort left = new QSort(a, lo, pivot - 1);
-					QSort right = new QSort(a, pivot + 1, hi);
+					QSort right =  new QSort(a, pivot + 1, hi);
 					left.fork();
 					right.compute();
 					left.join();
@@ -242,38 +252,41 @@ public class ParallelLPQuickSort {
 				
 			}
 		}
-		
-		private static void qsort(short[] a, int lo, int hi) {	
 
+		
+		private static void qsort(short[] a, int lo, int hi) {
+			
 			if(lo >= hi) {
 				return;
 			}
-			
-
 			int pivot = partition(a, lo, hi);	
 			
 			qsort(a, lo, pivot - 1);
 			qsort(a, pivot + 1, hi);
+			
 		}
-		
-
 		private static int partition(short[] a, int left, int right) {
 			
 			int lo = left;
 			int hi = right;
-			short pivot = a[left];	
-			
+			short pivot = a[right];		
 			while(lo < hi) {
 				
-				while(a[hi] > pivot) --hi;
-				while(a[lo] <= pivot && lo < hi) ++lo;
+
+				while(a[lo] < pivot && lo < hi) {
+					lo++;
+				}
+				while(a[hi] >= pivot && lo < hi) {
+					hi--;
+				}
 				
 				swap(a, lo, hi);
 			}
-
-			swap(a, left, lo);
 			
-			return lo;
+
+			swap(a, right, hi);
+			
+			return hi;
 		}
 		
 		private static void swap(short[] a, int i, int j) {
@@ -282,8 +295,6 @@ public class ParallelLPQuickSort {
 			a[j] = temp;
 		}
 	}
-
-	
 	
 	
 	
@@ -295,11 +306,11 @@ public class ParallelLPQuickSort {
 	 */
 	
 	public static void sort(int[] a) {
-		new ParLPQuickInt.QSort(a, 0, a.length - 1).invoke();
-		
+		new ParallelRightPivotQuickSortForInt.QSort(a, 0, a.length - 1).invoke();
 	}
 	
-	private static final class ParLPQuickInt {	
+	
+	private static final class ParallelRightPivotQuickSortForInt {	
 		private static final class QSort extends RecursiveAction {
 			private static final long serialVersionUID = 1L;
 			final int[] a;
@@ -307,13 +318,13 @@ public class ParallelLPQuickSort {
 			final int hi;
 			
 			QSort(int[] a, int lo, int hi) {
+
 				this.a = a;
 				this.lo = lo;
 				this.hi = hi;
 			}
 			
 			public final void compute() {
-				
 				if(lo >= hi) {
 					return;
 				}
@@ -327,45 +338,50 @@ public class ParallelLPQuickSort {
 				}
 				else {
 					QSort left = new QSort(a, lo, pivot - 1);
-					QSort right = new QSort(a, pivot + 1, hi);
+					QSort right =  new QSort(a, pivot + 1, hi);
 					left.fork();
 					right.compute();
 					left.join();
+					
 				}
-				
+
 			}
 		}
-		
-		private static void qsort(int[] a, int lo, int hi) {	
 
+		
+		private static void qsort(int[] a, int lo, int hi) {
+			
 			if(lo >= hi) {
 				return;
 			}
-			
 			int pivot = partition(a, lo, hi);	
 			
 			qsort(a, lo, pivot - 1);
 			qsort(a, pivot + 1, hi);
+			
 		}
-		
-
 		private static int partition(int[] a, int left, int right) {
 			
 			int lo = left;
 			int hi = right;
-			int pivot = a[left];	
-			
+			int pivot = a[right];		
 			while(lo < hi) {
 				
-				while(a[hi] > pivot) --hi;
-				while(a[lo] <= pivot && lo < hi) ++lo;
+
+				while(a[lo] < pivot && lo < hi) {
+					lo++;
+				}
+				while(a[hi] >= pivot && lo < hi) {
+					hi--;
+				}
 				
 				swap(a, lo, hi);
 			}
-
-			swap(a, left, lo);
 			
-			return lo;
+
+			swap(a, right, hi);
+			
+			return hi;
 		}
 		
 		private static void swap(int[] a, int i, int j) {
@@ -374,24 +390,23 @@ public class ParallelLPQuickSort {
 			a[j] = temp;
 		}
 	}
-
-	
-
 	
 	
 	
-
+	
+	
 	/*
 	 * ========================== 
 	 *  sorting long type array
 	 * ==========================
 	 */
-
+	
 	public static void sort(long[] a) {
-		new ParLPQuickLong.QSort(a, 0, a.length - 1).invoke();
+		new ParallelRightPivotQuickSortForLong.QSort(a, 0, a.length - 1).invoke();
 	}
 	
-	private static final class ParLPQuickLong {	
+	
+	private static final class ParallelRightPivotQuickSortForLong {	
 		private static final class QSort extends RecursiveAction {
 			private static final long serialVersionUID = 1L;
 			final long[] a;
@@ -419,7 +434,7 @@ public class ParallelLPQuickSort {
 				}
 				else {
 					QSort left = new QSort(a, lo, pivot - 1);
-					QSort right = new QSort(a, pivot + 1, hi);
+					QSort right =  new QSort(a, pivot + 1, hi);
 					left.fork();
 					right.compute();
 					left.join();
@@ -427,37 +442,41 @@ public class ParallelLPQuickSort {
 				
 			}
 		}
-		
-		private static void qsort(long[] a, int lo, int hi) {	
 
+		
+		private static void qsort(long[] a, int lo, int hi) {
+			
 			if(lo >= hi) {
 				return;
 			}
-			
 			int pivot = partition(a, lo, hi);	
 			
 			qsort(a, lo, pivot - 1);
 			qsort(a, pivot + 1, hi);
+			
 		}
-		
-
 		private static int partition(long[] a, int left, int right) {
 			
 			int lo = left;
 			int hi = right;
-			long pivot = a[left];	
-			
+			long pivot = a[right];		
 			while(lo < hi) {
 				
-				while(a[hi] > pivot) --hi;
-				while(a[lo] <= pivot && lo < hi) ++lo;
+
+				while(a[lo] < pivot && lo < hi) {
+					lo++;
+				}
+				while(a[hi] >= pivot && lo < hi) {
+					hi--;
+				}
 				
 				swap(a, lo, hi);
 			}
-
-			swap(a, left, lo);
 			
-			return lo;
+
+			swap(a, right, hi);
+			
+			return hi;
 		}
 		
 		private static void swap(long[] a, int i, int j) {
@@ -467,18 +486,21 @@ public class ParallelLPQuickSort {
 		}
 	}
 	
-
+	
+	
+	
 	/*
 	 * ========================== 
 	 *  sorting float type array
 	 * ==========================
 	 */
-
+	
 	public static void sort(float[] a) {
-		new ParLPQuickFloat.QSort(a, 0, a.length - 1).invoke();
+		new ParallelRightPivotQuickSortForFloat.QSort(a, 0, a.length - 1).invoke();
 	}
 	
-	private static final class ParLPQuickFloat {	
+	
+	private static final class ParallelRightPivotQuickSortForFloat {	
 		private static final class QSort extends RecursiveAction {
 			private static final long serialVersionUID = 1L;
 			final float[] a;
@@ -506,7 +528,7 @@ public class ParallelLPQuickSort {
 				}
 				else {
 					QSort left = new QSort(a, lo, pivot - 1);
-					QSort right = new QSort(a, pivot + 1, hi);
+					QSort right =  new QSort(a, pivot + 1, hi);
 					left.fork();
 					right.compute();
 					left.join();
@@ -514,37 +536,40 @@ public class ParallelLPQuickSort {
 				
 			}
 		}
-		
-		private static void qsort(float[] a, int lo, int hi) {	
 
+		
+		private static void qsort(float[] a, int lo, int hi) {
+			
 			if(lo >= hi) {
 				return;
 			}
-			
 			int pivot = partition(a, lo, hi);	
 			
 			qsort(a, lo, pivot - 1);
 			qsort(a, pivot + 1, hi);
 		}
-		
-
 		private static int partition(float[] a, int left, int right) {
 			
 			int lo = left;
 			int hi = right;
-			float pivot = a[left];	
-			
+			float pivot = a[right];		
 			while(lo < hi) {
 				
-				while(a[hi] > pivot) --hi;
-				while(a[lo] <= pivot && lo < hi) ++lo;
+
+				while(a[lo] < pivot && lo < hi) {
+					lo++;
+				}
+				while(a[hi] >= pivot && lo < hi) {
+					hi--;
+				}
 				
 				swap(a, lo, hi);
 			}
-
-			swap(a, left, lo);
 			
-			return lo;
+
+			swap(a, right, hi);
+			
+			return hi;
 		}
 		
 		private static void swap(float[] a, int i, int j) {
@@ -558,19 +583,19 @@ public class ParallelLPQuickSort {
 	
 	
 	
-
+	
 	/*
 	 * ========================== 
 	 *  sorting double type array
 	 * ==========================
 	 */
-
+	
 	public static void sort(double[] a) {
-		new ParLPQuickDouble.QSort(a, 0, a.length - 1).invoke();
+		new ParallelRightPivotQuickSortForDouble.QSort(a, 0, a.length - 1).invoke();
 	}
 	
-
-	private static final class ParLPQuickDouble {	
+	
+	private static final class ParallelRightPivotQuickSortForDouble {	
 		private static final class QSort extends RecursiveAction {
 			private static final long serialVersionUID = 1L;
 			final double[] a;
@@ -598,46 +623,48 @@ public class ParallelLPQuickSort {
 				}
 				else {
 					QSort left = new QSort(a, lo, pivot - 1);
-					QSort right = new QSort(a, pivot + 1, hi);
+					QSort right =  new QSort(a, pivot + 1, hi);
 					left.fork();
 					right.compute();
 					left.join();
-					
 				}
 				
 			}
 		}
-		
-		private static void qsort(double[] a, int lo, int hi) {	
 
+		
+		private static void qsort(double[] a, int lo, int hi) {
+			
 			if(lo >= hi) {
 				return;
 			}
-			
 			int pivot = partition(a, lo, hi);	
 			
 			qsort(a, lo, pivot - 1);
 			qsort(a, pivot + 1, hi);
 		}
-		
-
 		private static int partition(double[] a, int left, int right) {
 			
 			int lo = left;
 			int hi = right;
-			double pivot = a[left];	
-			
+			double pivot = a[right];		
 			while(lo < hi) {
 				
-				while(a[hi] > pivot) --hi;
-				while(a[lo] <= pivot && lo < hi) ++lo;
+
+				while(a[lo] < pivot && lo < hi) {
+					lo++;
+				}
+				while(a[hi] >= pivot && lo < hi) {
+					hi--;
+				}
 				
 				swap(a, lo, hi);
 			}
-
-			swap(a, left, lo);
 			
-			return lo;
+
+			swap(a, right, hi);
+			
+			return hi;
 		}
 		
 		private static void swap(double[] a, int i, int j) {
@@ -649,11 +676,6 @@ public class ParallelLPQuickSort {
 	
 	
 	
-	
-	
-	
-	
-
 	/*
 	 * ========================== 
 	 *  sorting Object type array
@@ -665,15 +687,15 @@ public class ParallelLPQuickSort {
 			sort(a);
 		}
 		else {
-			new ParLPQuickDComparator.QSort<>(a, 0, a.length - 1, c).invoke();
+			new ParallelRightPivotQuickSortForComparator.QSort<>(a, 0, a.length - 1, c).invoke();
 		}
 	}
 	
 	public static void sort(Object[] a) {
-		new ParLPQuickDComparable.QSort(a, 0, a.length - 1).invoke();
+		new ParallelRightPivotQuickSortForComparable.QSort(a, 0, a.length - 1).invoke();
 	}
 	
-	private static final class ParLPQuickDComparable {	
+	private static final class ParallelRightPivotQuickSortForComparable {	
 		private static final class QSort extends RecursiveAction {
 			private static final long serialVersionUID = 1L;
 			final Object[] a;
@@ -701,11 +723,10 @@ public class ParallelLPQuickSort {
 				}
 				else {
 					QSort left = new QSort(a, lo, pivot - 1);
-					QSort right = new QSort(a, pivot + 1, hi);
+					QSort right =  new QSort(a, pivot + 1, hi);
 					left.fork();
 					right.compute();
 					left.join();
-					
 				}
 				
 			}
@@ -731,19 +752,22 @@ public class ParallelLPQuickSort {
 			
 			int lo = left;
 			int hi = right;
-			Comparable pivot = ((Comparable) a[left]);	
-			
+			Comparable pivot = ((Comparable)a[right]);		
 			while(lo < hi) {
-
-				while(pivot.compareTo(a[hi]) < 0) --hi;
-				while(pivot.compareTo(a[lo]) >= 0 && lo < hi) ++lo;
 				
+				while(pivot.compareTo(a[lo]) > 0 && lo < hi) {
+					lo++;
+				}
+				while(pivot.compareTo(a[hi]) <= 0 && lo < hi) {
+					hi--;
+				}
 				swap(a, lo, hi);
 			}
-
-			swap(a, left, lo);
 			
-			return lo;
+
+			swap(a, right, hi);
+			
+			return hi;
 		}
 		
 		private static void swap(Object[] a, int i, int j) {
@@ -755,14 +779,14 @@ public class ParallelLPQuickSort {
 	
 
 	
-	private static final class ParLPQuickDComparator {
-		private static final class QSort<T> extends RecursiveAction {
+	private static final class ParallelRightPivotQuickSortForComparator {
+		private static final class QSort <T> extends RecursiveAction {
 			private static final long serialVersionUID = 1L;
 			final T[] a;
 			final int lo;
 			final int hi;
 			final Comparator<? super T> c;
-			
+			 
 			QSort(T[] a, int lo, int hi, Comparator<? super T> c) {
 				this.a = a;
 				this.lo = lo;
@@ -785,7 +809,7 @@ public class ParallelLPQuickSort {
 
 				else {
 					QSort<T> left = new QSort<>(a, lo, pivot - 1, c);
-					QSort<T> right = new QSort<>(a, pivot + 1, hi, c);
+					QSort<T> right =  new QSort<>(a, pivot + 1, hi, c);
 					left.fork();
 					right.compute();
 					left.join();
@@ -795,8 +819,6 @@ public class ParallelLPQuickSort {
 			}
 		}
 		
-		
-
 
 		private static <T> void qsort(T[] a, int lo, int hi, Comparator<? super T> c) {
 
@@ -811,24 +833,27 @@ public class ParallelLPQuickSort {
 		}
 		
 
-
 		private static <T> int partition(T[] a, int left, int right, Comparator<? super T> c) {
 			
 			int lo = left;
 			int hi = right;
-			T pivot = a[left];
-			
-			while(lo < hi) {
+			T pivot = a[right];
 
-				while(c.compare(pivot, a[hi]) < 0) --hi;
-				while(c.compare(a[lo], pivot) <= 0 && lo < hi) ++lo;
+			while(lo < hi) {
+				while(c.compare(a[lo], pivot) < 0 && lo < hi) { 
+					lo++;
+				}
+				while(c.compare(pivot, a[hi]) <= 0 && lo < hi) {
+					hi--;
+				}
 
 				swap(a, lo, hi);
 			}
-
-			swap(a, left, lo);
 			
-			return lo;
+
+			swap(a, right, hi);
+			
+			return hi;
 		}
 		
 		
@@ -842,13 +867,6 @@ public class ParallelLPQuickSort {
 	}
 	
 	
-	
-
-
-	
-	
-	
-
 	/*
 	 * ========================== 
 	 *  reverse ordering
@@ -933,5 +951,7 @@ public class ParallelLPQuickSort {
 			sort(a);
 		}
 	}
+	
 
 }
+

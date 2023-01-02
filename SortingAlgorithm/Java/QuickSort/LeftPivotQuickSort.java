@@ -1,7 +1,7 @@
 package QuickSort;
 
 /**
- * This Quick sort is implemented with right element selected as the pivot
+ * This Quick sort is implemented with left element selected as the pivot
  * @see #qsort(int[] a, int lo, int hi)
  * 
  * @author kdgyun
@@ -22,7 +22,7 @@ import Utils.Order;
  * This Quick sort is implemented with right element selected as the pivot
  */
 
-public class RPQuickSort {
+public class LeftPivotQuickSort {
 	
 	
 
@@ -41,48 +41,41 @@ public class RPQuickSort {
 
 	private static void qsort(byte[] a, int lo, int hi) {
 		
+
 		if(lo >= hi) {
 			return;
 		}
+
 		int pivot = partition(a, lo, hi);	
 		
 		qsort(a, lo, pivot - 1);
 		qsort(a, pivot + 1, hi);
 	}
 	
-	
 
 	private static int partition(byte[] a, int left, int right) {
 		
 		int lo = left;
 		int hi = right;
-		byte pivot = a[right];		
+		byte pivot = a[left];	
+		
 		while(lo < hi) {
 			
-
-			while(a[lo] < pivot && lo < hi) {
-				lo++;
-			}
-			while(a[hi] >= pivot && lo < hi) {
-				hi--;
-			}
+			while(a[hi] > pivot) --hi;
+			while(a[lo] <= pivot && lo < hi) ++lo;
 			
 			swap(a, lo, hi);
 		}
+		swap(a, left, lo);
 		
-
-		swap(a, right, hi);
-		
-		return hi;
+		return lo;
 	}
-	
 	
 	private static void swap(byte[] a, int i, int j) {
 		byte temp = a[i];
 		a[i] = a[j];
 		a[j] = temp;
 	}
-	
 	
 	
 
@@ -99,41 +92,35 @@ public class RPQuickSort {
 
 	private static void qsort(char[] a, int lo, int hi) {
 		
+
 		if(lo >= hi) {
 			return;
 		}
+
 		int pivot = partition(a, lo, hi);	
 		
 		qsort(a, lo, pivot - 1);
 		qsort(a, pivot + 1, hi);
 	}
 	
-	
 
 	private static int partition(char[] a, int left, int right) {
 		
 		int lo = left;
 		int hi = right;
-		char pivot = a[right];		
+		char pivot = a[left];	
+		
 		while(lo < hi) {
 			
-
-			while(a[lo] < pivot && lo < hi) {
-				lo++;
-			}
-			while(a[hi] >= pivot && lo < hi) {
-				hi--;
-			}
+			while(a[hi] > pivot) --hi;
+			while(a[lo] <= pivot && lo < hi) ++lo;
 			
 			swap(a, lo, hi);
 		}
+		swap(a, left, lo);
 		
-
-		swap(a, right, hi);
-		
-		return hi;
+		return lo;
 	}
-	
 	
 	private static void swap(char[] a, int i, int j) {
 		char temp = a[i];
@@ -157,41 +144,36 @@ public class RPQuickSort {
 
 	private static void qsort(short[] a, int lo, int hi) {
 		
+
 		if(lo >= hi) {
 			return;
 		}
+
 		int pivot = partition(a, lo, hi);	
 		
 		qsort(a, lo, pivot - 1);
 		qsort(a, pivot + 1, hi);
 	}
 	
-	
 
 	private static int partition(short[] a, int left, int right) {
 		
 		int lo = left;
 		int hi = right;
-		short pivot = a[right];		
+		short pivot = a[left];	
+		
 		while(lo < hi) {
 			
-
-			while(a[lo] < pivot && lo < hi) {
-				lo++;
-			}
-			while(a[hi] >= pivot && lo < hi) {
-				hi--;
-			}
+			while(a[hi] > pivot) --hi;
+			while(a[lo] <= pivot && lo < hi) ++lo;
 			
 			swap(a, lo, hi);
 		}
+		swap(a, left, lo);
 		
+		return lo;
 
-		swap(a, right, hi);
-		
-		return hi;
 	}
-	
 	
 	private static void swap(short[] a, int i, int j) {
 		short temp = a[i];
@@ -199,16 +181,12 @@ public class RPQuickSort {
 		a[j] = temp;
 	}
 	
-	
-	
-	
 	/*
 	 * ========================== 
 	 *  sorting int type array
 	 * ==========================
 	 */
 	
-
 	public static void sort(int[] a) {
 		qsort(a, 0, a.length - 1);
 	}
@@ -225,28 +203,28 @@ public class RPQuickSort {
 		 * 
 		 * [Process]
 		 * 
-		 * Before Partitioning:
+		 * Before Partition:
 		 *
-		 *         left part                right part       a[right]   
+		 *   a[left]          left part              right part
 		 * +---------------------------------------------------------+
-		 * |    element < pivot    |    element >= pivot   |  pivot  |
+		 * |  pivot  |    element <= pivot    |    element > pivot   |
 		 * +---------------------------------------------------------+
 		 *    
 		 *    
-		 *  result After Partitioning:
+		 *  After Partition:
 		 *  
-		 *         left part         a[hi]          right part
+		 *         left part          a[lo]          right part
 		 * +---------------------------------------------------------+
-		 * |   element < pivot    |  pivot  |    element >= pivot    |
+		 * |   element <= pivot    |  pivot  |    element > pivot    |
 		 * +---------------------------------------------------------+
 		 *       
 		 *       
-		 *  result : pivot = hi     
+		 *  result : pivot = lo     
 		 *       
 		 *
 		 *  Recursion:
 		 *  
-		 * r_pivot_sort(a, lo, pivot - 1)     r_pivot_sort(a, pivot + 1, hi)
+		 * l_pivot_sort(a, lo, pivot - 1)     l_pivot_sort(a, pivot + 1, hi)
 		 *  
 		 *         left part                           right part
 		 * +-----------------------+             +-----------------------+
@@ -261,39 +239,30 @@ public class RPQuickSort {
 		qsort(a, pivot + 1, hi);
 	}
 	
-	
 
 	private static int partition(int[] a, int left, int right) {
 		
 		int lo = left;
 		int hi = right;
-		int pivot = a[right];		
+		int pivot = a[left];	
+		
 		while(lo < hi) {
 			
-
-			while(a[lo] < pivot && lo < hi) {
-				lo++;
-			}
-			while(a[hi] >= pivot && lo < hi) {
-				hi--;
-			}
+			while(a[hi] > pivot) --hi;
+			while(a[lo] <= pivot && lo < hi) ++lo;
 			
 			swap(a, lo, hi);
 		}
+		swap(a, left, lo);
 		
-
-		swap(a, right, hi);
-		
-		return hi;
+		return lo;
 	}
-	
 	
 	private static void swap(int[] a, int i, int j) {
 		int temp = a[i];
 		a[i] = a[j];
 		a[j] = temp;
 	}
-	
 	
 	
 	
@@ -312,48 +281,41 @@ public class RPQuickSort {
 
 	private static void qsort(long[] a, int lo, int hi) {
 		
+
 		if(lo >= hi) {
 			return;
 		}
+
 		int pivot = partition(a, lo, hi);	
 		
 		qsort(a, lo, pivot - 1);
 		qsort(a, pivot + 1, hi);
 	}
 	
-	
 
 	private static int partition(long[] a, int left, int right) {
 		
 		int lo = left;
 		int hi = right;
-		long pivot = a[right];		
+		long pivot = a[left];	
+		
 		while(lo < hi) {
 			
-
-			while(a[lo] < pivot && lo < hi) {
-				lo++;
-			}
-			while(a[hi] >= pivot && lo < hi) {
-				hi--;
-			}
+			while(a[hi] > pivot) --hi;
+			while(a[lo] <= pivot && lo < hi) ++lo;
 			
 			swap(a, lo, hi);
 		}
+		swap(a, left, lo);
 		
-
-		swap(a, right, hi);
-		
-		return hi;
+		return lo;
 	}
-	
 	
 	private static void swap(long[] a, int i, int j) {
 		long temp = a[i];
 		a[i] = a[j];
 		a[j] = temp;
 	}
-	
 	
 	
 	
@@ -371,48 +333,41 @@ public class RPQuickSort {
 
 	private static void qsort(float[] a, int lo, int hi) {
 		
+
 		if(lo >= hi) {
 			return;
 		}
+
 		int pivot = partition(a, lo, hi);	
 		
 		qsort(a, lo, pivot - 1);
 		qsort(a, pivot + 1, hi);
 	}
 	
-	
 
 	private static int partition(float[] a, int left, int right) {
 		
 		int lo = left;
 		int hi = right;
-		float pivot = a[right];		
+		float pivot = a[left];	
+		
 		while(lo < hi) {
 			
-
-			while(a[lo] < pivot && lo < hi) {
-				lo++;
-			}
-			while(a[hi] >= pivot && lo < hi) {
-				hi--;
-			}
+			while(a[hi] > pivot) --hi;
+			while(a[lo] <= pivot && lo < hi) ++lo;
 			
 			swap(a, lo, hi);
 		}
+		swap(a, left, lo);
 		
-
-		swap(a, right, hi);
-		
-		return hi;
+		return lo;
 	}
-	
 	
 	private static void swap(float[] a, int i, int j) {
 		float temp = a[i];
 		a[i] = a[j];
 		a[j] = temp;
 	}
-	
 	
 	
 	
@@ -431,47 +386,43 @@ public class RPQuickSort {
 
 	private static void qsort(double[] a, int lo, int hi) {
 		
+
 		if(lo >= hi) {
 			return;
 		}
+
 		int pivot = partition(a, lo, hi);	
 		
 		qsort(a, lo, pivot - 1);
 		qsort(a, pivot + 1, hi);
 	}
 	
-	
 
 	private static int partition(double[] a, int left, int right) {
 		
 		int lo = left;
 		int hi = right;
-		double pivot = a[right];		
+		double pivot = a[left];	
+		
 		while(lo < hi) {
 			
-
-			while(a[lo] < pivot && lo < hi) {
-				lo++;
-			}
-			while(a[hi] >= pivot && lo < hi) {
-				hi--;
-			}
+			while(a[hi] > pivot) --hi;
+			while(a[lo] <= pivot && lo < hi) ++lo;
 			
 			swap(a, lo, hi);
 		}
+		swap(a, left, lo);
 		
-
-		swap(a, right, hi);
-		
-		return hi;
+		return lo;
 	}
-	
 	
 	private static void swap(double[] a, int i, int j) {
 		double temp = a[i];
 		a[i] = a[j];
 		a[j] = temp;
 	}
+	
+	
 	
 	
 	
@@ -500,82 +451,73 @@ public class RPQuickSort {
 
 	private static void qsort(Object[] a, int lo, int hi) {
 		
+
 		if(lo >= hi) {
 			return;
 		}
+
 		int pivot = partition(a, lo, hi);	
 		
 		qsort(a, lo, pivot - 1);
 		qsort(a, pivot + 1, hi);
 	}
 	
-	
 
-	@SuppressWarnings("unchecked")
+	@SuppressWarnings({ "rawtypes", "unchecked" })
 	private static int partition(Object[] a, int left, int right) {
 		
 		int lo = left;
 		int hi = right;
-		@SuppressWarnings("rawtypes")
-		Comparable pivot = ((Comparable)a[right]);		
+		Comparable pivot = ((Comparable) a[left]);	
+		
 		while(lo < hi) {
+
+			while(pivot.compareTo(a[hi]) < 0) --hi;
+			while(pivot.compareTo(a[lo]) >= 0 && lo < hi) ++lo;
 			
-			while(pivot.compareTo(a[lo]) > 0 && lo < hi) {
-				lo++;
-			}
-			while(pivot.compareTo(a[hi]) <= 0 && lo < hi) {
-				hi--;
-			}
 			swap(a, lo, hi);
 		}
-		
 
-		swap(a, right, hi);
+		swap(a, left, lo);
 		
-		return hi;
+		return lo;
 	}
 	
-	
-	
 
-	
-	
+
 	private static <T> void qsort(T[] a, int lo, int hi, Comparator<? super T> c) {
-		
+
 		if(lo >= hi) {
 			return;
 		}
+
 		int pivot = partition(a, lo, hi, c);	
 		
 		qsort(a, lo, pivot - 1, c);
 		qsort(a, pivot + 1, hi, c);
 	}
 	
-	
 
-	
 	private static <T> int partition(T[] a, int left, int right, Comparator<? super T> c) {
 		
 		int lo = left;
 		int hi = right;
-		T pivot = a[right];
-
+		T pivot = a[left];
+		
 		while(lo < hi) {
-			while(c.compare(a[lo], pivot) < 0 && lo < hi) { 
-				lo++;
-			}
-			while(c.compare(pivot, a[hi]) <= 0 && lo < hi) {
-				hi--;
-			}
+
+			while(c.compare(pivot, a[hi]) < 0) --hi;
+			while(c.compare(a[lo], pivot) <= 0 && lo < hi) ++lo;
 
 			swap(a, lo, hi);
 		}
-		
 
-		swap(a, right, hi);
+		swap(a, left, lo);
 		
-		return hi;
+		return lo;
 	}
+	
+	
 	
 	
 	
@@ -587,7 +529,6 @@ public class RPQuickSort {
 	
 	
 	
-
 	
 
 	/*
@@ -674,7 +615,5 @@ public class RPQuickSort {
 			sort(a);
 		}
 	}
-	
-	
 	
 }
