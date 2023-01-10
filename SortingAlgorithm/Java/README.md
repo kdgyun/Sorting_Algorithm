@@ -27,6 +27,7 @@ Sorting algorithm in this package uses **threading**.
 > - ParallelLeftPivotQuickSort (left pivot quick sort with threading)
 > - ParallelRightPivotQuickSort (right pivot quick sort with threading)
 > - PrarallelOddEvenMergeSort
+> - ParallelBitonicSort
 
 </br>
 
